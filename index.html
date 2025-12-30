@@ -11,9 +11,9 @@
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      line-height: 1.55;
-      color: #1a1a1a;
-      background-color: #f7f7f7;
+      line-height: 1.6;
+      color: #000;
+      background-color: #fff;
       margin: 0;
       padding: 0;
       display: flex;
@@ -24,40 +24,54 @@
 
     header {
       width: 100%;
-      background-color: #f7f7f7;
       text-align: center;
-      padding: 40px 10px 25px 10px;
+      padding: 60px 10px 30px 10px;
     }
 
     header img.logo {
-      height: 90px;
-      margin-bottom: 15px;
-      opacity: 0.95;
+      height: 140px; 
+      margin-bottom: 20px;
+      opacity: 1;
+    }
+
+    header .tagline {
+      font-style: italic;
+      font-weight: bold;
+      margin-top: 5px;
+      color: #333;
+      font-size: 1.1em;
+    }
+
+    header .subtext {
+      font-size: 0.95em;
+      color: #555;
+      margin-bottom: 30px;
+      font-style: normal;
     }
 
     section {
-      max-width: 680px;
+      max-width: 640px;
       width: 90%;
-      padding: 35px 0;
+      padding: 30px 0;
       text-align: justify;
       text-justify: inter-word;
     }
 
     h1, h2 {
-      color: #111111;
-      margin-bottom: 14px;
+      color: #000;
+      margin-bottom: 12px;
       font-weight: normal;
       text-align: center;
     }
 
     p {
-      margin-bottom: 28px;
+      margin-bottom: 22px;
     }
 
     hr {
       border: none;
-      border-top: 1px solid #e0e0e0;
-      margin: 40px 0;
+      border-top: 1px solid #ccc;
+      margin: 35px 0;
     }
 
     .contact-section {
@@ -66,27 +80,12 @@
 
     .qr-code {
       margin-top: 15px;
-      max-width: 150px;
+      max-width: 140px;
       height: auto;
     }
 
-    .tagline {
-      font-style: italic;
-      font-weight: bold;
-      margin-top: 5px;
-      color: #444;
-      font-size: 1.05em;
-    }
-
-    .official-note {
-      text-align: center;
-      font-size: 0.9em;
-      color: #666;
-      margin-bottom: 25px;
-    }
-
     footer {
-      background-color: #eaeaea;
+      background-color: #f5f5f5;
       padding: 22px 15px;
       text-align: center;
       width: 100%;
@@ -95,10 +94,11 @@
     footer p {
       margin: 6px 0;
       text-align: center;
+      color: #333;
     }
 
     a {
-      color: #1a1a1a;
+      color: #000;
       text-decoration: none;
     }
 
@@ -115,16 +115,20 @@
 
     <h1>Signature Management Unit</h1>
     <p class="tagline">Precise. Rapid. Discreet.</p>
-    <p class="official-note">This is the new official SMU website — updated substantially from the previous WordPress site.</p>
-    <p style="font-size:0.9em; color:#666;">Authorized Training Partner for the Institute for Signature Reduction (ISR)</p>
+    <p class="subtext">New official SMU website — Authorized Training Partner for the Institute for Signature Reduction (ISR)</p>
   </header>
 
   <section>
     <h2>Training & Services</h2>
     <p>
-      Signature Management Unit (SMU) provides tailored instruction focused on digital force protection,
-      cyber privacy, and signature reduction, aligned directly with ISR’s doctrinal framework.
-      All training is delivered professionally, securely, and in accordance with applicable laws and standards.
+      Over the past six years, SMU has trained Air Force special warfare operators — including CCTs, PJs, SERE, and TACPs — in the art and science of signature reduction as the world has gone digital.
+      Training integrates ISR doctrine with practical application in irregular warfare contexts and strategic competition, helping operators reduce detectability and maintain operational security across all domains.
+    </p>
+    <p>
+      SMU provides tailored instruction focused on digital force protection, cyber privacy, and signature reduction. All training is delivered professionally, securely, and in accordance with applicable laws and standards.
+    </p>
+    <p>
+      Our specialty lies in discreet, government-funded engagements that are typically three or five days in duration. These programs provide practitioners with a hands-on, field-based experience covering the fundamentals of signature reduction, blending practical exercises with doctrinal insight.
     </p>
 
     <hr>
@@ -132,7 +136,7 @@
     <h2>Contact</h2>
     <div class="contact-section">
       <p>
-        Authorized personnel may reach SMU securely via Signal:  
+        Authorized military special operations personnel may reach SMU securely via Signal:  
         <strong>@SMU.14</strong>
       </p>
       <!-- Placeholder for QR code -->
@@ -142,7 +146,7 @@
 
   <footer>
     <p>© Signature Management Unit. All rights reserved.</p>
-    <p style="font-size:0.8em; color:#888;">🔒 Authorized training partner of ISR</p>
+    <p style="font-size:0.8em;">🔒 Authorized training partner of ISR</p>
   </footer>
 
 </body>
