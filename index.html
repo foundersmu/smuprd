@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signature Management Unit, LLC — Authorized Training Partner</title>
+  <title>Signature Management Unit — Authorized Training Partner</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Anonymous Pro', monospace;
+      font-family: 'Roboto', sans-serif;
       line-height: 1.55;
       color: #1a1a1a;
-      background-color: #fafafa;
+      background-color: #f7f7f7;
       margin: 0;
       padding: 0;
       display: flex;
@@ -24,14 +24,14 @@
 
     header {
       width: 100%;
-      background-color: #fafafa;
+      background-color: #f7f7f7;
       text-align: center;
-      padding: 50px 10px 25px 10px;
+      padding: 40px 10px 25px 10px;
     }
 
-    header img {
+    header img.logo {
       height: 90px;
-      margin-top: 18px;
+      margin-bottom: 15px;
       opacity: 0.95;
     }
 
@@ -60,8 +60,33 @@
       margin: 40px 0;
     }
 
+    .contact-section {
+      text-align: center;
+    }
+
+    .qr-code {
+      margin-top: 15px;
+      max-width: 150px;
+      height: auto;
+    }
+
+    .tagline {
+      font-style: italic;
+      font-weight: bold;
+      margin-top: 5px;
+      color: #444;
+      font-size: 1.05em;
+    }
+
+    .official-note {
+      text-align: center;
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
     footer {
-      background-color: #f0f0f0;
+      background-color: #eaeaea;
       padding: 22px 15px;
       text-align: center;
       width: 100%;
@@ -85,39 +110,38 @@
 <body>
 
   <header>
-    <h1>Signature Management Unit, LLC</h1>
+    <!-- Logo placeholder -->
+    <img src="smu_logo.png" alt="Signature Management Unit Logo" class="logo">
+
+    <h1>Signature Management Unit</h1>
+    <p class="tagline">Precise. Rapid. Discreet.</p>
+    <p class="official-note">This is the new official SMU website — updated substantially from the previous WordPress site.</p>
     <p style="font-size:0.9em; color:#666;">Authorized Training Partner for the Institute for Signature Reduction (ISR)</p>
   </header>
 
   <section>
-    <h2>About SMU</h2>
-    <p>
-      Signature Management Unit, LLC (SMU) is the authorized training partner for the
-      Institute for Signature Reduction (ISR). SMU delivers specialized, high-quality
-      training and practical instruction to military special operations personnel in
-      accordance with ISR doctrine and educational programs.
-    </p>
-
     <h2>Training & Services</h2>
     <p>
-      SMU provides tailored instruction focused on digital force protection, cyber privacy,
-      and signature reduction, directly aligned with ISR’s doctrinal framework. All training
-      is delivered professionally, securely, and in accordance with applicable laws and standards.
+      Signature Management Unit (SMU) provides tailored instruction focused on digital force protection,
+      cyber privacy, and signature reduction, aligned directly with ISR’s doctrinal framework.
+      All training is delivered professionally, securely, and in accordance with applicable laws and standards.
     </p>
 
+    <hr>
+
     <h2>Contact</h2>
-    <p>
-      For inquiries about training, availability, or collaboration, authorized military
-      special operations personnel can contact SMU securely via Signal at:  
-      <strong>@SMU.14</strong>
-    </p>
-    <p>
-      For other correspondence, email: <a href="mailto:info@signaturemanagementunit.com">info@signaturemanagementunit.com</a>
-    </p>
+    <div class="contact-section">
+      <p>
+        Authorized personnel may reach SMU securely via Signal:  
+        <strong>@SMU.14</strong>
+      </p>
+      <!-- Placeholder for QR code -->
+      <img src="smu_signal_qr.png" alt="SMU Signal QR Code" class="qr-code">
+    </div>
   </section>
 
   <footer>
-    <p>© Signature Management Unit, LLC. All rights reserved.</p>
+    <p>© Signature Management Unit. All rights reserved.</p>
     <p style="font-size:0.8em; color:#888;">🔒 Authorized training partner of ISR</p>
   </footer>
 
