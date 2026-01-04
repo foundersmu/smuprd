@@ -5,120 +5,218 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signature Management Unit</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #000;
+      font-family: 'IBM Plex Mono', monospace;
       margin: 0;
-      padding: 0;
+      background: #ffffff;
+      color: #111;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    header {
-      text-align: center;
-      padding: 70px 20px 40px;
-    }
-    .logo {
-      height: 180px;
-      margin-bottom: 25px;
-    }
+
     nav {
-      font-size: 0.9em;
-      margin-bottom: 50px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #e3e3e3;
+      z-index: 1000;
+      font-size: 0.8em;
     }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      padding: 8px 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
     nav a {
-      color: #000;
       text-decoration: none;
-      margin: 0 6px;
+      color: #111;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
+
+    header {
+      padding: 110px 20px 40px;
+      text-align: center;
+    }
+
+    .logo {
+      height: 200px;
+      max-width: 90%;
+    }
+
     section {
-      max-width: 760px;
+      max-width: 820px;
       width: 90%;
       text-align: justify;
-      margin-bottom: 70px;
+      margin-bottom: 36px;
+      scroll-margin-top: 90px;
     }
-    .tagline {
-      text-align: center;
-      font-style: italic;
-      margin-bottom: 35px;
+
+    h2 {
+      font-weight: normal;
+      font-size: 1.05em;
+      margin-bottom: 10px;
     }
+
     p {
-      line-height: 1.65;
-      margin-bottom: 22px;
+      line-height: 1.55;
+      margin: 0 0 14px 0;
     }
-    .qr {
-      text-align: center;
-      margin-bottom: 60px;
+
+    .divider {
+      width: 100%;
+      max-width: 820px;
+      border-top: 1px solid #e3e3e3;
+      margin: 32px 0;
     }
-    .qr img {
-      height: 160px;
-      margin-top: 20px;
-    }
+
     footer {
       width: 100%;
       text-align: center;
-      padding: 30px 10px;
-      font-size: 0.85em;
-      border-top: 1px solid #e5e5e5;
+      padding: 28px 10px;
+      font-size: 0.8em;
+      border-top: 1px solid #e3e3e3;
+    }
+
+    .verification {
+      font-size: 0.75em;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .qr img {
+      height: 130px;
+      margin-top: 12px;
+    }
+
+    a {
+      color: #111;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <img src="smu_logo.png" alt="Signature Management Unit Logo" class="logo">
+<nav>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#isr">ISR</a></li>
+  </ul>
+</nav>
 
-  <nav>
-    <a href="index.html">Home</a> ·
-    <a href="about.html">About</a> ·
-    <a href="services.html">Services</a> ·
-    <a href="isr.html">ISR</a> ·
-    <a href="careers.html">Careers</a>
-  </nav>
+<header id="home">
+  <img src="smu_logo.png" alt="Signature Management Unit Logo" class="logo">
 </header>
 
-<section>
-  <div class="tagline">Precise. Rapid. Discreet.</div>
-
+<section id="about">
+  <h2>About</h2>
   <p>
-    Signature Management Unit (SMU) is the authorized training and implementation
-    partner supporting the Institute for Signature Reduction (ISR). SMU translates
-    ISR’s research, doctrine, and educational frameworks into applied capability
-    for operational forces operating in contested and denied environments.
+    Founded in 2020, Signature Management Unit (SMU) is a practitioner-led organization
+    whose name is a direct nod to special mission units within the U.S. military.
   </p>
 
   <p>
-    Our work focuses on signature reduction, digital force protection, and
-    survivability across the physical, electromagnetic, and cyber domains.
+    SMU was established to translate signature reduction concepts developed in
+    highly selective operational environments into applied education and field training.
+    Our work reflects the evolution of modern operating environments shaped by
+    strategic competition, digital exposure, and contested information domains.
   </p>
 
   <p>
-    SMU personnel have trained U.S. Air Force Special Warfare operators and other
-    government partners in operating with reduced observable signatures.
-  </p>
-
-  <p>
-    SMU exists to provide a durable operational conduit for ISR’s work, ensuring
-    doctrine is carried forward into training and applied practice.
+    Over the past six years, SMU personnel have trained Air Force Special Warfare operators,
+    including Combat Controllers, Pararescuemen, SERE specialists, and Tactical Air Control
+    Party members, in the art and science of signature reduction as warfare has shifted
+    decisively into the digital age.
   </p>
 </section>
 
-<div class="qr">
-  <img src="smu_signal_qr.png" alt="SMU Signal QR Code">
-  <p>🔒 Secure contact via Signal</p>
-  <p>🛡️ We will never contact you first. Always verify identity before sharing sensitive information.</p>
-</div>
+<div class="divider"></div>
+
+<section id="services">
+  <h2>Training and Capabilities</h2>
+  <p>
+    SMU specializes in discreet, government-funded training engagements focused on
+    signature reduction, force protection, and operational survivability.
+  </p>
+
+  <p>
+    Training is typically delivered in three- or five-day formats and emphasizes
+    practitioner-led instruction and hands-on field application of signature reduction
+    fundamentals across physical, digital, and electromagnetic domains.
+  </p>
+
+  <p>
+    SMU also supports select equipment initiatives, including hardened devices and
+    systems designed to enhance survivability and reduce operational exposure.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<section id="careers">
+  <h2>Careers</h2>
+  <p>
+    SMU seeks experienced special operations professionals with relevant operational,
+    instructional, or technical backgrounds to support training and advisory activities.
+  </p>
+
+  <p>
+    Most SMU personnel operate in a contract capacity supporting discrete engagements.
+    Interested professionals should initiate contact via secure messaging.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>
+    🔒 Secure contact via Signal: <strong>@SMU.14</strong>
+  </p>
+  <p>
+    🛡️ We will never contact you first. Always verify identity and communication
+    authenticity prior to engagement.
+  </p>
+
+  <div class="qr">
+    <img src="smu_signal_qr.png" alt="SMU Signal QR Code">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="isr">
+  <h2>Institute for Signature Reduction</h2>
+  <p>
+    Signature Management Unit is the authorized training partner of the
+    <a href="https://isrprivacymatters.org">Institute for Signature Reduction (ISR)</a>,
+    which is responsible for doctrine development, research, and long-term
+    stewardship of signature reduction concepts.
+  </p>
+</section>
 
 <footer>
-  <p>© 2020–2026 Signature Management Unit</p>
+  <p>© Signature Management Unit</p>
+  <div class="verification">
+    🔒 Official SMU Site
+  </div>
 </footer>
 
 </body>
