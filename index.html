@@ -53,8 +53,9 @@
     }
 
     .logo {
-      height: 200px;
+      height: 220px;       /* enlarged logo */
       max-width: 90%;
+      cursor: pointer;
     }
 
     section {
@@ -97,13 +98,25 @@
       margin-top: 6px;
     }
 
+    .qr {
+      display: flex;
+      justify-content: center;   /* centers QR code */
+      margin-top: 12px;
+    }
+
     .qr img {
       height: 130px;
-      margin-top: 12px;
     }
 
     a {
       color: #111;
+    }
+
+    @media (max-width: 768px) {
+      nav ul { flex-wrap: wrap; gap: 14px; font-size: 0.8em; }
+      header { padding: 100px 20px 30px; }
+      .logo { height: 160px; }
+      section { width: 95%; }
     }
   </style>
 </head>
@@ -122,7 +135,9 @@
 </nav>
 
 <header id="home">
-  <img src="smu_logo.png" alt="Signature Management Unit Logo" class="logo">
+  <a href="https://www.isrprivacymatters.org">
+    <img src="smu_logo.png" alt="Signature Management Unit Logo" class="logo">
+  </a>
 </header>
 
 <section id="about">
@@ -131,14 +146,12 @@
     Founded in 2020, Signature Management Unit (SMU) is a practitioner-led organization
     whose name is a direct nod to special mission units within the U.S. military.
   </p>
-
   <p>
     SMU was established to translate signature reduction concepts developed in
     highly selective operational environments into applied education and field training.
     Our work reflects the evolution of modern operating environments shaped by
     strategic competition, digital exposure, and contested information domains.
   </p>
-
   <p>
     Over the past six years, SMU personnel have trained Air Force Special Warfare operators,
     including Combat Controllers, Pararescuemen, SERE specialists, and Tactical Air Control
@@ -155,13 +168,11 @@
     SMU specializes in discreet, government-funded training engagements focused on
     signature reduction, force protection, and operational survivability.
   </p>
-
   <p>
     Training is typically delivered in three- or five-day formats and emphasizes
     practitioner-led instruction and hands-on field application of signature reduction
     fundamentals across physical, digital, and electromagnetic domains.
   </p>
-
   <p>
     SMU also supports select equipment initiatives, including hardened devices and
     systems designed to enhance survivability and reduce operational exposure.
@@ -176,7 +187,6 @@
     SMU seeks experienced special operations professionals with relevant operational,
     instructional, or technical backgrounds to support training and advisory activities.
   </p>
-
   <p>
     Most SMU personnel operate in a contract capacity supporting discrete engagements.
     Interested professionals should initiate contact via secure messaging.
@@ -206,7 +216,7 @@
   <h2>Institute for Signature Reduction</h2>
   <p>
     Signature Management Unit is the authorized training partner of the
-    <a href="www.isrprivacymatters.org">Institute for Signature Reduction (ISR)</a>,
+    <a href="https://www.isrprivacymatters.org">Institute for Signature Reduction (ISR)</a>,
     an independent 501(c)(3) nonprofit charitable organization responsible for doctrine development, research, and long-term
     stewardship of signature reduction concepts.
   </p>
@@ -215,7 +225,8 @@
 <footer>
   <p>© Signature Management Unit. All Rights Reserved.</p>
   <div class="verification">
-    🔒 Official SMU Site
+    <img src="us_flag.png" alt="US Flag" style="height:14px; vertical-align:middle;">
+    Official SMU Site
   </div>
 </footer>
 
