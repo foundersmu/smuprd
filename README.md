@@ -1,8 +1,8 @@
 # Precise. Rapid. Discreet.
 
-This repository hosts a public-facing landing page intended for controlled external visibility. The site is delivered via **GitHub Pages** and consists solely of static content.
+Welcome to the official SMU website. This repository hosts our public-facing landing page intended for controlled external visibility. The site is delivered via **GitHub Pages** and consists solely of static content.
 
-The design prioritizes **minimal digital signature, reduced attack surface, and privacy-by-default** principles.
+The design prioritizes minimal digital signature, reduced attack surface, and privacy-by-default principles.
 
 ## Architecture
 
@@ -25,7 +25,7 @@ Contact information displayed on the site is provided for legitimate engagement 
 
 ## Force Protection Considerations
 
-- The site functions strictly as an information and contact relay
+- This site functions strictly as an information and contact relay
 - No operational, personnel, or sensitive business data is hosted
 - Repository contents should be treated as publicly accessible at all times
 - Changes should be reviewed with OPSEC and digital footprint considerations in mind
@@ -34,8 +34,10 @@ Contact information displayed on the site is provided for legitimate engagement 
 
 The site is automatically served via GitHub Pages from the default branch. Publishing changes requires only a commit to this repository.
 
-## Contributor Guidance
+## Repository Use, Attribution, and Branding
 
-- Do not commit secrets, credentials, API keys, or configuration artifacts
-- Avoid adding external dependencies that increase fingerprinting or supply-chain risk
-- Maintain minimalism to preserve reduced exposure and attack surface
+- This repository is the sole authoritative source for the **official SMU website**. All official content, updates, and maintenance are performed exclusively by the SMU team or authorized representatives. This repository and the associated live site are the only sources through which official SMU web content and contact information are published.
+
+- The codebase is open source and may be forked or reused in accordance with the project license. Such reuse does not grant permission to represent, brand, or imply affiliation with SMU, nor to present a derivative work as an official SMU site. Any public-facing fork must clearly identify itself as unofficial, remove or replace SMU branding and identifying marks, and provide appropriate attribution.
+
+- SMU names, logos, written content, and other identifying materials are not licensed as part of this repository. No third party is authorized to claim to act on behalf of, speak for, or represent SMU through a copied or derivative version of this site.
