@@ -1,8 +1,10 @@
 # Precise. Rapid. Discreet.
 
-Welcome to the official SMU website. This repository hosts our public-facing landing page intended for controlled external visibility. The site is delivered via **GitHub Pages** and consists solely of static content.
+Welcome to the **official SMU website**. This repository hosts our public-facing landing page intended for controlled external visibility. The site is delivered via GitHub Pages and consists solely of static content.
 
 The design prioritizes minimal digital signature, reduced attack surface, and privacy-by-default principles.
+
+---
 
 ## Architecture
 
@@ -14,6 +16,8 @@ The design prioritizes minimal digital signature, reduced attack surface, and pr
 
 This architecture intentionally limits exposure and eliminates common vectors for data compromise.
 
+---
+
 ## Privacy & Signature Reduction
 
 - No user data is collected or processed
@@ -23,6 +27,8 @@ This architecture intentionally limits exposure and eliminates common vectors fo
 
 Contact information displayed on the site is provided for legitimate engagement and does not expose credentials, identifiers, or privileged access.
 
+---
+
 ## Force Protection Considerations
 
 - This site functions strictly as an information and contact relay
@@ -30,9 +36,13 @@ Contact information displayed on the site is provided for legitimate engagement 
 - Repository contents should be treated as publicly accessible at all times
 - Changes should be reviewed with OPSEC and digital footprint considerations in mind
 
-## Deployment
+---
 
-The site is automatically served via GitHub Pages from the default branch. Publishing changes requires only a commit to this repository.
+## License
+
+All content © Signature Management Unit (SMU).  
+
+---
 
 ## Repository Use, Attribution, and Branding
 
@@ -41,3 +51,7 @@ The site is automatically served via GitHub Pages from the default branch. Publi
 - The codebase is open source and may be forked or reused in accordance with the project license. Such reuse does not grant permission to represent, brand, or imply affiliation with SMU, nor to present a derivative work as an official SMU site. Any public-facing fork must clearly identify itself as unofficial, remove or replace SMU branding and identifying marks, and provide appropriate attribution.
 
 - SMU names, logos, written content, and other identifying materials are not licensed as part of this repository. No third party is authorized to claim to act on behalf of, speak for, or represent SMU through a copied or derivative version of this site.
+
+---
+
+🇺🇸 **Precise. Rapid. Discreet.**
