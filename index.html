@@ -92,6 +92,19 @@
       margin-bottom: 16px;
     }
 
+    .typed-header {
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      font-weight: bold;
+      border-right: 2px solid #111; 
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
     footer {
       width: 100%;
       text-align: center;
@@ -153,7 +166,7 @@
 </header>
 
 <section id="about">
-  <h2><strong>Precise. Rapid. Discreet.</strong></h2>
+  <h2 class="typed-header" data-text="Precise. Rapid. Discreet."></h2>
   <p>
     Founded in 2020, Signature Management Unit (SMU) is a practitioner-led organization
     whose name is a direct nod to special mission units within the U.S. military.
@@ -175,7 +188,7 @@
 <div class="divider"></div>
 
 <section id="services">
-  <h2><strong>Training and Capabilities</strong></h2>
+  <h2 class="typed-header" data-text="Training and Capabilities"></h2>
 
   <div class="op-posture-box">
     <p>
@@ -197,13 +210,12 @@
     SMU also supports select equipment initiatives, including hardened personal devices and
     systems designed to enhance survivability and reduce operational exposure.
   </p>
-
 </section>
 
 <div class="divider"></div>
 
 <section id="careers">
-  <h2><strong>Careers</strong></h2>
+  <h2 class="typed-header" data-text="Careers"></h2>
   <p>
     SMU seeks experienced special operations and intelligence professionals with relevant operational,
     instructional, or technical backgrounds to support training and advisory activities.
@@ -217,7 +229,7 @@
 <div class="divider"></div>
 
 <section id="contact">
-  <h2><strong>Contact</strong></h2>
+  <h2 class="typed-header" data-text="Contact"></h2>
   <p>
     🔒 Secure contact via Signal: <strong>@SMU.14</strong>
   </p>
@@ -234,7 +246,7 @@
 <div class="divider"></div>
 
 <section id="isr">
-  <h2><strong>Institute for Signature Reduction</strong></h2>
+  <h2 class="typed-header" data-text="Institute for Signature Reduction"></h2>
   <p>
     Signature Management Unit is the authorized training partner of the
     <a href="https://www.isrprivacymatters.org">Institute for Signature Reduction (ISR)</a>,
@@ -250,6 +262,40 @@
     Official SMU Site
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const headers = document.querySelectorAll(".typed-header");
+
+  function typeWriter(element, text, delay = 80) {
+    let index = 0;
+    function type() {
+      if (index < text.length) {
+        element.innerHTML += "<strong>" + text.charAt(index) + "</strong>";
+        index++;
+        setTimeout(type, delay);
+      }
+    }
+    type();
+  }
+
+  // Use IntersectionObserver to trigger typing when header comes into view
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !entry.target.dataset.typed) {
+        typeWriter(entry.target, entry.target.dataset.text);
+        entry.target.dataset.typed = "true"; // mark as typed
+        // stop cursor after 30s
+        setTimeout(() => {
+          entry.target.style.borderRight = "none";
+        }, 30000);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  headers.forEach(h => observer.observe(h));
+});
+</script>
 
 </body>
 </html>
