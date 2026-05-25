@@ -23,17 +23,23 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-  --ink: #111111;
-  --ink-mid: #444444;
-  --ink-muted: #777777;
-  --ink-faint: #aaaaaa;
-  --rule: #e2e2e2;
-  --rule-strong: #c8c8c8;
-  --surface: #f8f8f7;
-  --surface-hover: #f2f2f0;
-  --bg: #ffffff;
-  --accent-rule: 2px solid #111;
+  --bg:       #0b0b09;
+  --bg-1:     #0f0f0d;
+  --bg-2:     #141412;
+  --bg-h:     #191917;
+  --rule:     #1e1e1c;
+  --rule-2:   #2a2a27;
+  --rule-3:   #363632;
+  --dim:      #353532;
+  --muted:    #56564f;
+  --mid:      #7e7e76;
+  --body:     #aeaca4;
+  --head:     #cac8c0;
+  --bright:   #e4e2da;
+  --accent:   #c8a96e;
+  --accent-d: #9a7d48;
   --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --col: 640px;
 }
 
 html { scroll-behavior: smooth; }
@@ -41,583 +47,782 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--mono);
   margin: 0;
-  background: var(--bg) url('textures/light_grid.png') repeat;
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--body);
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ── SCANLINES ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
 }
 
 /* ── SCROLL PROGRESS ── */
-.scroll-progress {
+#progress {
   position: fixed;
   top: 0; left: 0;
   height: 1px;
   width: 0%;
-  background: var(--ink);
-  opacity: 0.15;
-  z-index: 1200;
+  background: var(--accent-d);
+  z-index: 9100;
   pointer-events: none;
-  transition: width 0.08s linear;
+  opacity: 0.7;
+  transition: width 0.06s linear;
 }
 
 /* ── NAV ── */
 nav {
   position: fixed;
-  top: 0; width: 100%;
-  background: rgba(255,255,255,0.97);
+  top: 0; left: 0; right: 0;
+  z-index: 9000;
+  background: rgba(11,11,9,0.96);
   border-bottom: 1px solid var(--rule);
-  z-index: 1000;
-  transition: border-color 0.3s;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
-nav.scrolled { border-bottom-color: var(--rule-strong); }
 
-nav ul {
-  list-style: none;
+.nav-inner {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 0;
   display: flex;
-  justify-content: center;
-  gap: 28px;
-  padding: 13px 0;
-  margin: 0;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  gap: 24px;
 }
 
 nav a {
   text-decoration: none;
-  color: var(--ink-muted);
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  transition: color 0.15s;
   position: relative;
-  transition: color 0.2s;
 }
-nav a:hover { color: var(--ink); }
-nav a.active { color: var(--ink); }
+nav a:hover { color: var(--mid); }
+nav a.active { color: var(--body); }
 nav a.active::after {
   content: '';
   position: absolute;
-  left: 0; bottom: -3px;
+  bottom: -3px; left: 0;
   width: 100%; height: 1px;
-  background: var(--ink);
+  background: var(--accent-d);
+  opacity: 0.8;
 }
 
-/* ── HEADER ── */
-header {
-  padding: 116px 20px 52px;
-  text-align: center;
-}
-.logo {
-  height: 200px;
-  max-width: 90%;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(8px);
-  animation: fadeUp 0.9s ease 0.2s forwards;
+#utc {
+  font-size: 9.5px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
 }
 
-/* ── LAYOUT ── */
-.content-wrap {
-  max-width: 68ch;
-  width: 90%;
-  margin: 0 auto;
-}
-
-section {
-  max-width: 68ch;
-  width: 90%;
-  margin: 0 auto 0;
-  scroll-margin-top: 108px;
-  padding: 40px 0;
-}
-
-/* ── SECTION HEADERS ── */
-.section-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
+/* ── TICKER ── */
+.ticker-wrap {
   border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  background: var(--bg-1);
+  position: relative;
 }
-.section-index {
-  font-size: 10px;
-  color: var(--ink-faint);
-  letter-spacing: 0.08em;
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 48px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ticker-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-1), transparent);
+}
+.ticker-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-1), transparent);
+}
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.t-item {
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
 }
-h2 {
-  font-weight: 500;
-  font-size: 11px;
+.t-item::before {
+  content: '';
+  display: inline-block;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--dim);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.t-item span { color: var(--muted); }
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── OUTER WRAPPER ── */
+.outer {
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 0;
+}
+
+/* ── HERO ── */
+#home {
+  padding: 72px 0 52px;
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 74px;
+}
+
+.hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 44px;
+}
+
+.logo-wrap {
+  opacity: 0;
+  animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+}
+.logo-wrap img {
+  height: 80px;
+  max-width: 100%;
+  filter: invert(1) brightness(0.62);
+  display: block;
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  padding-top: 6px;
+  opacity: 0;
+  animation: riseIn 0.7s ease 0.4s forwards;
+}
+.hero-meta-row {
+  font-size: 9px;
+  color: var(--dim);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink);
+}
+
+.hero-body {
+  opacity: 0;
+  animation: riseIn 0.8s ease 0.6s forwards;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--bright);
+  line-height: 1.25;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.hero-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 0 36px;
+  line-height: 1.75;
+  text-align: left;
+}
+
+/* ── STATUS BAR ── */
+.status-bar {
+  display: flex;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-2);
+}
+.s-cell {
+  background: var(--bg-1);
+  flex: 1;
+  padding: 12px 16px;
+  transition: background 0.12s;
+}
+.s-cell:hover { background: var(--bg-h); }
+.s-val {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--mid);
+  margin-bottom: 3px;
+  letter-spacing: 0.04em;
+}
+.s-label {
+  font-size: 9.5px;
+  color: var(--dim);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 44px 0;
+  border-bottom: 1px solid var(--rule);
+  scroll-margin-top: 74px;
+}
+
+.s-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 11px;
+  margin-bottom: 22px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid var(--rule);
+}
+.s-idx {
+  font-size: 9.5px;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+}
+h2 {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
   margin: 0;
 }
 
-/* ── BODY COPY ── */
 p {
-  margin: 0 0 16px;
-  color: var(--ink-mid);
+  margin: 0 0 14px;
+  color: var(--body);
   text-align: justify;
   hyphens: auto;
+  line-height: 1.75;
 }
 p:last-child { margin-bottom: 0; }
-p strong { color: var(--ink); font-weight: 500; }
+p strong { color: var(--head); font-weight: 500; }
 
-/* ── RULE DIVIDERS ── */
-.divider {
-  max-width: 68ch;
-  width: 90%;
-  margin: 0 auto;
-  border: none;
-  border-top: 1px solid var(--rule);
-}
-
-/* ── CAPABILITY GRID ── */
+/* ── CAP GRID ── */
 .cap-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   background: var(--rule);
   border: 1px solid var(--rule);
-  margin: 24px 0;
+  margin: 22px 0;
 }
 .cap-cell {
-  background: var(--bg);
-  padding: 16px 18px;
-  transition: background 0.18s;
+  background: var(--bg-1);
+  padding: 17px 19px;
+  transition: background 0.12s;
+  cursor: default;
 }
-.cap-cell:hover { background: var(--surface); }
+.cap-cell:hover { background: var(--bg-h); }
+.cap-n {
+  font-size: 9.5px;
+  color: var(--dim);
+  letter-spacing: 0.07em;
+  margin-bottom: 8px;
+}
 .cap-title {
   font-size: 11px;
   font-weight: 500;
-  color: var(--ink);
-  letter-spacing: 0.05em;
+  color: var(--head);
   margin-bottom: 5px;
+  letter-spacing: 0.03em;
 }
 .cap-body {
   font-size: 11.5px;
-  color: var(--ink-muted);
-  line-height: 1.55;
+  color: var(--muted);
+  line-height: 1.6;
   margin: 0;
   text-align: left;
 }
 
-/* ── CALLOUT / POSTURE BOX ── */
+/* ── CALLOUT ── */
 .callout {
-  border-left: 2px solid var(--rule-strong);
-  padding: 14px 18px;
-  margin: 24px 0;
-  background: var(--surface);
+  border-left: 1px solid var(--rule-3);
+  padding: 12px 16px;
+  margin: 22px 0;
+  background: var(--bg-1);
+}
+.c-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 7px;
 }
 .callout p {
   margin: 0;
   font-size: 12px;
-  color: var(--ink-muted);
+  color: var(--muted);
   text-align: left;
-}
-.callout-label {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 6px;
+  line-height: 1.75;
 }
 
-/* ── SIGNAL / CONTACT ITEMS ── */
-.contact-row {
+/* ── CONTACT ROWS ── */
+.contact-block {
+  border-top: 1px solid var(--rule);
+  margin-top: 22px;
+}
+.c-row {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  gap: 20px;
   padding: 14px 0;
   border-bottom: 1px solid var(--rule);
 }
-.contact-row:first-of-type { border-top: 1px solid var(--rule); }
-.contact-icon {
-  font-size: 11px;
-  color: var(--ink-faint);
-  flex-shrink: 0;
-  min-width: 48px;
-  padding-top: 1px;
-  letter-spacing: 0.05em;
+.c-tag {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
+  color: var(--dim);
+  flex-shrink: 0;
+  min-width: 52px;
+  padding-top: 2px;
 }
-.contact-text {
+.c-val {
   font-size: 12.5px;
-  color: var(--ink-mid);
-  line-height: 1.6;
+  color: var(--muted);
   flex: 1;
+  line-height: 1.75;
 }
-.contact-text strong { color: var(--ink); font-weight: 500; }
-.contact-text em {
+.c-val strong { color: var(--body); font-weight: 500; }
+.c-val em {
   font-style: normal;
-  color: var(--ink-faint);
+  color: var(--dim);
   font-size: 11.5px;
 }
 
-/* ── ISR PARTNER ── */
+/* ── PARTNER BLOCK ── */
 .partner-block {
   border: 1px solid var(--rule);
   padding: 20px 22px;
-  margin-top: 24px;
+  margin-top: 22px;
+  background: var(--bg-1);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: border-color 0.2s;
+  gap: 8px;
+  transition: border-color 0.18s;
 }
-.partner-block:hover { border-color: var(--rule-strong); }
-.partner-label {
-  font-size: 10px;
+.partner-block:hover { border-color: var(--rule-3); }
+.p-eyebrow {
+  font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--dim);
 }
-.partner-name {
-  font-size: 13px;
+.p-name {
+  font-size: 12.5px;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--body);
 }
-.partner-desc {
+.p-desc {
   font-size: 12px;
-  color: var(--ink-muted);
-  margin: 0;
-  line-height: 1.6;
+  color: var(--muted);
+  line-height: 1.75;
   text-align: left;
+  margin: 0;
 }
-.partner-link {
+a.p-link {
   font-size: 11px;
-  color: var(--ink-muted);
+  color: var(--muted);
   text-decoration: none;
-  letter-spacing: 0.06em;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-3);
   padding-bottom: 1px;
   align-self: flex-start;
-  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.04em;
+  transition: color 0.15s, border-color 0.15s;
 }
-.partner-link:hover { color: var(--ink); border-color: var(--ink); }
-
-/* ── PULL STAT ── */
-.stat-row {
-  display: flex;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-  margin: 24px 0;
-}
-.stat-cell {
-  background: var(--bg);
-  flex: 1;
-  padding: 16px 18px;
-  text-align: center;
-}
-.stat-num {
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--ink);
-  display: block;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.stat-label {
-  font-size: 10px;
-  color: var(--ink-faint);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+a.p-link:hover { color: var(--body); border-color: var(--muted); }
 
 /* ── FOOTER ── */
-footer {
-  max-width: 68ch;
-  width: 90%;
+.footer-inner {
+  max-width: var(--col);
   margin: 0 auto;
-  padding: 28px 0 40px;
-  border-top: 1px solid var(--rule);
+  padding: 20px 0 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
+  border-top: 1px solid var(--rule);
 }
-.footer-copy {
-  font-size: 11px;
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-}
-.footer-flag {
+.f-copy { font-size: 9.5px; color: var(--dim); letter-spacing: 0.06em; }
+.f-right {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: 11px;
-  color: var(--ink-faint);
-  letter-spacing: 0.05em;
+  gap: 8px;
+  font-size: 9.5px;
+  color: var(--dim);
+  letter-spacing: 0.06em;
 }
-.footer-flag img {
-  height: 12px;
-  vertical-align: middle;
-  opacity: 0.6;
+.f-right img { height: 10px; filter: invert(1); opacity: 0.2; }
+
+/* ── GLITCH EFFECT on H1 ── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+.glitch::before {
+  color: var(--accent-d);
+  opacity: 0;
+  animation: glitch-a 7s infinite 2s;
+  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+}
+.glitch::after {
+  color: var(--mid);
+  opacity: 0;
+  animation: glitch-b 7s infinite 2.08s;
+  clip-path: polygon(0 55%, 100% 55%, 100% 72%, 0 72%);
 }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
+@keyframes glitch-a {
+  0%,94%,100% { opacity:0; transform:none; }
+  95%          { opacity:0.7; transform:translateX(-3px); }
+  96%          { opacity:0.5; transform:translateX(2px); }
+  97%          { opacity:0; transform:none; }
 }
+@keyframes glitch-b {
+  0%,94%,100% { opacity:0; transform:none; }
+  95%          { opacity:0.5; transform:translateX(3px); }
+  96%          { opacity:0.4; transform:translateX(-1px); }
+  97%          { opacity:0; transform:none; }
+}
+
+/* ── REVEAL ── */
 .reveal {
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── ANIMATIONS ── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* ── LINKS ── */
-a { color: var(--ink); }
+a { color: var(--body); }
+
+/* ── ACCENT LINE on hover rows ── */
+.cap-cell:hover .cap-n { color: var(--accent-d); }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  nav ul { gap: 16px; padding: 11px 0; }
-  nav a { font-size: 10px; }
-  header { padding: 100px 20px 40px; }
-  .logo { height: 150px; }
+@media (max-width: 700px) {
+  .outer, .nav-inner, .footer-inner { padding: 0 18px; }
+  #home { padding: 68px 18px 44px; }
+  h1 { font-size: 20px; }
   .cap-grid { grid-template-columns: 1fr; }
-  .stat-row { flex-direction: column; gap: 1px; }
-  footer { flex-direction: column; align-items: flex-start; }
+  .status-bar { flex-wrap: wrap; }
+  #utc { display: none; }
+  nav a { font-size: 9px; }
+  .nav-links { gap: 16px; }
 }
 </style>
 </head>
-
 <body>
 
-<div class="scroll-progress" id="progress"></div>
+<div id="progress"></div>
 
-<nav id="nav">
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#programs">Programs</a></li>
-    <li><a href="#careers">Careers</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#isr">ISR</a></li>
-  </ul>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner outer">
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#isr">ISR</a></li>
+    </ul>
+    <div id="utc"></div>
+  </div>
 </nav>
 
-<!-- HEADER -->
-<header id="home">
-  <a href="https://www.signaturemanagementunit.com">
-    <img src="images/smu_logo.png" alt="Signature Management Unit" class="logo">
-  </a>
-</header>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-meta reveal">
-    <span class="section-index">01</span>
-    <h2>About</h2>
-  </div>
-
-  <p class="reveal">
-    Signature Management Unit (SMU) was founded in 2020 to translate signature reduction concepts — developed inside highly selective operational environments — into applied field instruction for special operations forces.
-  </p>
-
-  <p class="reveal">
-    The name is a deliberate nod to special mission units within the U.S. military. The work reflects it: practitioner-led, operationally grounded, and focused on the real consequences of exposure in modern contested environments.
-  </p>
-
-  <p class="reveal">
-    As warfare has shifted into the post-digital age, the threat surface has expanded far beyond the physical. Commercial surveillance infrastructure, open-source intelligence, and pervasive digital collection have made signature management a foundational warfighting competency. SMU exists to ensure that the operators who need this discipline can access it — at the level of rigor it demands.
-  </p>
-
-  <p class="reveal">
-    SMU maintains a deliberately small footprint. Engagements are selective. The organization does not scale for scale's sake.
-  </p>
-
-  <div class="stat-row reveal">
-    <div class="stat-cell">
-      <span class="stat-num">2020</span>
-      <span class="stat-label">Founded</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-num">AFSW</span>
-      <span class="stat-label">Primary client</span>
-    </div>
-    <div class="stat-cell">
-      <span class="stat-num">SOF</span>
-      <span class="stat-label">Focus population</span>
+<!-- TICKER -->
+<div style="margin-top:44px">
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker">
+      <span class="t-item">Domain <span>Digital · Physical · Behavioral</span></span>
+      <span class="t-item">Client <span>Air Force Special Warfare</span></span>
+      <span class="t-item">Founded <span>2020</span></span>
+      <span class="t-item">Doctrine <span>ISR-authorized</span></span>
+      <span class="t-item">Posture <span>Selective engagement</span></span>
+      <span class="t-item">Contact <span>Secure email only</span></span>
+      <span class="t-item">Personnel <span>SOF / IC practitioners</span></span>
+      <span class="t-item">Programs <span>Government-funded</span></span>
+      <span class="t-item">Domain <span>Digital · Physical · Behavioral</span></span>
+      <span class="t-item">Client <span>Air Force Special Warfare</span></span>
+      <span class="t-item">Founded <span>2020</span></span>
+      <span class="t-item">Doctrine <span>ISR-authorized</span></span>
+      <span class="t-item">Posture <span>Selective engagement</span></span>
+      <span class="t-item">Contact <span>Secure email only</span></span>
+      <span class="t-item">Personnel <span>SOF / IC practitioners</span></span>
+      <span class="t-item">Programs <span>Government-funded</span></span>
     </div>
   </div>
-</section>
+</div>
 
-<hr class="divider">
-
-<!-- PROGRAMS -->
-<section id="programs">
-  <div class="section-meta reveal">
-    <span class="section-index">02</span>
-    <h2>Programs</h2>
-  </div>
-
-  <p class="reveal">
-    SMU trains special operations forces in <strong>signature reduction</strong> — the discipline of managing physical, digital, and behavioral exposure in commercial surveillance environments and contested information domains. Our primary client since founding has been Air Force Special Warfare.
-  </p>
-
-  <p class="reveal">
-    Programs combine applied field instruction, practitioner-facilitated workshops, and doctrine materials developed by the Institute for Signature Reduction. Delivery is in small cohorts. Instruction is practitioner-led — built by and for operators who have applied these concepts in the field.
-  </p>
-
-  <div class="cap-grid reveal">
-    <div class="cap-cell">
-      <p class="cap-title">Digital force protection</p>
-      <p class="cap-body">Device hardening, account footprint reduction, attribution risk management, and behavioral hygiene in surveillance-dense operating environments.</p>
+<!-- HERO -->
+<div class="outer">
+  <div id="home">
+    <div class="hero-top">
+      <div class="logo-wrap">
+        <img src="images/smu_logo.png" alt="Signature Management Unit">
+      </div>
+      <div class="hero-meta">
+        <span class="hero-meta-row">Est. 2020</span>
+        <span class="hero-meta-row">United States</span>
+        <span class="hero-meta-row">ISR-authorized</span>
+      </div>
     </div>
-    <div class="cap-cell">
-      <p class="cap-title">Physical signature management</p>
-      <p class="cap-body">Pattern-of-life discipline, biometric exposure reduction, and physical signature management across operational phases.</p>
-    </div>
-    <div class="cap-cell">
-      <p class="cap-title">Information domain operations</p>
-      <p class="cap-body">Operating effectively in environments where identity, affiliation, and intent are actively being collected and assessed by adversaries.</p>
-    </div>
-    <div class="cap-cell">
-      <p class="cap-title">Hardened systems</p>
-      <p class="cap-body">Select equipment and device initiatives designed to reduce operational exposure at the hardware and firmware layer.</p>
-    </div>
-  </div>
-
-  <div class="callout reveal">
-    <p class="callout-label">Operating posture</p>
-    <p>Programs are government-funded and initiated on a selective basis. Engagements are assessed for timing, partner readiness, and operational alignment. Not all inquiries will result in a program. Response times may be extended.</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- CAREERS -->
-<section id="careers">
-  <div class="section-meta reveal">
-    <span class="section-index">03</span>
-    <h2>Careers</h2>
-  </div>
-
-  <p class="reveal">
-    SMU draws on a small network of experienced special operations and intelligence professionals. Personnel support discrete training and advisory activities on a contract basis, aligned to specific program engagements.
-  </p>
-
-  <p class="reveal">
-    Participation is episodic. Most engagements are short-duration and operationally focused. We do not maintain a standing staff beyond core organizational functions.
-  </p>
-
-  <div class="callout reveal">
-    <p class="callout-label">Current status</p>
-    <p>SMU is not actively recruiting. Practitioners with directly relevant SOF or intelligence community backgrounds who believe there may be future alignment are welcome to make contact through the secure channel below. Outreach is noted and retained.</p>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-meta reveal">
-    <span class="section-index">04</span>
-    <h2>Contact</h2>
-  </div>
-
-  <p class="reveal">All contact should be initiated via secure email. We do not accept inbound calls, and we will not initiate contact by phone or any unencrypted channel.</p>
-
-  <div class="reveal">
-    <div class="contact-row">
-      <span class="contact-icon">Email</span>
-      <span class="contact-text">
-        <strong>contact&#64;signaturemanagementunit.com</strong><br>
-        <em>Initial contact only. Use a secure email client where possible.</em>
-      </span>
-    </div>
-    <div class="contact-row">
-      <span class="contact-icon">Signal</span>
-      <span class="contact-text">
-        Used for all follow-on communication with established contacts. We will never contact you first via Signal or any other platform.<br>
-        <em>Always verify identity independently before sharing any sensitive information.</em>
-      </span>
-    </div>
-    <div class="contact-row">
-      <span class="contact-icon">Note</span>
-      <span class="contact-text">
-        <em>Due to our selective operating posture, not all inquiries will receive a response. Do not transmit classified or operationally sensitive information through any channel prior to a verified, established relationship.</em>
-      </span>
+    <div class="hero-body">
+      <h1 class="glitch" data-text="You leave a trail.">You leave a trail.<br>We close it.</h1>
+      <p class="hero-sub">Practitioner-led instruction in signature reduction for special operations forces — physical domain, digital domain, and everything in between.</p>
+      <div class="status-bar">
+        <div class="s-cell">
+          <span class="s-val">Active</span>
+          <span class="s-label">Program status</span>
+        </div>
+        <div class="s-cell">
+          <span class="s-val">AFSW</span>
+          <span class="s-label">Primary client</span>
+        </div>
+        <div class="s-cell">
+          <span class="s-val">SOF / IC</span>
+          <span class="s-label">Focus population</span>
+        </div>
+        <div class="s-cell">
+          <span class="s-val">ISR</span>
+          <span class="s-label">Doctrine partner</span>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<hr class="divider">
+<!-- MAIN -->
+<div class="outer">
 
-<!-- ISR -->
-<section id="isr">
-  <div class="section-meta reveal">
-    <span class="section-index">05</span>
-    <h2>Institute for Signature Reduction</h2>
-  </div>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="s-meta reveal">
+      <span class="s-idx">01</span>
+      <h2>About</h2>
+    </div>
+    <p class="reveal">Signature Management Unit (SMU) was founded in 2020 to translate signature reduction concepts — developed inside highly selective operational environments — into applied field instruction for special operations forces. The name is a deliberate nod to special mission units within the U.S. military.</p>
+    <p class="reveal">As warfare has shifted into the post-digital age, the threat surface has expanded far beyond the physical. Commercial surveillance infrastructure, open-source intelligence collection, and pervasive digital tracking have made signature management a foundational warfighting competency. SMU exists to ensure the operators who need this discipline can access it at the level of rigor it demands.</p>
+    <p class="reveal">The organization is practitioner-led, operationally grounded, and deliberately small. We engage where timing, alignment, and readiness converge — and not elsewhere.</p>
+  </section>
 
-  <p class="reveal">
-    All SMU instruction is derived from doctrine developed and stewarded by the <strong>Institute for Signature Reduction (ISR)</strong> — an independent 501(c)(3) nonprofit research organization. ISR is responsible for the long-term development, publication, and evolution of the signature reduction framework that informs SMU programs.
-  </p>
+  <!-- PROGRAMS -->
+  <section id="programs">
+    <div class="s-meta reveal">
+      <span class="s-idx">02</span>
+      <h2>Programs</h2>
+    </div>
+    <p class="reveal">SMU trains special operations forces in <strong>signature reduction</strong> — the discipline of managing physical, digital, and behavioral exposure across contested environments and commercial surveillance infrastructure. Our primary client since founding has been Air Force Special Warfare.</p>
+    <p class="reveal">Programs combine applied field instruction, practitioner-facilitated workshops, and doctrine materials developed by the Institute for Signature Reduction. Instruction is delivered in small cohorts by practitioners who have applied these concepts operationally.</p>
+    <div class="cap-grid reveal">
+      <div class="cap-cell">
+        <p class="cap-n">01</p>
+        <p class="cap-title">Digital force protection</p>
+        <p class="cap-body">Device hardening, attribution risk management, account footprint reduction, and behavioral hygiene in surveillance-dense environments.</p>
+      </div>
+      <div class="cap-cell">
+        <p class="cap-n">02</p>
+        <p class="cap-title">Physical signature management</p>
+        <p class="cap-body">Pattern-of-life discipline, biometric exposure reduction, and physical signature management across operational phases.</p>
+      </div>
+      <div class="cap-cell">
+        <p class="cap-n">03</p>
+        <p class="cap-title">Information domain operations</p>
+        <p class="cap-body">Operating in environments where identity, affiliation, and intent are actively being collected, analyzed, and exploited.</p>
+      </div>
+      <div class="cap-cell">
+        <p class="cap-n">04</p>
+        <p class="cap-title">Hardened systems</p>
+        <p class="cap-body">Select equipment and device initiatives designed to reduce operational exposure at the hardware and firmware layer.</p>
+      </div>
+    </div>
+    <div class="callout reveal">
+      <p class="c-label">Operating posture</p>
+      <p>Programs are government-funded and initiated on a selective basis. Engagements are assessed for timing, partner readiness, and operational alignment prior to commitment. Not all inquiries result in a program.</p>
+    </div>
+  </section>
 
-  <p class="reveal">
-    The relationship matters: doctrine developed through rigorous research and practitioner feedback — not proprietary to a training company — means the framework stays current, independent, and field-tested. SMU participants may receive ISR doctrine publications and educational materials for continued application following instruction.
-  </p>
+  <!-- CAREERS -->
+  <section id="careers">
+    <div class="s-meta reveal">
+      <span class="s-idx">03</span>
+      <h2>Careers</h2>
+    </div>
+    <p class="reveal">SMU draws on a small network of experienced special operations and intelligence professionals. Personnel support discrete training and advisory activities on a contract basis, aligned to specific program engagements. Participation is episodic.</p>
+    <p class="reveal">We do not maintain a standing staff beyond core organizational functions and are not actively recruiting. Practitioners with directly relevant SOF or intelligence community backgrounds who believe there may be future alignment are welcome to make initial contact through the secure channel below.</p>
+  </section>
 
-  <div class="partner-block reveal">
-    <span class="partner-label">Authorized training partner</span>
-    <span class="partner-name">Institute for Signature Reduction</span>
-    <p class="partner-desc">Independent 501(c)(3) nonprofit. Responsible for signature reduction doctrine development, publication, and long-term stewardship. SMU is ISR's authorized operational training partner.</p>
-    <a href="https://www.isrprivacymatters.org" class="partner-link">isrprivacymatters.org ↗</a>
-  </div>
-</section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="s-meta reveal">
+      <span class="s-idx">04</span>
+      <h2>Contact</h2>
+    </div>
+    <p class="reveal">All contact should be initiated via secure email. We do not accept inbound calls and will not initiate contact by phone or any unencrypted channel.</p>
+    <div class="contact-block reveal">
+      <div class="c-row">
+        <span class="c-tag">Email</span>
+        <span class="c-val">
+          <strong>contact&#64;signaturemanagementunit.com</strong><br>
+          <em>Initial contact only. Use a secure email client where possible.</em>
+        </span>
+      </div>
+      <div class="c-row">
+        <span class="c-tag">Signal</span>
+        <span class="c-val">Used for all follow-on communication with established contacts. We will not initiate contact via Signal or any other platform. Verify identity independently before sharing any sensitive information.</span>
+      </div>
+      <div class="c-row">
+        <span class="c-tag">Note</span>
+        <span class="c-val"><em>Due to our selective operating posture, not all inquiries will receive a response. Do not transmit classified or operationally sensitive information prior to a verified, established relationship.</em></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISR -->
+  <section id="isr">
+    <div class="s-meta reveal">
+      <span class="s-idx">05</span>
+      <h2>Institute for Signature Reduction</h2>
+    </div>
+    <p class="reveal">All SMU instruction is derived from doctrine developed and stewarded by the <strong>Institute for Signature Reduction (ISR)</strong> — an independent 501(c)(3) nonprofit research organization responsible for the long-term development, publication, and evolution of the signature reduction framework.</p>
+    <p class="reveal">The distinction matters. Doctrine developed through independent research and sustained practitioner feedback — not proprietary to a training company — remains current, field-tested, and accountable to the operational community rather than to commercial interests. SMU is ISR's authorized training partner.</p>
+    <div class="partner-block reveal">
+      <span class="p-eyebrow">Authorized training partner</span>
+      <span class="p-name">Institute for Signature Reduction</span>
+      <p class="p-desc">Independent 501(c)(3) nonprofit. Responsible for signature reduction doctrine development, publication, and long-term stewardship. SMU program participants may receive ISR doctrine publications for continued application following instruction.</p>
+      <a href="https://www.isrprivacymatters.org" class="p-link">isrprivacymatters.org ↗</a>
+    </div>
+  </section>
+
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-copy">© Signature Management Unit. All rights reserved.</span>
-  <span class="footer-flag">
-    <img src="images/us_flag.png" alt="US Flag"> Official SMU site
-  </span>
+  <div class="footer-inner outer">
+    <span class="f-copy">© Signature Management Unit. All rights reserved.</span>
+    <span class="f-right">
+      <img src="images/us_flag.png" alt="">
+      Official SMU site
+    </span>
+  </div>
 </footer>
 
 <script>
 (function () {
-  /* Scroll progress */
+  /* Progress */
   const bar = document.getElementById('progress');
-  const nav = document.getElementById('nav');
-  const links = document.querySelectorAll('nav a');
-  const sections = document.querySelectorAll('section, header');
-
   window.addEventListener('scroll', () => {
-    const st = window.scrollY;
-    const dh = document.body.scrollHeight - window.innerHeight;
-    bar.style.width = (st / dh * 100) + '%';
-    nav.classList.toggle('scrolled', st > 20);
+    bar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
   }, { passive: true });
 
-  /* Active nav link */
-  const navObserver = new IntersectionObserver(entries => {
+  /* Nav active */
+  const links = document.querySelectorAll('nav a');
+  const secs  = document.querySelectorAll('section, #home');
+  const navObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
+      if (e.isIntersecting)
         links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
-      }
     });
-  }, { threshold: 0.45 });
-  sections.forEach(s => navObserver.observe(s));
+  }, { threshold: 0.3 });
+  secs.forEach(s => navObs.observe(s));
 
-  /* Reveal on scroll */
-  const revealObserver = new IntersectionObserver(entries => {
+  /* Reveal */
+  const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }, { threshold: 0.08, rootMargin: '0px 0px -16px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+  /* UTC clock */
+  const utcEl = document.getElementById('utc');
+  function tick() {
+    const n = new Date();
+    utcEl.textContent =
+      String(n.getUTCHours()).padStart(2,'0') + ':' +
+      String(n.getUTCMinutes()).padStart(2,'0') + ':' +
+      String(n.getUTCSeconds()).padStart(2,'0') + '\u00a0UTC';
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* Glitch — apply data-text to each line separately */
+  const h1 = document.querySelector('h1.glitch');
+  if (h1) h1.setAttribute('data-text', h1.textContent);
 })();
 </script>
 
