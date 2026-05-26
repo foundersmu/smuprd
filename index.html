@@ -23,28 +23,32 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-  --bg:       #0f0f0d;
-  --bg-1:     #151513;
-  --bg-2:     #1b1b18;
-  --bg-h:     #20201c;
+  /* Backgrounds — dark but readable; bg lifted to reduce harshness */
+  --bg:       #1c1c19;
+  --bg-1:     #222220;
+  --bg-2:     #282825;
+  --bg-h:     #2f2f2b;
 
-  --rule:     #242420;
-  --rule-2:   #30302c;
-  --rule-3:   #3d3d38;
+  /* Rules */
+  --rule:     #333330;
+  --rule-2:   #404040;
+  --rule-3:   #515148;
 
-  --dim:      #4f4f49;
-  --muted:    #74746c;
-  --mid:      #94948b;
+  /* Text scale — boosted for legibility at all sizes */
+  --dim:      #686860;   /* timestamps, indices, secondary labels */
+  --muted:    #96968c;   /* supporting copy, captions */
+  --mid:      #b8b8ae;   /* body text secondary */
+  --body:     #d8d7cf;   /* primary body — WCAG AA on --bg */
+  --head:     #eceae2;   /* headings, strong */
+  --bright:   #f6f4ec;   /* hero H1 */
 
-  --body:     #c6c4bc;
-  --head:     #e0ded6;
-  --bright:   #f2f0e8;
-
+  /* Accent — warm amber, used sparingly */
   --accent:   #c8a96e;
-  --accent-d: #9a7d48;
+  --accent-d: #b08840;
 
   --mono: 'IBM Plex Mono', 'Courier New', monospace;
   --col: 640px;
+  --pad: 24px;
 }
 
 html { scroll-behavior: smooth; }
@@ -54,42 +58,26 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--body);
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* ── GRAIN OVERLAY ── */
+/* ── GRAIN — very subtle, doesn't hurt legibility ── */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9000;
-  opacity: 0.03;
+  opacity: 0.018;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
   background-size: 200px;
 }
 
-/* ── SCANLINES ── */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 8999;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.03) 2px,
-    rgba(0,0,0,0.03) 4px
-  );
-}
-
-/* ── SCROLL PROGRESS ── */
+/* ── PROGRESS ── */
 #progress {
   position: fixed;
   top: 0; left: 0;
@@ -98,7 +86,7 @@ body::after {
   background: var(--accent-d);
   z-index: 9100;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: width 0.06s linear;
 }
 
@@ -107,34 +95,35 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 9000;
-  background: rgba(15,15,13,0.96);
+  background: rgba(28,28,25,0.97);
   border-bottom: 1px solid var(--rule);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .nav-inner {
   max-width: var(--col);
   margin: 0 auto;
-  padding: 0 0;
+  padding: 0 var(--pad);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 44px;
+  height: 46px;
 }
 
 .nav-links {
   list-style: none;
   margin: 0; padding: 0;
   display: flex;
-  gap: 24px;
+  gap: 22px;
+  flex-wrap: wrap;
 }
 
 nav a {
   text-decoration: none;
   color: var(--muted);
   font-size: 9.5px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   transition: color 0.15s;
   position: relative;
@@ -147,7 +136,7 @@ nav a.active::after {
   bottom: -3px; left: 0;
   width: 100%; height: 1px;
   background: var(--accent-d);
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 #utc {
@@ -155,10 +144,12 @@ nav a.active::after {
   color: var(--dim);
   letter-spacing: 0.1em;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 /* ── TICKER ── */
 .ticker-wrap {
+  margin-top: 46px;
   border-bottom: 1px solid var(--rule);
   overflow: hidden;
   height: 30px;
@@ -172,7 +163,7 @@ nav a.active::after {
   content: '';
   position: absolute;
   top: 0; bottom: 0;
-  width: 48px;
+  width: 56px;
   z-index: 2;
   pointer-events: none;
 }
@@ -186,8 +177,7 @@ nav a.active::after {
 }
 .ticker-track {
   display: flex;
-  gap: 0;
-  animation: ticker 28s linear infinite;
+  animation: ticker 32s linear infinite;
   white-space: nowrap;
 }
 .ticker-track:hover { animation-play-state: paused; }
@@ -196,10 +186,10 @@ nav a.active::after {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dim);
-  padding: 0 32px;
+  padding: 0 30px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   flex-shrink: 0;
 }
 .t-item::before {
@@ -207,11 +197,10 @@ nav a.active::after {
   display: inline-block;
   width: 3px; height: 3px;
   border-radius: 50%;
-  background: var(--dim);
-  opacity: 0.5;
+  background: var(--rule-3);
   flex-shrink: 0;
 }
-.t-item span { color: var(--muted); }
+.t-item span { color: var(--mid); }
 
 @keyframes ticker {
   0%   { transform: translateX(0); }
@@ -222,14 +211,14 @@ nav a.active::after {
 .outer {
   max-width: var(--col);
   margin: 0 auto;
-  padding: 0 0;
+  padding: 0 var(--pad);
 }
 
 /* ── HERO ── */
 #home {
-  padding: 72px 0 52px;
+  padding: 52px 0 52px;
   border-bottom: 1px solid var(--rule);
-  scroll-margin-top: 74px;
+  scroll-margin-top: 76px;
 }
 
 .hero-top {
@@ -237,18 +226,17 @@ nav a.active::after {
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 44px;
+  margin-bottom: 40px;
 }
 
 .logo-wrap {
   opacity: 0;
   animation: riseIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
 }
-
 .logo-wrap img {
-  height: 122px;
+  height: 172px;          /* bumped from 148px */
   max-width: 100%;
-  filter: invert(1) brightness(0.78);
+  filter: invert(1) brightness(0.86);
   display: block;
 }
 
@@ -257,11 +245,10 @@ nav a.active::after {
   flex-direction: column;
   align-items: flex-end;
   gap: 5px;
-  padding-top: 6px;
+  padding-top: 8px;
   opacity: 0;
   animation: riseIn 0.7s ease 0.4s forwards;
 }
-
 .hero-meta-row {
   font-size: 9px;
   color: var(--dim);
@@ -275,20 +262,20 @@ nav a.active::after {
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 500;
   color: var(--bright);
-  line-height: 1.25;
+  line-height: 1.22;
   margin: 0 0 16px;
   letter-spacing: -0.02em;
 }
 
 .hero-sub {
-  font-size: 12.5px;
-  color: var(--muted);
+  font-size: 13px;
+  color: var(--body);           /* one step brighter than before */
   max-width: 52ch;
-  margin: 0 0 36px;
-  line-height: 1.75;
+  margin: 0 0 32px;
+  line-height: 1.8;
   text-align: left;
 }
 
@@ -297,29 +284,25 @@ h1 {
   display: flex;
   gap: 1px;
   background: var(--rule);
-  border: 1px solid var(--rule);
-  border-top: 1px solid var(--rule-2);
+  border: 1px solid var(--rule-2);
 }
-
 .s-cell {
   background: var(--bg-1);
   flex: 1;
-  padding: 12px 16px;
+  padding: 12px 14px;
   transition: background 0.12s;
 }
 .s-cell:hover { background: var(--bg-h); }
-
 .s-val {
   display: block;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 500;
-  color: var(--mid);
-  margin-bottom: 3px;
+  color: var(--body);
+  margin-bottom: 4px;
   letter-spacing: 0.04em;
 }
-
 .s-label {
-  font-size: 9.5px;
+  font-size: 9px;
   color: var(--dim);
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -329,7 +312,7 @@ h1 {
 section {
   padding: 44px 0;
   border-bottom: 1px solid var(--rule);
-  scroll-margin-top: 74px;
+  scroll-margin-top: 76px;
 }
 
 .s-meta {
@@ -340,30 +323,28 @@ section {
   padding-bottom: 11px;
   border-bottom: 1px solid var(--rule);
 }
-
 .s-idx {
   font-size: 9.5px;
   color: var(--dim);
   letter-spacing: 0.06em;
 }
-
 h2 {
   font-size: 9.5px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--mid);
   margin: 0;
 }
 
+/* ── BODY TEXT ── */
 p {
-  margin: 0 0 14px;
+  margin: 0 0 15px;
   color: var(--body);
   text-align: justify;
   hyphens: auto;
-  line-height: 1.75;
+  line-height: 1.8;
 }
-
 p:last-child { margin-bottom: 0; }
 p strong { color: var(--head); font-weight: 500; }
 
@@ -373,80 +354,73 @@ p strong { color: var(--head); font-weight: 500; }
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   background: var(--rule);
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-2);
   margin: 22px 0;
 }
-
 .cap-cell {
   background: var(--bg-1);
-  padding: 17px 19px;
+  padding: 18px 20px;
   transition: background 0.12s;
   cursor: default;
 }
-
 .cap-cell:hover { background: var(--bg-h); }
-
 .cap-n {
   font-size: 9.5px;
   color: var(--dim);
   letter-spacing: 0.07em;
   margin-bottom: 8px;
+  transition: color 0.12s;
 }
-
+.cap-cell:hover .cap-n { color: var(--accent-d); }
 .cap-title {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--head);
-  margin-bottom: 5px;
-  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
 }
-
 .cap-body {
-  font-size: 11.5px;
-  color: var(--muted);
-  line-height: 1.6;
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.65;
   margin: 0;
   text-align: left;
 }
 
-/* ── CALLALOUT ── */
+/* ── CALLOUT ── */
 .callout {
   border-left: 1px solid var(--rule-3);
-  padding: 12px 16px;
+  padding: 13px 17px;
   margin: 22px 0;
   background: var(--bg-1);
 }
-
 .c-label {
   font-size: 9.5px;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
-
 .callout p {
   margin: 0;
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 12.5px;
+  color: var(--mid);
   text-align: left;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
-/* ── CONTACT ROWS ── */
+/* ── CONTACT ── */
 .contact-block {
   border-top: 1px solid var(--rule);
   margin-top: 22px;
 }
-
 .c-row {
   display: flex;
   gap: 20px;
-  padding: 14px 0;
+  padding: 15px 0;
   border-bottom: 1px solid var(--rule);
 }
-
 .c-tag {
   font-size: 9.5px;
   font-weight: 500;
@@ -457,36 +431,31 @@ p strong { color: var(--head); font-weight: 500; }
   min-width: 52px;
   padding-top: 2px;
 }
-
 .c-val {
-  font-size: 12.5px;
-  color: var(--muted);
+  font-size: 13px;
+  color: var(--body);
   flex: 1;
-  line-height: 1.75;
+  line-height: 1.8;
 }
-
 .c-val strong { color: var(--body); font-weight: 500; }
-
 .c-val em {
   font-style: normal;
   color: var(--dim);
-  font-size: 11.5px;
+  font-size: 12px;
 }
 
 /* ── PARTNER BLOCK ── */
 .partner-block {
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-2);
   padding: 20px 22px;
   margin-top: 22px;
   background: var(--bg-1);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
   transition: border-color 0.18s;
 }
-
 .partner-block:hover { border-color: var(--rule-3); }
-
 .p-eyebrow {
   font-size: 9.5px;
   font-weight: 500;
@@ -494,21 +463,18 @@ p strong { color: var(--head); font-weight: 500; }
   text-transform: uppercase;
   color: var(--dim);
 }
-
 .p-name {
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--body);
 }
-
 .p-desc {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.75;
+  font-size: 12.5px;
+  color: var(--mid);
+  line-height: 1.8;
   text-align: left;
   margin: 0;
 }
-
 a.p-link {
   font-size: 11px;
   color: var(--muted);
@@ -519,24 +485,20 @@ a.p-link {
   letter-spacing: 0.04em;
   transition: color 0.15s, border-color 0.15s;
 }
-
 a.p-link:hover { color: var(--body); border-color: var(--muted); }
 
 /* ── FOOTER ── */
+footer { margin-top: 0; }
 .footer-inner {
-  max-width: var(--col);
-  margin: 0 auto;
-  padding: 20px 0 36px;
+  padding: 22px var(--pad) 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   border-top: 1px solid var(--rule);
 }
-
 .f-copy { font-size: 9.5px; color: var(--dim); letter-spacing: 0.06em; }
-
 .f-right {
   display: flex;
   align-items: center;
@@ -545,19 +507,10 @@ a.p-link:hover { color: var(--body); border-color: var(--muted); }
   color: var(--dim);
   letter-spacing: 0.06em;
 }
+.f-right img { height: 10px; filter: invert(1); opacity: 0.25; }
 
-.f-right img {
-  height: 10px;
-  filter: invert(1);
-  opacity: 0.2;
-}
-
-/* ── GLITCH EFFECT ── */
-.glitch {
-  position: relative;
-  display: inline-block;
-}
-
+/* ── GLITCH ── */
+.glitch { position: relative; display: inline-block; }
 .glitch::before,
 .glitch::after {
   content: attr(data-text);
@@ -565,34 +518,31 @@ a.p-link:hover { color: var(--body); border-color: var(--muted); }
   top: 0; left: 0;
   width: 100%;
   pointer-events: none;
+  white-space: pre;
 }
-
 .glitch::before {
   color: var(--accent-d);
   opacity: 0;
-  animation: glitch-a 7s infinite 2s;
-  clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+  animation: glitch-a 8s infinite 3s;
+  clip-path: polygon(0 18%, 100% 18%, 100% 38%, 0 38%);
 }
-
 .glitch::after {
   color: var(--mid);
   opacity: 0;
-  animation: glitch-b 7s infinite 2.08s;
-  clip-path: polygon(0 55%, 100% 55%, 100% 72%, 0 72%);
+  animation: glitch-b 8s infinite 3.1s;
+  clip-path: polygon(0 56%, 100% 56%, 100% 72%, 0 72%);
 }
-
 @keyframes glitch-a {
-  0%,94%,100% { opacity:0; transform:none; }
-  95% { opacity:0.7; transform:translateX(-3px); }
-  96% { opacity:0.5; transform:translateX(2px); }
-  97% { opacity:0; transform:none; }
+  0%,93%,100% { opacity:0; transform:none; }
+  94% { opacity:0.65; transform:translateX(-3px); }
+  96% { opacity:0.4;  transform:translateX(2px); }
+  97% { opacity:0;    transform:none; }
 }
-
 @keyframes glitch-b {
-  0%,94%,100% { opacity:0; transform:none; }
-  95% { opacity:0.5; transform:translateX(3px); }
-  96% { opacity:0.4; transform:translateX(-1px); }
-  97% { opacity:0; transform:none; }
+  0%,93%,100% { opacity:0; transform:none; }
+  94% { opacity:0.45; transform:translateX(3px); }
+  96% { opacity:0.3;  transform:translateX(-1px); }
+  97% { opacity:0;    transform:none; }
 }
 
 /* ── REVEAL ── */
@@ -601,41 +551,74 @@ a.p-link:hover { color: var(--body); border-color: var(--muted); }
   transform: translateY(8px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
 .reveal.in { opacity: 1; transform: none; }
 
-/* ── ANIMATIONS ── */
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: none; }
+  to   { opacity: 1; transform: none; }
 }
 
-/* ── LINKS ── */
 a { color: var(--body); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 700px) {
-  .outer, .nav-inner, .footer-inner { padding: 0 18px; }
-  #home { padding: 68px 18px 44px; }
-  h1 { font-size: 20px; }
-  .cap-grid { grid-template-columns: 1fr; }
-  .status-bar { flex-wrap: wrap; }
+/* ── MOBILE ── */
+@media (max-width: 680px) {
+  :root { --pad: 18px; }
+
+  body { font-size: 14px; }
+
+  .nav-inner { height: 44px; }
+  .nav-links { gap: 14px; }
+  nav a { font-size: 9px; letter-spacing: 0.12em; }
   #utc { display: none; }
-  nav a { font-size: 9px; }
-  .nav-links { gap: 16px; }
+
+  .ticker-wrap { margin-top: 44px; }
+
+  #home { padding: 36px 0 44px; }
+
+  .logo-wrap img { height: 128px; }
+
+  .hero-top { margin-bottom: 28px; }
+  h1 { font-size: 22px; }
+  .hero-sub { font-size: 13px; }
+
+  .status-bar { flex-wrap: wrap; }
+  .s-cell { min-width: calc(50% - 1px); flex: none; }
+
+  .cap-grid { grid-template-columns: 1fr; }
+  .cap-cell { padding: 16px; }
+  .cap-title { font-size: 12px; }
+  .cap-body  { font-size: 12.5px; }
+
+  section { padding: 36px 0; }
+
+  p { font-size: 13.5px; line-height: 1.85; text-align: left; hyphens: none; }
+
+  .callout p { font-size: 13px; }
+
+  .c-val { font-size: 13px; }
+  .c-tag { min-width: 46px; }
+
+  .partner-block { padding: 16px 18px; }
+  .p-desc { font-size: 13px; }
+
+  .footer-inner { flex-direction: column; align-items: flex-start; }
 }
 
-/* ── SCROLL PROGRESS JS HOOK ── */
+@media (max-width: 380px) {
+  nav a { font-size: 8.5px; letter-spacing: 0.1em; }
+  .nav-links { gap: 10px; }
+  h1 { font-size: 19px; }
+  .logo-wrap img { height: 104px; }
+}
 </style>
 </head>
-
 <body>
 
 <div id="progress"></div>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-inner outer">
+  <div class="nav-inner">
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
@@ -649,69 +632,62 @@ a { color: var(--body); }
 </nav>
 
 <!-- TICKER -->
-<div style="margin-top:44px">
-  <div class="ticker-wrap">
-    <div class="ticker-track" id="ticker">
-      <span class="t-item">Domain <span>Digital · Physical · Behavioral</span></span>
-      <span class="t-item">Client <span>Air Force Special Warfare</span></span>
-      <span class="t-item">Founded <span>2020</span></span>
-      <span class="t-item">Doctrine <span>ISR-authorized</span></span>
-      <span class="t-item">Posture <span>Selective engagement</span></span>
-      <span class="t-item">Contact <span>Secure email only</span></span>
-      <span class="t-item">Personnel <span>SOF / IC practitioners</span></span>
-      <span class="t-item">Programs <span>Government-funded</span></span>
-      <span class="t-item">Domain <span>Digital · Physical · Behavioral</span></span>
-      <span class="t-item">Client <span>Air Force Special Warfare</span></span>
-      <span class="t-item">Founded <span>2020</span></span>
-      <span class="t-item">Doctrine <span>ISR-authorized</span></span>
-      <span class="t-item">Posture <span>Selective engagement</span></span>
-      <span class="t-item">Contact <span>Secure email only</span></span>
-      <span class="t-item">Personnel <span>SOF / IC practitioners</span></span>
-      <span class="t-item">Programs <span>Government-funded</span></span>
-    </div>
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="t-item">Domain <span>Digital · Physical · Behavioral</span></span>
+    <span class="t-item">Client <span>Air Force Special Warfare</span></span>
+    <span class="t-item">Founded <span>2020</span></span>
+    <span class="t-item">Doctrine <span>ISR-authorized</span></span>
+    <span class="t-item">Posture <span>Selective engagement</span></span>
+    <span class="t-item">Contact <span>Secure email only</span></span>
+    <span class="t-item">Personnel <span>SOF / IC practitioners</span></span>
+    <span class="t-item">Programs <span>Government-funded</span></span>
+    <span class="t-item">Domain <span>Digital · Physical · Behavioral</span></span>
+    <span class="t-item">Client <span>Air Force Special Warfare</span></span>
+    <span class="t-item">Founded <span>2020</span></span>
+    <span class="t-item">Doctrine <span>ISR-authorized</span></span>
+    <span class="t-item">Posture <span>Selective engagement</span></span>
+    <span class="t-item">Contact <span>Secure email only</span></span>
+    <span class="t-item">Personnel <span>SOF / IC practitioners</span></span>
+    <span class="t-item">Programs <span>Government-funded</span></span>
   </div>
 </div>
 
 <!-- HERO -->
 <div class="outer">
   <div id="home">
-
     <div class="hero-top">
       <div class="logo-wrap">
         <img src="images/smu_logo.png" alt="Signature Management Unit">
       </div>
-
       <div class="hero-meta">
         <span class="hero-meta-row">Est. 2020</span>
         <span class="hero-meta-row">United States</span>
         <span class="hero-meta-row">ISR-authorized</span>
       </div>
     </div>
-
     <div class="hero-body">
       <h1 class="glitch" data-text="You leave a trail.">You leave a trail.<br>We close it.</h1>
       <p class="hero-sub">Practitioner-led instruction in signature reduction for special operations forces — physical domain, digital domain, and behavioral awareness under surveillance saturation.</p>
+      <div class="status-bar">
+        <div class="s-cell">
+          <span class="s-val">Active</span>
+          <span class="s-label">Program status</span>
+        </div>
+        <div class="s-cell">
+          <span class="s-val">AFSW</span>
+          <span class="s-label">Primary client</span>
+        </div>
+        <div class="s-cell">
+          <span class="s-val">SOF / IC</span>
+          <span class="s-label">Focus population</span>
+        </div>
+        <div class="s-cell">
+          <span class="s-val">ISR</span>
+          <span class="s-label">Doctrine partner</span>
+        </div>
+      </div>
     </div>
-
-    <div class="status-bar">
-      <div class="s-cell">
-        <span class="s-val">Active</span>
-        <span class="s-label">Program status</span>
-      </div>
-      <div class="s-cell">
-        <span class="s-val">AFSW</span>
-        <span class="s-label">Primary client</span>
-      </div>
-      <div class="s-cell">
-        <span class="s-val">SOF / IC</span>
-        <span class="s-label">Focus population</span>
-      </div>
-      <div class="s-cell">
-        <span class="s-val">ISR</span>
-        <span class="s-label">Doctrine partner</span>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -737,7 +713,6 @@ a { color: var(--body); }
     </div>
     <p class="reveal">SMU trains special operations forces in <strong>signature reduction</strong> — the discipline of managing physical, digital, and behavioral exposure across contested environments and commercial surveillance infrastructure. Our primary client since founding has been Air Force Special Warfare.</p>
     <p class="reveal">Programs combine applied field instruction, practitioner-facilitated workshops, and doctrine materials developed by the Institute for Signature Reduction. Instruction is delivered in small cohorts by practitioners who have applied these concepts operationally.</p>
-
     <div class="cap-grid reveal">
       <div class="cap-cell">
         <p class="cap-n">01</p>
@@ -760,7 +735,6 @@ a { color: var(--body); }
         <p class="cap-body">Select equipment and device initiatives designed to reduce operational exposure at the hardware and firmware layer.</p>
       </div>
     </div>
-
     <div class="callout reveal">
       <p class="c-label">Operating posture</p>
       <p>Programs are government-funded and initiated on a selective basis. Engagements are assessed for timing, partner readiness, and operational alignment prior to commitment. Not all inquiries result in a program.</p>
@@ -784,7 +758,6 @@ a { color: var(--body); }
       <h2>Contact</h2>
     </div>
     <p class="reveal">All contact should be initiated via secure email. We do not accept inbound calls and will not initiate contact by phone or any unencrypted channel.</p>
-
     <div class="contact-block reveal">
       <div class="c-row">
         <span class="c-tag">Email</span>
@@ -793,12 +766,10 @@ a { color: var(--body); }
           <em>Initial contact only. Use a secure email client where possible.</em>
         </span>
       </div>
-
       <div class="c-row">
         <span class="c-tag">Signal</span>
         <span class="c-val">Used for all follow-on communication with established contacts. We will not initiate contact via Signal or any other platform. Verify identity independently before sharing any sensitive information.</span>
       </div>
-
       <div class="c-row">
         <span class="c-tag">Note</span>
         <span class="c-val"><em>Due to our selective operating posture, not all inquiries will receive a response. Do not transmit classified or operationally sensitive information prior to a verified, established relationship.</em></span>
@@ -812,11 +783,8 @@ a { color: var(--body); }
       <span class="s-idx">05</span>
       <h2>Institute for Signature Reduction</h2>
     </div>
-
     <p class="reveal">All SMU instruction is derived from doctrine developed and stewarded by the <strong>Institute for Signature Reduction (ISR)</strong> — an independent 501(c)(3) nonprofit research organization responsible for the long-term development, publication, and evolution of the signature reduction framework.</p>
-
     <p class="reveal">The distinction matters. Doctrine developed through independent research and sustained practitioner feedback — not proprietary to a training company — remains current, field-tested, and accountable to the operational community rather than to commercial interests. SMU is ISR's authorized training partner.</p>
-
     <div class="partner-block reveal">
       <span class="p-eyebrow">Authorized training partner</span>
       <span class="p-name">Institute for Signature Reduction</span>
@@ -829,7 +797,7 @@ a { color: var(--body); }
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner outer">
+  <div class="footer-inner">
     <span class="f-copy">© Signature Management Unit. All rights reserved.</span>
     <span class="f-right">
       <img src="images/us_flag.png" alt="">
@@ -840,15 +808,15 @@ a { color: var(--body); }
 
 <script>
 (function () {
-  /* Progress */
+  /* Progress bar */
   const bar = document.getElementById('progress');
   window.addEventListener('scroll', () => {
     bar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
   }, { passive: true });
 
-  /* Nav active */
-  const links = document.querySelectorAll('nav a');
-  const secs  = document.querySelectorAll('section, #home');
+  /* Nav active state */
+  const links  = document.querySelectorAll('nav a');
+  const secs   = document.querySelectorAll('section, #home');
   const navObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting)
@@ -857,12 +825,12 @@ a { color: var(--body); }
   }, { threshold: 0.3 });
   secs.forEach(s => navObs.observe(s));
 
-  /* Reveal */
+  /* Scroll reveal */
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -16px 0px' });
+  }, { threshold: 0.07, rootMargin: '0px 0px -14px 0px' });
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
   /* UTC clock */
@@ -876,9 +844,9 @@ a { color: var(--body); }
   }
   tick(); setInterval(tick, 1000);
 
-  /* Glitch */
+  /* Glitch — set data-text to first line only so pseudo-elements don't duplicate both lines */
   const h1 = document.querySelector('h1.glitch');
-  if (h1) h1.setAttribute('data-text', h1.textContent);
+  if (h1) h1.setAttribute('data-text', 'You leave a trail.');
 })();
 </script>
 
