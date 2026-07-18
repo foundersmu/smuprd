@@ -167,6 +167,23 @@ nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86);
 .btn-outline { border: 1px solid var(--rule-2); color: var(--ink) !important; }
 .btn-outline:hover { border-color: var(--ink-3); }
 
+/* ─── BRIEFING FORM ─── */
+button.btn { border: none; cursor: pointer; }
+.brief-form { max-width: 680px; margin: 0 auto; text-align: left; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.bf-field { display: flex; flex-direction: column; gap: 7px; }
+.bf-field.full { grid-column: 1 / -1; }
+.bf-label { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.bf-input, .bf-select, .bf-textarea { font-family: var(--sans); font-size: .96rem; color: var(--ink); background: var(--card); border: 1px solid var(--rule-2); border-radius: var(--radius); padding: 12px 14px; width: 100%; transition: border-color var(--trans), box-shadow var(--trans); }
+.bf-input:focus, .bf-select:focus, .bf-textarea:focus { outline: none; border-color: var(--slate); box-shadow: 0 0 0 3px var(--slate-ghost); }
+.bf-textarea { min-height: 130px; resize: vertical; }
+.bf-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+.bf-status { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); }
+.bf-status.ok { color: var(--slate); }
+.bf-status.err { color: var(--clay); }
+.bf-fallback { grid-column: 1 / -1; font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); margin-top: 10px; }
+.bf-fallback a { color: var(--slate); }
+@media (max-width: 560px) { .brief-form { grid-template-columns: 1fr; } }
+
 /* ─── AFFIL NOTE ─── */
 .affil { max-width: var(--max); margin: 0 auto; padding: 70px 36px; }
 .affil-card { border: 1px solid var(--rule); border-left: 3px solid var(--slate); border-radius: var(--radius); background: var(--card); padding: 30px 34px; display: flex; gap: 22px; align-items: flex-start; }
@@ -391,10 +408,45 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
   <div class="cta-inner">
     <h2>Reclaim your freedom for action.</h2>
     <p>SMU works with military and government organizations to build signature reduction into trained practice. Tell us about your mission profile and we'll scope the right engagement.</p>
-    <div class="cta-actions">
-      <a href="mailto:contact&#64;signaturemanagementunit.com" class="btn btn-dark">Request a Briefing <i class="ti ti-arrow-right"></i></a>
-      <a href="#capabilities" class="btn btn-outline">Review Capabilities</a>
-    </div>
+
+    <!-- FORMSPREE SETUP: create a form at formspree.io (free tier is fine), then replace
+         YOUR_FORM_ID in the action below with the ID Formspree gives you (e.g. xvgqabcd).
+         Submissions will forward to the email you configure in the Formspree dashboard. -->
+    <form id="briefForm" class="brief-form" action="https://formspree.io/f/xojgdnrp" method="POST">
+      <input type="hidden" name="_subject" value="SMU briefing request">
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="bf-field">
+        <label class="bf-label" for="bf-name">Name</label>
+        <input class="bf-input" type="text" id="bf-name" name="name" required autocomplete="name">
+      </div>
+      <div class="bf-field">
+        <label class="bf-label" for="bf-org">Organization</label>
+        <input class="bf-input" type="text" id="bf-org" name="organization" autocomplete="organization">
+      </div>
+      <div class="bf-field">
+        <label class="bf-label" for="bf-email">Email</label>
+        <input class="bf-input" type="email" id="bf-email" name="email" required autocomplete="email">
+      </div>
+      <div class="bf-field">
+        <label class="bf-label" for="bf-interest">Interest</label>
+        <select class="bf-select" id="bf-interest" name="interest">
+          <option>General inquiry</option>
+          <option>Training</option>
+          <option>Technology equipment</option>
+          <option>Embedded advisory</option>
+        </select>
+      </div>
+      <div class="bf-field full">
+        <label class="bf-label" for="bf-message">Mission profile / message</label>
+        <textarea class="bf-textarea" id="bf-message" name="message" required></textarea>
+      </div>
+      <div class="bf-actions">
+        <button type="submit" class="btn btn-dark" id="bfSubmit">Send Request <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        <span class="bf-status" id="bfStatus" role="status" aria-live="polite"></span>
+      </div>
+      <p class="bf-fallback">Prefer direct contact, or have a sensitive inquiry? <a href="mailto:contact&#64;signaturemanagementunit.com">contact&#64;signaturemanagementunit.com</a></p>
+    </form>
   </div>
 </section>
 
@@ -446,6 +498,46 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
   window.addEventListener('scroll', onScroll, { passive: true });
   btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
   onScroll();
+})();
+
+(function(){
+  var form = document.getElementById('briefForm');
+  if (!form) return;
+  var status = document.getElementById('bfStatus');
+  var submit = document.getElementById('bfSubmit');
+  var original = submit.innerHTML;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (form.action.indexOf('YOUR_FORM_ID') !== -1) {
+      status.textContent = 'Form not yet connected. Email us directly instead.';
+      status.className = 'bf-status err';
+      return;
+    }
+    submit.disabled = true;
+    submit.innerHTML = 'Sending\u2026';
+    status.textContent = '';
+    status.className = 'bf-status';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(r){
+      if (r.ok) {
+        form.reset();
+        status.textContent = 'Received. We\u2019ll be in touch.';
+        status.className = 'bf-status ok';
+      } else {
+        status.textContent = 'Send failed. Email us directly instead.';
+        status.className = 'bf-status err';
+      }
+    }).catch(function(){
+      status.textContent = 'Send failed. Email us directly instead.';
+      status.className = 'bf-status err';
+    }).finally(function(){
+      submit.disabled = false;
+      submit.innerHTML = original;
+    });
+  });
 })();
 </script>
 
