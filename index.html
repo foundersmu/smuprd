@@ -8,11 +8,14 @@
 <meta property="og:title" content="Signature Management Unit">
 <meta property="og:description" content="Applied instruction in signature reduction and digital force protection for operators under ubiquitous technical surveillance.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#14181d">
+<link rel="canonical" href="https://www.signaturemanagementunit.com/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+@font-face { font-family: 'Public Sans'; src: url('fonts/public-sans-var.woff2') format('woff2'); font-weight: 300 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Source Serif 4'; src: url('fonts/source-serif-4-italic-var.woff2') format('woff2'); font-weight: 400 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('fonts/jetbrains-mono-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
+</style>
 
 <style>
 :root {
@@ -37,28 +40,32 @@
   --clay-ghost: rgba(168,80,63,.08);
   --clay-line: rgba(168,80,63,.3);
 
-  /* SMU runs a darker "operations" hero, distinct from ISR's all-paper, but same family */
   --ink-deep: #14181d;
   --ink-deep-2: #1c2127;
 
   --max: 1140px;
   --serif: 'Source Serif 4', Georgia, serif;
   --sans: 'Public Sans', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', monospace;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
   --radius: 8px;
   --radius-lg: 14px;
   --trans: .22s cubic-bezier(.4,0,.2,1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 78px; font-size: 16px; -webkit-text-size-adjust: 100%; }
 body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 400; line-height: 1.7; font-size: 1.02rem; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 ::selection { background: var(--slate); color: var(--paper); }
 a { color: var(--slate); transition: color var(--trans); text-decoration: none; }
 a:hover { color: var(--clay); }
 img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 2px solid var(--slate); outline-offset: 3px; }
 .skip-link { position: absolute; left: -9999px; background: var(--ink); color: var(--paper); padding: 12px 18px; z-index: 9999; }
 .skip-link:focus { left: 16px; top: 16px; }
+
+/* inline icon system — replaces the CDN icon font */
+.icon { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
 /* ─── NAV ─── */
 nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86); backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
@@ -70,7 +77,14 @@ nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86);
 .nav-links a:hover { color: var(--ink); }
 .nav-cta { font-family: var(--mono); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: #fff !important; background: var(--slate); padding: 10px 18px; border-radius: 22px; }
 .nav-cta:hover { background: var(--clay); }
-.nav-hamburger { display: none; background: none; border: 1px solid var(--rule-2); border-radius: 6px; cursor: pointer; padding: 7px 9px; color: var(--ink); font-size: 20px; }
+.nav-hamburger { display: none; background: none; border: 1px solid var(--rule-2); border-radius: 6px; cursor: pointer; padding: 8px 10px; color: var(--ink); font-size: 20px; align-items: center; justify-content: center; }
+
+/* mobile nav overlay — the hamburger previously had no target and no handler */
+.mobile-nav { display: none; position: fixed; inset: 0; z-index: 900; background: var(--paper); flex-direction: column; align-items: center; justify-content: center; }
+.mobile-nav.open { display: flex; }
+.mobile-nav-close { position: absolute; top: 18px; right: 22px; background: none; border: 1px solid var(--rule-2); border-radius: 6px; padding: 8px 10px; color: var(--ink); font-size: 20px; cursor: pointer; display: flex; }
+.mobile-nav ul { list-style: none; text-align: center; }
+.mobile-nav a { display: block; padding: 15px 40px; font-family: var(--sans); font-size: 1.5rem; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
 
 /* ─── HERO (dark operations field, declarative) ─── */
 .hero { position: relative; background: var(--ink-deep); color: #fff; overflow: hidden; border-bottom: 1px solid var(--ink-deep-2); }
@@ -78,8 +92,6 @@ nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86);
 .hero-topo svg { width: 100%; height: 100%; display: block; }
 .hero-grad { position: absolute; inset: 0; background: linear-gradient(105deg, var(--ink-deep) 30%, rgba(20,24,29,.65) 60%, rgba(20,24,29,.35) 100%); }
 .hero-inner { position: relative; max-width: var(--max); margin: 0 auto; padding: 120px 36px 110px; }
-.hero-eyebrow { font-family: var(--mono); font-size: .64rem; letter-spacing: .2em; color: var(--slate-2); margin-bottom: 26px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 11px; }
-.hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--slate-2); }
 .hero h1 { font-family: var(--sans); font-size: clamp(2.6rem, 5.4vw, 4.3rem); font-weight: 700; line-height: 1.04; letter-spacing: -.025em; max-width: 17ch; margin: 0 0 26px; color: #fff; }
 .hero h1 em { font-style: normal; color: var(--slate-2); }
 .hero-sub { font-family: var(--sans); font-size: 1.18rem; color: #c9cdd3; max-width: 52ch; line-height: 1.6; font-weight: 400; margin-bottom: 38px; }
@@ -89,16 +101,7 @@ nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86);
 .btn-primary:hover { background: var(--slate-2); color: #fff !important; }
 .btn-ghost { border: 1px solid rgba(255,255,255,.28); color: #fff !important; }
 .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
-.btn i { font-size: 14px; }
-
-/* ─── STAT ANCHOR ROW ─── */
-.stats { background: var(--ink-deep-2); border-bottom: 1px solid var(--rule); }
-.stats-inner { max-width: var(--max); margin: 0 auto; padding: 0 36px; display: grid; grid-template-columns: repeat(4, 1fr); }
-.stat { padding: 40px 28px; border-right: 1px solid rgba(255,255,255,.08); }
-.stat:last-child { border-right: none; }
-.stat-num { font-family: var(--sans); font-size: 2.5rem; font-weight: 800; color: #fff; line-height: 1; letter-spacing: -.03em; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
-.stat-num span { color: var(--slate-2); }
-.stat-label { font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-4); line-height: 1.5; }
+.btn .icon { font-size: 15px; }
 
 /* ─── SHARED SECTION ─── */
 .section { max-width: var(--max); margin: 0 auto; padding: 96px 36px; }
@@ -144,31 +147,18 @@ nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86);
 .cap p { font-size: .93rem; color: #aeb3ba; line-height: 1.7; margin-bottom: 22px; flex-grow: 1; }
 .cap-link { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--slate-2) !important; display: inline-flex; align-items: center; gap: 7px; }
 .cap-link:hover { color: #fff !important; }
-
-/* ─── LEADERSHIP ─── */
-.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
-.member { border: 1px solid var(--rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--card); }
-.member-photo { aspect-ratio: 4/3; background: var(--paper-3); position: relative; overflow: hidden; }
-.member-photo svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .5; }
-.member-photo .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); }
-.member-body { padding: 24px 24px 26px; }
-.member-body h3 { font-family: var(--sans); font-size: 1.12rem; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
-.member-role { font-family: var(--mono); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: var(--slate); margin: 6px 0 14px; }
-.member-bio { font-size: .88rem; color: var(--ink-3); line-height: 1.65; }
+.cap-link .icon { font-size: 14px; }
 
 /* ─── CTA BAND ─── */
 .cta-band { background: var(--paper-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .cta-inner { max-width: var(--max); margin: 0 auto; padding: 80px 36px; text-align: center; }
 .cta-inner h2 { font-family: var(--sans); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--ink); letter-spacing: -.02em; line-height: 1.1; max-width: 20ch; margin: 0 auto 18px; }
 .cta-inner p { font-size: 1.08rem; color: var(--ink-2); max-width: 56ch; margin: 0 auto 32px; line-height: 1.7; }
-.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.btn-dark { background: var(--slate); color: #fff !important; }
-.btn-dark:hover { background: var(--clay); }
-.btn-outline { border: 1px solid var(--rule-2); color: var(--ink) !important; }
-.btn-outline:hover { border-color: var(--ink-3); }
 
 /* ─── BRIEFING FORM ─── */
 button.btn { border: none; cursor: pointer; }
+.btn-dark { background: var(--slate); color: #fff !important; }
+.btn-dark:hover { background: var(--clay); }
 .brief-form { max-width: 680px; margin: 0 auto; text-align: left; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .bf-field { display: flex; flex-direction: column; gap: 7px; }
 .bf-field.full { grid-column: 1 / -1; }
@@ -180,14 +170,13 @@ button.btn { border: none; cursor: pointer; }
 .bf-status { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); }
 .bf-status.ok { color: var(--slate); }
 .bf-status.err { color: var(--clay); }
-.bf-fallback { grid-column: 1 / -1; font-family: var(--mono); font-size: .58rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); margin-top: 10px; }
-.bf-fallback a { color: var(--slate); }
-@media (max-width: 560px) { .brief-form { grid-template-columns: 1fr; } }
+.bf-fallback { grid-column: 1 / -1; font-size: .82rem; color: var(--ink-3); line-height: 1.7; margin-top: 12px; }
+.bf-fallback a { color: var(--slate); font-weight: 600; }
 
 /* ─── AFFIL NOTE ─── */
 .affil { max-width: var(--max); margin: 0 auto; padding: 70px 36px; }
 .affil-card { border: 1px solid var(--rule); border-left: 3px solid var(--slate); border-radius: var(--radius); background: var(--card); padding: 30px 34px; display: flex; gap: 22px; align-items: flex-start; }
-.affil-card i { font-size: 22px; color: var(--slate); flex-shrink: 0; margin-top: 2px; }
+.affil-card .icon { font-size: 22px; color: var(--slate); flex-shrink: 0; margin-top: 4px; }
 .affil-card p { font-size: .98rem; color: var(--ink-2); line-height: 1.75; }
 .affil-card a { font-weight: 600; }
 
@@ -204,36 +193,30 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  .stats-inner { grid-template-columns: 1fr 1fr; }
-  .stat:nth-child(2) { border-right: none; }
-  .stat { border-bottom: 1px solid rgba(255,255,255,.08); }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .paths { grid-template-columns: 1fr; }
   .gaps { grid-template-columns: 1fr; }
   .caps { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
-  .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+  .nav-hamburger { display: flex; }
 }
 @media (max-width: 560px) {
   .hero-inner { padding: 84px 22px 76px; }
-  .stats-inner { grid-template-columns: 1fr; }
-  .stat { border-right: none; }
   .section { padding: 64px 22px; }
-  .cta-inner, .affil, .footer-inner > * { padding-left: 0; padding-right: 0; }
+  .cta-inner, .affil { padding-left: 22px; padding-right: 22px; }
   .nav-inner { padding: 0 22px; }
-  .team-grid { grid-template-columns: 1fr; }
+  .brief-form { grid-template-columns: 1fr; }
+  .affil-card { flex-direction: column; gap: 14px; padding: 26px 24px; }
   .footer-top { grid-template-columns: 1fr; }
   .nav-cta { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
 
 /* ─── BACK TO TOP ─── */
-.to-top { position: fixed; bottom: 28px; right: 28px; z-index: 900; width: 44px; height: 44px; border-radius: 50%; background: var(--slate); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 19px; box-shadow: 0 8px 24px rgba(20,24,29,.28); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity var(--trans), transform var(--trans), background var(--trans), visibility var(--trans); }
+.to-top { position: fixed; bottom: 28px; right: 28px; z-index: 700; width: 44px; height: 44px; border-radius: 50%; background: var(--slate); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 19px; box-shadow: 0 8px 24px rgba(20,24,29,.28); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity var(--trans), transform var(--trans), background var(--trans), visibility var(--trans); }
 .to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
 .to-top:hover { background: var(--clay); }
-.to-top:focus-visible { outline: 2px solid var(--slate-2); outline-offset: 3px; }
 @media (max-width: 560px) { .to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 17px; } }
 </style>
 </head>
@@ -241,18 +224,43 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
 <body>
 <a href="#main" class="skip-link">Skip to main content</a>
 
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-school" viewBox="0 0 24 24"><path d="M22 9 12 5 2 9l10 4 10-4Z"/><path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/></symbol>
+  <symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4"/><path d="M16.5 5.2a3.2 3.2 0 0 1 0 5.9M18 14.9c2.4.6 3.9 2.4 3.9 5.1"/></symbol>
+  <symbol id="i-certificate" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.2"/><path d="M8.4 13.2 7 22l5-2.6L17 22l-1.4-8.8"/></symbol>
+</svg>
+
 <nav aria-label="Primary navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo">Signature Management <b>Unit</b></a>
     <ul class="nav-links" role="list">
       <li><a href="#about">About</a></li>
       <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#team">Team</a></li>
+      <li><a href="#approach">Approach</a></li>
       <li><a href="#engage" class="nav-cta">Request a Briefing</a></li>
     </ul>
-    <button class="nav-hamburger" aria-label="Open menu"><i class="ti ti-menu-2"></i></button>
+    <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
   </div>
 </nav>
+
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="mobile-nav-close" id="navClose" aria-label="Close menu">
+    <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+  </button>
+  <ul role="list">
+    <li><a href="#about">About</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#engage">Request a Briefing</a></li>
+  </ul>
+</div>
 
 <!-- ─── HERO ─── -->
 <header class="hero">
@@ -290,21 +298,11 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
     <h1>We teach operators to read the <em>surveillance terrain.</em></h1>
     <p class="hero-sub">SMU delivers applied instruction in signature reduction and digital force protection — turning doctrine into trained, repeatable practice for the operators who carry the mission.</p>
     <div class="hero-actions">
-      <a href="#engage" class="btn btn-primary">Request a Briefing <i class="ti ti-arrow-right"></i></a>
+      <a href="#engage" class="btn btn-primary">Request a Briefing <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       <a href="#capabilities" class="btn btn-ghost">See What We Train</a>
     </div>
   </div>
 </header>
-
-<!-- ─── STAT ANCHORS ─── -->
-<section class="stats" aria-label="Operating environment at a glance">
-  <div class="stats-inner">
-    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Surveillance domains every operator emits across</div></div>
-    <div class="stat"><div class="stat-num">24<span>/7</span></div><div class="stat-label">Collection runs continuously, before any targeting</div></div>
-    <div class="stat"><div class="stat-num">2020</div><div class="stat-label">Practitioner-led, operating since</div></div>
-    <div class="stat"><div class="stat-num">1</div><div class="stat-label">Discipline at the center — human judgment</div></div>
-  </div>
-</section>
 
 <main id="main">
 
@@ -372,35 +370,34 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
     <h2 class="lead-head">Three lines of effort, one trained operator.</h2>
     <div class="caps">
       <div class="cap">
-        <div class="cap-ico"><i class="ti ti-school"></i></div>
+        <div class="cap-ico"><svg class="icon" aria-hidden="true"><use href="#i-school"/></svg></div>
         <div class="cap-tag">Instruction</div>
         <h3>Training</h3>
         <p>Facilitated instruction taking operators from the UTS operating picture through practical signature reduction and digital force protection. Classroom grounding paired with applied tradecraft they can carry into the field.</p>
-        <a href="#engage" class="cap-link">Request the syllabus <i class="ti ti-arrow-right"></i></a>
+        <a href="#engage" class="cap-link">Request the syllabus <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       </div>
       <div class="cap">
-        <div class="cap-ico"><i class="ti ti-crosshair"></i></div>
-        <div class="cap-tag">Hardware & Development</div>
+        <div class="cap-ico"><svg class="icon" aria-hidden="true"><use href="#i-crosshair"/></svg></div>
+        <div class="cap-tag">Hardware &amp; Development</div>
         <h3>Technology Equipment</h3>
         <p>Specialty technology equipment designed to reduce an element's real attributable surface across the five domains, such as hardened personal devices or mesh technology.</p>
-        <a href="#engage" class="cap-link">Request a quote <i class="ti ti-arrow-right"></i></a>
+        <a href="#engage" class="cap-link">Request a quote <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       </div>
       <div class="cap">
-        <div class="cap-ico"><i class="ti ti-users"></i></div>
+        <div class="cap-ico"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></div>
         <div class="cap-tag">Advisory</div>
         <h3>Embedded Advisory</h3>
         <p>Direct advisory support for units and programs building signature management into how they operate, translating doctrine into standing procedure tailored to a specific mission profile.</p>
-        <a href="#engage" class="cap-link">Start a conversation <i class="ti ti-arrow-right"></i></a>
+        <a href="#engage" class="cap-link">Start a conversation <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── TEAM ─── -->
-<section class="section bordered" id="team">
-  <div class="kicker">Cadre</div>
-  <h2 class="lead-head">Practitioners who have operated in the terrain they teach.</h2>
-  <p class="lead-body">Signature Management Unit (SMU) was founded in 2020 to translate signature reduction concepts — developed inside dynamic and complex operational environments — into applied field instruction for special operations forces. The name is a deliberate nod to special mission units within the U.S. military. The organization is practitioner-led, operationally grounded, and deliberately small. We engage where timing, alignment, and readiness converge.</p>
+<section class="section bordered" id="approach">
+  <div class="kicker">Approach</div>
+  <h2 class="lead-head">Small, practitioner-led, and deliberate about fit.</h2>
+  <p class="lead-body">SMU was founded in 2020 to translate signature reduction concepts developed inside complex operational environments into applied field instruction. The organization is practitioner-led, operationally grounded, and deliberately small. We engage where timing, alignment, and readiness converge, and we scope each engagement to a specific mission profile rather than running a fixed catalogue.</p>
 </section>
 
 <!-- ─── CTA ─── -->
@@ -409,9 +406,6 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
     <h2>Reclaim your freedom for action.</h2>
     <p>SMU works with military and government organizations to build signature reduction into trained practice. Tell us about your mission profile and we'll scope the right engagement.</p>
 
-    <!-- FORMSPREE SETUP: create a form at formspree.io (free tier is fine), then replace
-         YOUR_FORM_ID in the action below with the ID Formspree gives you (e.g. xvgqabcd).
-         Submissions will forward to the email you configure in the Formspree dashboard. -->
     <form id="briefForm" class="brief-form" action="https://formspree.io/f/xojgdnrp" method="POST">
       <input type="hidden" name="_subject" value="SMU briefing request">
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -442,19 +436,17 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
         <textarea class="bf-textarea" id="bf-message" name="message" required></textarea>
       </div>
       <div class="bf-actions">
-        <button type="submit" class="btn btn-dark" id="bfSubmit">Send Request <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+        <button type="submit" class="btn btn-dark" id="bfSubmit">Send Request <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
         <span class="bf-status" id="bfStatus" role="status" aria-live="polite"></span>
       </div>
-      <p class="bf-fallback">Prefer direct contact, or have a sensitive inquiry? <a href="mailto:contact&#64;signaturemanagementunit.com">contact&#64;signaturemanagementunit.com</a></p>
+      <p class="bf-fallback">This form is processed by a third-party service. Keep an initial message general, or write directly: <a href="mailto:contact&#64;signaturemanagementunit.com">contact&#64;signaturemanagementunit.com</a></p>
     </form>
   </div>
 </section>
-
-<!-- ─── AFFILIATION ─── -->
 <section class="affil">
   <div class="affil-card">
-    <i class="ti ti-certificate"></i>
-    <p>SMU's instruction is grounded in doctrine licensed from the <a href="https://www.isrprivacymatters.org" target="_blank" rel="noopener noreferrer">Institute for Signature Reduction (ISR)</a>, an independent 501(c)(3) research institute. ISR develops and stewards the doctrine; SMU is one licensed channel that delivers it as operator training and feeds field-tested insight back into its development. Two independent organizations, one shared mission.</p>
+    <svg class="icon" aria-hidden="true"><use href="#i-certificate"/></svg>
+    <p>SMU's instruction is grounded in doctrine licensed from the <a href="https://www.isrprivacymatters.org" target="_blank" rel="noopener noreferrer">Institute for Signature Reduction (ISR)</a>, a nonprofit research institute. </p>
   </div>
 </section>
 
@@ -464,13 +456,15 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
     <div class="footer-top">
       <div>
         <div class="footer-brand">Signature Management Unit</div>
-        <p class="footer-mission">Precise. Rapid. Discreet.</p>
+        <p class="footer-mission">Applied instruction in signature reduction and digital force protection for military and government operators.</p>
+        <br></br>
+        <p>Precise. Rapid. Discreet.</p>
       </div>
       <div class="footer-col">
         <h4>Navigate</h4>
         <a href="#about">About</a>
         <a href="#capabilities">Capabilities</a>
-        <a href="#team">Cadre</a>
+        <a href="#approach">Approach</a>
         <a href="#engage">Request a Briefing</a>
       </div>
       <div class="footer-col">
@@ -480,20 +474,23 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Signature Management Unit</span>
+      <span>© Signature Management Unit</span>
       <span>signaturemanagementunit.com</span>
     </div>
   </div>
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Back to top"><i class="ti ti-arrow-up" aria-hidden="true"></i></button>
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+</button>
 
 <script>
+/* back to top */
 (function(){
   var btn = document.getElementById('toTop');
   function onScroll(){
     var y = window.scrollY || window.pageYOffset || 0;
-    if (y > 500) { btn.classList.add('visible'); } else { btn.classList.remove('visible'); }
+    btn.classList.toggle('visible', y > 500);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
@@ -501,18 +498,43 @@ footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
 })();
 
 (function(){
+  var toggle = document.getElementById('navToggle');
+  var close = document.getElementById('navClose');
+  var panel = document.getElementById('mobileNav');
+  if (!toggle || !panel) return;
+
+  function open(){
+    panel.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    var first = panel.querySelector('a');
+    if (first) first.focus();
+  }
+  function shut(){
+    panel.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggle.focus();
+  }
+
+  toggle.addEventListener('click', open);
+  close.addEventListener('click', shut);
+  panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', shut); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && panel.classList.contains('open')) shut();
+  });
+})();
+
+
+(function(){
   var form = document.getElementById('briefForm');
   if (!form) return;
   var status = document.getElementById('bfStatus');
   var submit = document.getElementById('bfSubmit');
   var original = submit.innerHTML;
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    if (form.action.indexOf('YOUR_FORM_ID') !== -1) {
-      status.textContent = 'Form not yet connected. Email us directly instead.';
-      status.className = 'bf-status err';
-      return;
-    }
     submit.disabled = true;
     submit.innerHTML = 'Sending\u2026';
     status.textContent = '';
