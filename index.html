@@ -20,6 +20,26 @@
 
 <meta name="theme-color" content="#14181d">
 
+<!-- Privacy / security-oriented browser policies -->
+<meta name="referrer" content="no-referrer">
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
+    default-src 'self';
+    base-uri 'self';
+    form-action 'self';
+    object-src 'none';
+    frame-ancestors 'none';
+    img-src 'self' data:;
+    font-src 'self';
+    style-src 'self' 'unsafe-inline';
+    script-src 'self' 'unsafe-inline';
+    connect-src 'self';
+    media-src 'self';
+    worker-src 'self';
+  "
+>
+
 <link
   rel="canonical"
   href="https://www.signaturemanagementunit.com/"
@@ -173,14 +193,17 @@ img {
 }
 
 
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
 nav {
   position: sticky;
   top: 0;
 
   z-index: 800;
 
-  background: rgba(250,249,246,.86);
-  backdrop-filter: blur(14px);
+  background: rgba(250,249,246,.94);
 
   border-bottom: 1px solid var(--rule);
 }
@@ -287,6 +310,10 @@ nav {
 }
 
 
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
+
 .mobile-nav {
   display: none;
 
@@ -348,6 +375,10 @@ nav {
   color: var(--ink);
 }
 
+
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero {
   position: relative;
@@ -445,6 +476,10 @@ nav {
 }
 
 
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
 .btn {
   font-family: var(--mono);
 
@@ -502,6 +537,10 @@ nav {
 }
 
 
+/* =========================================================
+   SHARED SECTIONS
+   ========================================================= */
+
 .section {
   max-width: var(--max);
 
@@ -558,6 +597,11 @@ nav {
   margin-top: 22px;
 }
 
+
+/* =========================================================
+   POINT OF VIEW
+   ========================================================= */
+
 .point-of-view {
   display: grid;
 
@@ -610,6 +654,10 @@ nav {
   margin-bottom: 0;
 }
 
+
+/* =========================================================
+   DARK CAPABILITIES
+   ========================================================= */
 
 .section.dark {
   max-width: none;
@@ -748,6 +796,10 @@ nav {
 }
 
 
+/* =========================================================
+   WHY SMU
+   ========================================================= */
+
 .why-grid {
   display: grid;
 
@@ -756,22 +808,6 @@ nav {
   gap: 72px;
 
   align-items: start;
-}
-
-.why-note {
-  font-family: var(--mono);
-
-  font-size: .62rem;
-
-  letter-spacing: .12em;
-
-  text-transform: uppercase;
-
-  color: var(--ink-4);
-
-  line-height: 1.7;
-
-  padding-top: 7px;
 }
 
 .why-detail {
@@ -798,42 +834,56 @@ nav {
   font-weight: 600;
 }
 
-.definition {
+
+/* =========================================================
+   UBIQUITOUS TECHNICAL SURVEILLANCE
+   Styled to mirror the site's editorial sections
+   ========================================================= */
+
+.uts-grid {
   display: grid;
 
   grid-template-columns: .85fr 1.15fr;
 
-  column-gap: 72px;
+  gap: 72px;
 
-  row-gap: 42px;
+  align-items: start;
 }
 
-.definition-term h2 {
-  font-family: var(--serif);
+.uts-statement {
+  font-family: var(--sans);
 
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
 
-  font-weight: 400;
-
-  font-style: normal;
-
-  line-height: 1.05;
-
-  letter-spacing: -.025em;
+  font-weight: 600;
 
   color: var(--ink);
 
-  max-width: 15ch;
+  line-height: 1.18;
+
+  letter-spacing: -.02em;
+
+  max-width: 17ch;
 }
 
-.definition-meta {
+.uts-statement em {
+  font-family: var(--serif);
+
+  font-style: italic;
+
+  font-weight: 400;
+
+  color: var(--slate);
+}
+
+.uts-meta {
   display: flex;
 
   flex-direction: column;
 
   gap: 5px;
 
-  margin-top: 18px;
+  margin-top: 20px;
 
   font-family: var(--mono);
 
@@ -848,19 +898,27 @@ nav {
   color: var(--ink-4);
 }
 
-.definition-body {
+.uts-detail {
+  max-width: 58ch;
+}
+
+.uts-detail-item {
   display: grid;
 
   grid-template-columns: 34px 1fr;
 
   column-gap: 18px;
 
-  row-gap: 26px;
-
   align-items: start;
+
+  margin-bottom: 28px;
 }
 
-.definition-number {
+.uts-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.uts-number {
   font-family: var(--mono);
 
   font-size: .58rem;
@@ -872,7 +930,7 @@ nav {
   padding-top: 5px;
 }
 
-.definition-body p {
+.uts-detail-item p {
   font-size: 1.05rem;
 
   color: var(--ink-2);
@@ -882,10 +940,8 @@ nav {
   max-width: 58ch;
 }
 
-.definition-conclusion {
-  grid-column: 2;
-
-  max-width: 58ch;
+.uts-conclusion {
+  margin-top: 30px;
 
   padding-top: 30px;
 
@@ -903,47 +959,9 @@ nav {
 }
 
 
-@media (max-width: 900px) {
-
-  .definition {
-    grid-template-columns: 1fr;
-
-    gap: 34px;
-  }
-
-  .definition-term h2 {
-    max-width: 20ch;
-  }
-
-  .definition-conclusion {
-    grid-column: 1;
-  }
-
-}
-
-
-@media (max-width: 560px) {
-
-  .definition {
-    gap: 28px;
-  }
-
-  .definition-body {
-    grid-template-columns: 28px 1fr;
-
-    column-gap: 12px;
-  }
-
-  .definition-body p {
-    font-size: .98rem;
-  }
-
-  .definition-conclusion {
-    font-size: 1.12rem;
-  }
-
-}
-
+/* =========================================================
+   CTA
+   ========================================================= */
 
 .cta-band {
   background: var(--paper-2);
@@ -979,18 +997,6 @@ nav {
   max-width: 19ch;
 
   margin: 0 auto 18px;
-}
-
-.cta-inner > p {
-  font-size: 1.08rem;
-
-  color: var(--ink-2);
-
-  max-width: 56ch;
-
-  margin: 0 auto 34px;
-
-  line-height: 1.7;
 }
 
 .contact-block {
@@ -1067,103 +1073,10 @@ nav {
   margin-bottom: 26px;
 }
 
-.contact-guide {
-  border: 1px solid var(--rule-2);
 
-  border-radius: var(--radius-lg);
-
-  background: var(--card);
-
-  padding: 26px 30px;
-
-  text-align: left;
-}
-
-.contact-guide h3 {
-  font-family: var(--mono);
-
-  font-size: .58rem;
-
-  letter-spacing: .12em;
-
-  text-transform: uppercase;
-
-  color: var(--slate);
-
-  font-weight: 500;
-
-  margin-bottom: 14px;
-}
-
-.contact-guide ul {
-  list-style: none;
-}
-
-.contact-guide li {
-  font-size: .93rem;
-
-  color: var(--ink-3);
-
-  line-height: 1.7;
-
-  padding-left: 18px;
-
-  position: relative;
-
-  margin-bottom: 9px;
-}
-
-.contact-guide li:last-child {
-  margin-bottom: 0;
-}
-
-.contact-guide li::before {
-  content: '';
-
-  position: absolute;
-
-  left: 0;
-
-  top: .68em;
-
-  width: 5px;
-  height: 5px;
-
-  border-radius: 50%;
-
-  background: rgba(63,93,119,.26);
-}
-
-.contact-guide .note {
-  margin-top: 16px;
-
-  padding-top: 15px;
-
-  border-top: 1px solid var(--rule);
-
-  font-size: .87rem;
-
-  color: var(--ink-3);
-
-  line-height: 1.7;
-}
-
-.referral-note {
-  font-family: var(--mono);
-
-  font-size: .62rem;
-
-  letter-spacing: .08em;
-
-  text-transform: uppercase;
-
-  color: var(--ink-4);
-
-  margin-top: 24px;
-
-  line-height: 1.7;
-}
-
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer {
   background: var(--ink-deep);
@@ -1280,6 +1193,10 @@ footer {
 }
 
 
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
 .to-top {
   position: fixed;
 
@@ -1336,10 +1253,15 @@ footer {
 }
 
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 900px) {
 
   .point-of-view,
-  .why-grid {
+  .why-grid,
+  .uts-grid {
     grid-template-columns: 1fr;
 
     gap: 32px;
@@ -1359,6 +1281,10 @@ footer {
 
   .nav-hamburger {
     display: flex;
+  }
+
+  .uts-statement {
+    max-width: 20ch;
   }
 
 }
@@ -1386,10 +1312,6 @@ footer {
     font-size: .88rem;
   }
 
-  .contact-guide {
-    padding: 22px;
-  }
-
   .footer-top {
     grid-template-columns: 1fr;
   }
@@ -1406,6 +1328,20 @@ footer {
     height: 40px;
 
     font-size: 17px;
+  }
+
+  .uts-detail-item {
+    grid-template-columns: 28px 1fr;
+
+    column-gap: 12px;
+  }
+
+  .uts-detail-item p {
+    font-size: .98rem;
+  }
+
+  .uts-conclusion {
+    font-size: 1.12rem;
   }
 
 }
@@ -1434,6 +1370,12 @@ footer {
 <a href="#main" class="skip-link">
   Skip to main content
 </a>
+
+
+<!-- =======================================================
+     INLINE SVG ICON SPRITE
+     No external icon library required.
+     ======================================================= -->
 
 <svg
   class="sprite"
@@ -1486,6 +1428,7 @@ footer {
 
 </svg>
 
+
 <nav aria-label="Primary navigation">
 
   <div class="nav-inner">
@@ -1534,6 +1477,7 @@ footer {
 
 </nav>
 
+
 <div
   class="mobile-nav"
   id="mobileNav"
@@ -1576,6 +1520,7 @@ footer {
 
 </div>
 
+
 <header class="hero">
 
   <div class="hero-topo" aria-hidden="true">
@@ -1604,7 +1549,6 @@ footer {
         <line x1="1050" y1="0" x2="1050" y2="600"/>
 
       </g>
-
 
       <g
         fill="none"
@@ -1650,7 +1594,6 @@ footer {
 
       </g>
 
-
       <g
         fill="none"
         stroke="#5a7891"
@@ -1685,7 +1628,6 @@ footer {
 
       </g>
 
-
       <g
         fill="none"
         stroke="#5a7891"
@@ -1711,7 +1653,6 @@ footer {
 
       </g>
 
-
       <g
         fill="none"
         stroke="#5a7891"
@@ -1727,7 +1668,6 @@ footer {
 
       </g>
 
-
       <g fill="#7a93a8" opacity=".7">
 
         <circle cx="966" cy="218" r="2.6"/>
@@ -1740,9 +1680,7 @@ footer {
 
   </div>
 
-
   <div class="hero-grad" aria-hidden="true"></div>
-
 
   <div class="hero-inner">
 
@@ -1767,7 +1705,6 @@ footer {
 
       </a>
 
-
       <a href="#capabilities" class="btn btn-ghost">
         What We Do
       </a>
@@ -1778,61 +1715,83 @@ footer {
 
 </header>
 
+
 <main id="main">
-  
+
+
+  <!-- =====================================================
+       OPERATING ENVIRONMENT
+       ===================================================== -->
+
   <section class="section bordered" id="about">
 
-  <div class="kicker">
-    The operating environment
-  </div>
-
-  <div class="definition">
-
-    <div class="definition-term">
-      <h2>
-        Ubiquitous Technical Surveillance
-      </h2>
-
-      <div class="definition-meta">
-        <span>noun</span>
-        <span>/ˌyo͞o-bi-kwə-təs ˈtek-ni-kəl sər-ˈvā-ləns/</span>
-      </div>
-    </div>
-
-
-    <div class="definition-body">
-
-      <div class="definition-number">
-        01
-      </div>
+    <div class="uts-grid">
 
       <div>
-        <p>
-          The persistent ability to observe, detect, identify, locate,
-          or infer activity through the increasingly pervasive technical
-          systems surrounding modern operations.
-        </p>
+
+        <div class="kicker">
+          The operating environment
+        </div>
+
+        <h2 class="uts-statement">
+          Ubiquitous technical surveillance.
+        </h2>
+
+        <div class="uts-meta">
+          <span>noun</span>
+          <span>/ˌyo͞o-bi-kwə-təs ˈtek-ni-kəl sər-ˈvā-ləns/</span>
+        </div>
+
       </div>
 
 
-      <div class="definition-number">
-        02
-      </div>
+      <div class="uts-detail">
 
-      <div>
-        <p>
-          The condition in which seemingly ordinary communications,
-          devices, infrastructure, and digital activity can collectively
-          produce a meaningful picture of people, places, and patterns.
-        </p>
+        <div class="uts-detail-item">
+
+          <div class="uts-number">
+            01
+          </div>
+
+          <p>
+            The persistent ability to observe, detect, identify, locate,
+            or infer activity through the increasingly pervasive technical
+            systems surrounding modern operations.
+          </p>
+
+        </div>
+
+
+        <div class="uts-detail-item">
+
+          <div class="uts-number">
+            02
+          </div>
+
+          <p>
+            The condition in which seemingly ordinary communications,
+            devices, infrastructure, and digital activity can collectively
+            produce a meaningful picture of people, places, and patterns.
+          </p>
+
+        </div>
+
+
+        <div class="uts-conclusion">
+          In the age of UTS, operators must learn to navigate digital terrain effectively. That's why they keep coming back to us. 
+          
+        </div>
+
       </div>
 
     </div>
 
-  </div>
+  </section>
 
-</section>
 
+  <!-- =====================================================
+       CAPABILITIES
+       ===================================================== -->
 
   <section class="section dark" id="capabilities">
 
@@ -1849,7 +1808,6 @@ footer {
 
       <div class="caps">
 
-
         <div class="cap">
 
           <div class="cap-ico">
@@ -1860,21 +1818,20 @@ footer {
 
           </div>
 
-
           <div class="cap-tag">
             Instruction
           </div>
-
 
           <h3>
             Training
           </h3>
 
-
           <p>
-            Facilitated instruction taking operators from the UTS operating picture through practical signature reduction and digital force protection. Classroom grounding paired with applied tradecraft they can carry into the field.
+            Facilitated instruction taking operators from the UTS operating
+            picture through practical signature reduction and digital force
+            protection. Classroom grounding paired with applied tradecraft
+            they can carry into the field.
           </p>
-
 
           <a href="#engage" class="cap-link">
 
@@ -1899,23 +1856,19 @@ footer {
 
           </div>
 
-
           <div class="cap-tag">
             Hardware &amp; Development
           </div>
 
-
           <h3>
             Technology
           </h3>
-
 
           <p>
             Specialized equipment and technical solutions that support
             signature reduction and digital force protection, selected
             around the requirements of the mission.
           </p>
-
 
           <a href="#engage" class="cap-link">
 
@@ -1940,23 +1893,19 @@ footer {
 
           </div>
 
-
           <div class="cap-tag">
             Advisory
           </div>
 
-
           <h3>
             Embedded Advisory
           </h3>
-
 
           <p>
             Direct support for organizations incorporating signature
             management into how they operate, translating concepts into
             practices tailored to the mission.
           </p>
-
 
           <a href="#engage" class="cap-link">
 
@@ -1970,7 +1919,6 @@ footer {
 
         </div>
 
-
       </div>
 
     </div>
@@ -1978,17 +1926,19 @@ footer {
   </section>
 
 
+  <!-- =====================================================
+       WHY SMU
+       ===================================================== -->
+
   <section class="section bordered" id="why">
 
     <div class="why-grid">
-
 
       <div>
 
         <div class="kicker">
           Why SMU
         </div>
-
 
         <h2 class="lead-head">
           Small, practitioner-led, and deliberate about fit.
@@ -2000,14 +1950,21 @@ footer {
       <div class="why-detail">
 
         <p>
-          SMU was founded in 2020 to translate signature reduction concepts developed inside complex operational environments into applied field instruction. </p>
-          <p>The organization is practitioner-led, operationally grounded, and deliberately small. We engage where timing, alignment, and readiness converge, and we scope each engagement to a specific mission profile rather than running a fixed catalogue.
+          SMU was founded in 2020 to translate signature reduction concepts
+          developed inside complex operational environments into applied
+          field instruction.
         </p>
 
+        <p>
+          The organization is practitioner-led, operationally grounded,
+          and deliberately small. We engage where timing, alignment, and
+          readiness converge, and we scope each engagement to a specific
+          mission profile rather than running a fixed catalogue.
+        </p>
 
         <p>
           We work directly with the people who will use what we teach,
-          adapting engagements to the mission. 
+          adapting engagements to the mission.
         </p>
 
       </div>
@@ -2020,6 +1977,10 @@ footer {
 </main>
 
 
+<!-- =======================================================
+     CONTACT
+     ======================================================= -->
+
 <section class="cta-band" id="engage">
 
   <div class="cta-inner">
@@ -2028,9 +1989,7 @@ footer {
       Reclaim your freedom for action.
     </h2>
 
-
     <div class="contact-block">
-
 
       <p
         class="contact-address"
@@ -2041,8 +2000,10 @@ footer {
           contact [at] signaturemanagementunit [dot] com
         </noscript>
 
-      <div class="contact-actions">
+      </p>
 
+
+      <div class="contact-actions">
 
         <a
           class="btn btn-dark"
@@ -2073,7 +2034,6 @@ footer {
 
         </button>
 
-
       </div>
 
 
@@ -2084,20 +2044,22 @@ footer {
         aria-live="polite"
       ></span>
 
-
     </div>
 
   </div>
 
 </section>
 
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
 <footer>
 
   <div class="footer-inner">
 
-
     <div class="footer-top">
-
 
       <div>
 
@@ -2105,11 +2067,10 @@ footer {
           Signature Management Unit
         </div>
 
-
         <p class="footer-mission">
-          Applied instruction in signature reduction and digital force proteection for military and government operators.
+          Applied instruction in signature reduction and digital force
+          protection for military and government operators.
         </p>
-
 
         <p class="footer-tag">
           Precise. Rapid. Discreet.
@@ -2123,7 +2084,6 @@ footer {
         <h4>
           Navigate
         </h4>
-
 
         <a href="#about">
           About
@@ -2150,7 +2110,6 @@ footer {
           Engage
         </h4>
 
-
         <a href="#engage">
           Start a Conversation
         </a>
@@ -2169,7 +2128,6 @@ footer {
 
       </div>
 
-
     </div>
 
 
@@ -2179,17 +2137,16 @@ footer {
         © Signature Management Unit
       </span>
 
-
       <span>
         signaturemanagementunit.com
       </span>
 
     </div>
 
-
   </div>
 
 </footer>
+
 
 <button
   class="to-top"
@@ -2203,54 +2160,61 @@ footer {
 
 </button>
 
+
 <script>
 
 (function() {
 
+  'use strict';
+
+  /* =======================================================
+     BACK TO TOP
+     ======================================================= */
+
   var btn = document.getElementById('toTop');
 
+  if (btn) {
 
-  function onScroll() {
+    function onScroll() {
 
-    var y =
-      window.scrollY ||
-      window.pageYOffset ||
-      0;
+      var y =
+        window.scrollY ||
+        window.pageYOffset ||
+        0;
 
-    btn.classList.toggle(
-      'visible',
-      y > 500
+      btn.classList.toggle(
+        'visible',
+        y > 500
+      );
+
+    }
+
+    window.addEventListener(
+      'scroll',
+      onScroll,
+      { passive: true }
     );
+
+    btn.addEventListener(
+      'click',
+      function() {
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+
+      }
+    );
+
+    onScroll();
 
   }
 
 
-  window.addEventListener(
-    'scroll',
-    onScroll,
-    { passive: true }
-  );
-
-
-  btn.addEventListener(
-    'click',
-    function() {
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-
-    }
-  );
-
-
-  onScroll();
-
-})();
-
-
-(function() {
+  /* =======================================================
+     MOBILE NAVIGATION
+     ======================================================= */
 
   var toggle =
     document.getElementById('navToggle');
@@ -2262,101 +2226,97 @@ footer {
     document.getElementById('mobileNav');
 
 
-  if (!toggle || !panel) {
-    return;
-  }
+  if (toggle && panel) {
 
+    function open() {
 
-  function open() {
+      panel.classList.add('open');
 
-    panel.classList.add('open');
+      toggle.setAttribute(
+        'aria-expanded',
+        'true'
+      );
 
-    toggle.setAttribute(
-      'aria-expanded',
-      'true'
-    );
+      document.body.style.overflow = 'hidden';
 
-    document.body.style.overflow = 'hidden';
+      var first =
+        panel.querySelector('a');
 
+      if (first) {
+        first.focus();
+      }
 
-    var first =
-      panel.querySelector('a');
-
-    if (first) {
-      first.focus();
     }
 
-  }
+
+    function shut() {
+
+      panel.classList.remove('open');
+
+      toggle.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+
+      document.body.style.overflow = '';
+
+      toggle.focus();
+
+    }
 
 
-  function shut() {
-
-    panel.classList.remove('open');
-
-    toggle.setAttribute(
-      'aria-expanded',
-      'false'
+    toggle.addEventListener(
+      'click',
+      open
     );
 
-    document.body.style.overflow = '';
 
-    toggle.focus();
+    if (close) {
 
-  }
-
-
-  toggle.addEventListener(
-    'click',
-    open
-  );
-
-
-  close.addEventListener(
-    'click',
-    shut
-  );
-
-
-  panel
-    .querySelectorAll('a')
-    .forEach(function(a) {
-
-      a.addEventListener(
+      close.addEventListener(
         'click',
         shut
       );
 
-    });
-
-
-  document.addEventListener(
-    'keydown',
-    function(e) {
-
-      if (
-        e.key === 'Escape' &&
-        panel.classList.contains('open')
-      ) {
-        shut();
-      }
-
     }
-  );
-
-})();
 
 
-(function() {
+    panel
+      .querySelectorAll('a')
+      .forEach(function(a) {
 
-  var user =
-    'contact';
+        a.addEventListener(
+          'click',
+          shut
+        );
 
-  var host =
-    'signaturemanagementunit';
+      });
 
-  var tld =
-    'com';
 
+    document.addEventListener(
+      'keydown',
+      function(e) {
+
+        if (
+          e.key === 'Escape' &&
+          panel.classList.contains('open')
+        ) {
+          shut();
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =======================================================
+     CONTACT ADDRESS
+     ======================================================= */
+
+  var user = 'contact';
+  var host = 'signaturemanagementunit';
+  var tld = 'com';
 
   var addr =
     user +
@@ -2387,6 +2347,12 @@ footer {
     );
 
 
+  var subject =
+    encodeURIComponent(
+      'SMU inquiry'
+    );
+
+
   if (out) {
 
     var link =
@@ -2396,9 +2362,7 @@ footer {
       'mailto:' +
       addr +
       '?subject=' +
-      encodeURIComponent(
-        'SMU inquiry'
-      );
+      subject;
 
     link.textContent =
       addr;
@@ -2416,12 +2380,9 @@ footer {
       'mailto:' +
       addr +
       '?subject=' +
-      encodeURIComponent(
-        'SMU inquiry'
-      );
+      subject;
 
   }
-
 
 
   if (copy && status) {
@@ -2430,12 +2391,10 @@ footer {
       'click',
       function() {
 
-
         function done() {
 
           status.textContent =
             'Address copied';
-
 
           setTimeout(
             function() {
