@@ -3,26 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Signature Management Unit</title>
-<meta name="description" content="The Signature Management Unit delivers applied instruction in signature reduction and digital force protection for military and government operators, built on doctrine licensed from the Institute for Signature Reduction.">
+
+<meta
+  name="description"
+  content="Signature Management Unit delivers applied instruction in signature reduction and digital force protection to military and government operators."
+>
+
 <meta property="og:title" content="Signature Management Unit">
-<meta property="og:description" content="Applied instruction in signature reduction and digital force protection for operators under ubiquitous technical surveillance.">
+<meta
+  property="og:description"
+  content="Applied training, specialized technology, and advisory support for military and government operators."
+>
 <meta property="og:type" content="website">
+
 <meta name="theme-color" content="#14181d">
-<link rel="canonical" href="https://www.signaturemanagementunit.com/">
+
+<link
+  rel="canonical"
+  href="https://www.signaturemanagementunit.com/"
+>
 
 <style>
-@font-face { font-family: 'Public Sans'; src: url('fonts/public-sans-var.woff2') format('woff2'); font-weight: 300 800; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Source Serif 4'; src: url('fonts/source-serif-4-italic-var.woff2') format('woff2'); font-weight: 400 500; font-style: italic; font-display: swap; }
-@font-face { font-family: 'JetBrains Mono'; src: url('fonts/jetbrains-mono-var.woff2') format('woff2'); font-weight: 400 500; font-style: normal; font-display: swap; }
-</style>
 
-<style>
+@font-face {
+  font-family: 'Public Sans';
+  src: url('fonts/public-sans-var.woff2') format('woff2');
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('fonts/source-serif-4-italic-var.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/jetbrains-mono-var.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --paper: #faf9f6;
   --paper-2: #f3f1ec;
-  --paper-3: #ece9e2;
   --card: #ffffff;
+
   --ink: #1a1c1f;
   --ink-2: #3d4046;
   --ink-3: #6c7077;
@@ -33,526 +66,2461 @@
 
   --slate: #3f5d77;
   --slate-2: #5a7891;
-  --slate-ghost: rgba(63,93,119,.08);
-  --slate-line: rgba(63,93,119,.26);
-
-  --clay: #a8503f;
-  --clay-ghost: rgba(168,80,63,.08);
-  --clay-line: rgba(168,80,63,.3);
 
   --ink-deep: #14181d;
   --ink-deep-2: #1c2127;
 
   --max: 1140px;
+
   --serif: 'Source Serif 4', Georgia, serif;
   --sans: 'Public Sans', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
+
   --radius: 8px;
   --radius-lg: 14px;
+
   --trans: .22s cubic-bezier(.4,0,.2,1);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 78px; font-size: 16px; -webkit-text-size-adjust: 100%; }
-body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 400; line-height: 1.7; font-size: 1.02rem; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-::selection { background: var(--slate); color: var(--paper); }
-a { color: var(--slate); transition: color var(--trans); text-decoration: none; }
-a:hover { color: var(--clay); }
-img { max-width: 100%; height: auto; display: block; }
-:focus-visible { outline: 2px solid var(--slate); outline-offset: 3px; }
-.skip-link { position: absolute; left: -9999px; background: var(--ink); color: var(--paper); padding: 12px 18px; z-index: 9999; }
-.skip-link:focus { left: 16px; top: 16px; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-/* inline icon system — replaces the CDN icon font */
-.icon { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
 
-/* ─── NAV ─── */
-nav { position: sticky; top: 0; z-index: 800; background: rgba(250,249,246,.86); backdrop-filter: blur(14px); border-bottom: 1px solid var(--rule); }
-.nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 36px; display: flex; align-items: center; justify-content: space-between; height: 66px; }
-.nav-logo { font-family: var(--mono); font-weight: 500; font-size: .72rem; letter-spacing: .18em; color: var(--ink); text-transform: uppercase; display: flex; align-items: center; gap: 11px; }
-.nav-logo b { font-weight: 500; color: var(--slate); }
-.nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
-.nav-links a { font-family: var(--mono); font-size: .66rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
-.nav-links a:hover { color: var(--ink); }
-.nav-cta { font-family: var(--mono); font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: #fff !important; background: var(--slate); padding: 10px 18px; border-radius: 22px; }
-.nav-cta:hover { background: var(--clay); }
-.nav-hamburger { display: none; background: none; border: 1px solid var(--rule-2); border-radius: 6px; cursor: pointer; padding: 8px 10px; color: var(--ink); font-size: 20px; align-items: center; justify-content: center; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.7;
+  font-size: 1.02rem;
 
-/* mobile nav overlay */
-.mobile-nav { display: none; position: fixed; inset: 0; z-index: 900; background: var(--paper); flex-direction: column; align-items: center; justify-content: center; }
-.mobile-nav.open { display: flex; }
-.mobile-nav-close { position: absolute; top: 18px; right: 22px; background: none; border: 1px solid var(--rule-2); border-radius: 6px; padding: 8px 10px; color: var(--ink); font-size: 20px; cursor: pointer; display: flex; }
-.mobile-nav ul { list-style: none; text-align: center; }
-.mobile-nav a { display: block; padding: 15px 40px; font-family: var(--sans); font-size: 1.5rem; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-/* ─── HERO ─── */
-.hero { position: relative; background: var(--ink-deep); color: #fff; overflow: hidden; border-bottom: 1px solid var(--ink-deep-2); }
-.hero-topo { position: absolute; inset: 0; opacity: .5; }
-.hero-topo svg { width: 100%; height: 100%; display: block; }
-.hero-grad { position: absolute; inset: 0; background: linear-gradient(105deg, var(--ink-deep) 30%, rgba(20,24,29,.65) 60%, rgba(20,24,29,.35) 100%); }
-.hero-inner { position: relative; max-width: var(--max); margin: 0 auto; padding: 120px 36px 110px; }
-.hero h1 { font-family: var(--sans); font-size: clamp(2.6rem, 5.4vw, 4.3rem); font-weight: 700; line-height: 1.04; letter-spacing: -.025em; max-width: 17ch; margin: 0 0 26px; color: #fff; }
-.hero h1 em { font-style: normal; color: var(--slate-2); }
-.hero-sub { font-family: var(--sans); font-size: 1.18rem; color: #c9cdd3; max-width: 52ch; line-height: 1.6; font-weight: 400; margin-bottom: 38px; }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.btn { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding: 14px 26px; border-radius: 28px; display: inline-flex; align-items: center; gap: 9px; transition: all var(--trans); }
-.btn-primary { background: #fff; color: var(--ink-deep) !important; }
-.btn-primary:hover { background: var(--slate-2); color: #fff !important; }
-.btn-ghost { border: 1px solid rgba(255,255,255,.28); color: #fff !important; }
-.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.06); }
-.btn .icon { font-size: 15px; }
+::selection {
+  background: var(--slate);
+  color: var(--paper);
+}
 
-/* ─── SHARED SECTION ─── */
-.section { max-width: var(--max); margin: 0 auto; padding: 96px 36px; }
-.section.bordered { border-bottom: 1px solid var(--rule); }
-.kicker { font-family: var(--mono); font-size: .62rem; letter-spacing: .2em; color: var(--slate); text-transform: uppercase; margin-bottom: 20px; }
-.lead-head { font-family: var(--sans); font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 700; color: var(--ink); letter-spacing: -.02em; line-height: 1.12; max-width: 24ch; }
-.lead-body { font-family: var(--sans); font-size: 1.08rem; color: var(--ink-2); line-height: 1.75; max-width: 60ch; margin-top: 22px; }
+a {
+  color: var(--slate);
+  text-decoration: none;
+  transition: color var(--trans);
+}
 
-/* ─── ABOUT splitblock ─── */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.about-statement { font-family: var(--sans); font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 600; color: var(--ink); line-height: 1.2; letter-spacing: -.015em; }
-.about-statement em { font-style: italic; font-family: var(--serif); font-weight: 400; color: var(--slate); }
-.about-detail p { font-size: 1.04rem; color: var(--ink-2); line-height: 1.8; margin-bottom: 16px; }
-.about-detail p:last-child { margin-bottom: 0; }
+a:hover {
+  color: #a8503f;
+}
 
-/* ─── TWO-PATH ORIGIN ─── */
-.paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: var(--radius-lg); overflow: hidden; margin-top: 48px; }
-.path { background: var(--card); padding: 38px 34px; }
-.path-tag { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--slate); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.path-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--slate); }
-.path h3 { font-family: var(--sans); font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; letter-spacing: -.01em; }
-.path p { font-size: .96rem; color: var(--ink-3); line-height: 1.75; }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-/* ─── GAP ANALYSIS ─── */
-.gaps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
-.gap-card { border: 1px solid var(--rule); border-radius: var(--radius-lg); background: var(--card); padding: 32px 28px; }
-.gap-tag { font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 20px; }
-.gap-num { font-family: var(--sans); font-size: 2.6rem; font-weight: 800; color: var(--slate); line-height: 1; letter-spacing: -.03em; margin-bottom: 14px; font-variant-numeric: tabular-nums; }
-.gap-card p { font-size: .92rem; color: var(--ink-3); line-height: 1.7; }
-.gap-card.alert .gap-num { color: var(--clay); }
+:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 3px;
+}
 
-/* ─── CAPABILITIES ─── */
-.section.dark { background: var(--ink-deep); color: #fff; max-width: none; }
-.section.dark .section-bound { max-width: var(--max); margin: 0 auto; }
-.section.dark .kicker { color: var(--slate-2); }
-.section.dark .lead-head { color: #fff; }
-.caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
-.cap { border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-lg); padding: 34px 30px; background: var(--ink-deep-2); transition: all var(--trans); display: flex; flex-direction: column; }
-.cap:hover { border-color: rgba(255,255,255,.28); transform: translateY(-3px); }
-.cap-ico { width: 44px; height: 44px; border-radius: 10px; background: rgba(90,120,145,.18); border: 1px solid var(--slate-2); display: flex; align-items: center; justify-content: center; color: var(--slate-2); font-size: 21px; margin-bottom: 22px; }
-.cap-tag { font-family: var(--mono); font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 10px; }
-.cap h3 { font-family: var(--sans); font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 12px; letter-spacing: -.01em; }
-.cap p { font-size: .93rem; color: #aeb3ba; line-height: 1.7; margin-bottom: 22px; flex-grow: 1; }
-.cap-link { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; color: var(--slate-2) !important; display: inline-flex; align-items: center; gap: 7px; }
-.cap-link:hover { color: #fff !important; }
-.cap-link .icon { font-size: 14px; }
+.skip-link {
+  position: absolute;
+  left: -9999px;
 
-/* ─── CTA / CONTACT BAND ─── */
-.cta-band { background: var(--paper-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-.cta-inner { max-width: var(--max); margin: 0 auto; padding: 80px 36px; text-align: center; }
-.cta-inner h2 { font-family: var(--sans); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--ink); letter-spacing: -.02em; line-height: 1.1; max-width: 20ch; margin: 0 auto 18px; }
-.cta-inner > p { font-size: 1.08rem; color: var(--ink-2); max-width: 56ch; margin: 0 auto 34px; line-height: 1.7; }
+  background: var(--ink);
+  color: var(--paper);
 
-.btn-dark { background: var(--slate); color: #fff !important; }
-.btn-dark:hover { background: var(--clay); }
+  padding: 12px 18px;
 
-/* contact block — replaces the third-party form */
-.contact-block { max-width: 620px; margin: 0 auto; }
-.contact-address { font-family: var(--mono); font-size: 1.02rem; letter-spacing: .01em; color: var(--ink); word-break: break-word; }
-.contact-address a { color: var(--ink) !important; border-bottom: 1px solid var(--slate-line); padding-bottom: 2px; }
-.contact-address a:hover { color: var(--slate) !important; border-color: var(--slate); }
-.contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 26px 0 34px; }
-.contact-guide { border: 1px solid var(--rule-2); border-radius: var(--radius-lg); background: var(--card); padding: 26px 30px; text-align: left; }
-.contact-guide h3 { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--slate); font-weight: 500; margin-bottom: 14px; }
-.contact-guide ul { list-style: none; }
-.contact-guide li { font-size: .93rem; color: var(--ink-3); line-height: 1.7; padding-left: 18px; position: relative; margin-bottom: 9px; }
-.contact-guide li:last-child { margin-bottom: 0; }
-.contact-guide li::before { content: ''; position: absolute; left: 0; top: .68em; width: 5px; height: 5px; border-radius: 50%; background: var(--slate-line); }
-.contact-guide .note { margin-top: 16px; padding-top: 15px; border-top: 1px solid var(--rule); font-size: .87rem; color: var(--ink-3); line-height: 1.7; }
-.copy-status { font-family: var(--mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; color: var(--slate); min-height: 1.2em; display: block; margin-top: -20px; margin-bottom: 26px; }
+  z-index: 9999;
+}
 
-/* ─── AFFIL NOTE ─── */
-.affil { max-width: var(--max); margin: 0 auto; padding: 70px 36px; }
-.affil-card { border: 1px solid var(--rule); border-left: 3px solid var(--slate); border-radius: var(--radius); background: var(--card); padding: 30px 34px; display: flex; gap: 22px; align-items: flex-start; }
-.affil-card .icon { font-size: 22px; color: var(--slate); flex-shrink: 0; margin-top: 4px; }
-.affil-card p { font-size: .98rem; color: var(--ink-2); line-height: 1.75; }
-.affil-card a { font-weight: 600; }
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+}
 
-/* ─── FOOTER ─── */
-footer { background: var(--ink-deep); color: #fff; padding: 60px 36px 34px; }
-.footer-inner { max-width: var(--max); margin: 0 auto; }
-.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1); }
-.footer-brand { font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: #fff; margin-bottom: 16px; }
-.footer-mission { font-size: .92rem; color: #9aa0a8; line-height: 1.7; max-width: 40ch; }
-.footer-tag { margin-top: 18px; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--slate-2); }
-.footer-col h4 { font-family: var(--mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 16px; }
-.footer-col a { display: block; font-size: .9rem; color: #c9cdd3 !important; margin-bottom: 10px; }
-.footer-col a:hover { color: #fff !important; }
-.footer-bottom { padding-top: 26px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--mono); font-size: .6rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-4); }
+.icon {
+  width: 1em;
+  height: 1em;
 
-/* ─── RESPONSIVE ─── */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  flex-shrink: 0;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+
+nav {
+  position: sticky;
+  top: 0;
+
+  z-index: 800;
+
+  background: rgba(250,249,246,.86);
+  backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid var(--rule);
+}
+
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+
+  padding: 0 36px;
+
+  height: 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-weight: 500;
+
+  font-size: .72rem;
+  letter-spacing: .18em;
+
+  color: var(--ink);
+
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.nav-logo b {
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+
+  font-size: .66rem;
+  font-weight: 400;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-3);
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.nav-cta {
+  font-family: var(--mono);
+
+  font-size: .64rem;
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: #fff !important;
+
+  background: var(--slate);
+
+  padding: 10px 18px;
+
+  border-radius: 22px;
+}
+
+.nav-cta:hover {
+  background: #a8503f;
+}
+
+.nav-hamburger {
+  display: none;
+
+  background: none;
+
+  border: 1px solid var(--rule-2);
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  padding: 8px 10px;
+
+  color: var(--ink);
+
+  font-size: 20px;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+.mobile-nav {
+  display: none;
+
+  position: fixed;
+  inset: 0;
+
+  z-index: 900;
+
+  background: var(--paper);
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-nav.open {
+  display: flex;
+}
+
+.mobile-nav-close {
+  position: absolute;
+
+  top: 18px;
+  right: 22px;
+
+  background: none;
+
+  border: 1px solid var(--rule-2);
+
+  border-radius: 6px;
+
+  padding: 8px 10px;
+
+  color: var(--ink);
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  display: flex;
+}
+
+.mobile-nav ul {
+  list-style: none;
+
+  text-align: center;
+}
+
+.mobile-nav a {
+  display: block;
+
+  padding: 15px 40px;
+
+  font-family: var(--sans);
+
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  color: var(--ink);
+}
+
+
+.hero {
+  position: relative;
+
+  background: var(--ink-deep);
+
+  color: #fff;
+
+  overflow: hidden;
+
+  border-bottom: 1px solid var(--ink-deep-2);
+}
+
+.hero-topo {
+  position: absolute;
+  inset: 0;
+
+  opacity: .5;
+}
+
+.hero-topo svg {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+.hero-grad {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      105deg,
+      var(--ink-deep) 30%,
+      rgba(20,24,29,.65) 60%,
+      rgba(20,24,29,.35) 100%
+    );
+}
+
+.hero-inner {
+  position: relative;
+
+  max-width: var(--max);
+
+  margin: 0 auto;
+
+  padding: 120px 36px 110px;
+}
+
+.hero h1 {
+  font-family: var(--sans);
+
+  font-size: clamp(2.8rem, 5.6vw, 4.5rem);
+
+  font-weight: 700;
+
+  line-height: 1.02;
+
+  letter-spacing: -.035em;
+
+  max-width: 14ch;
+
+  margin-bottom: 28px;
+
+  color: #fff;
+}
+
+.hero h1 em {
+  font-style: normal;
+
+  color: var(--slate-2);
+}
+
+.hero-sub {
+  font-family: var(--sans);
+
+  font-size: 1.18rem;
+
+  color: #c9cdd3;
+
+  max-width: 54ch;
+
+  line-height: 1.65;
+
+  margin-bottom: 38px;
+}
+
+.hero-actions {
+  display: flex;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+
+.btn {
+  font-family: var(--mono);
+
+  font-size: .68rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  padding: 14px 26px;
+
+  border-radius: 28px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  transition: all var(--trans);
+}
+
+.btn-primary {
+  background: #fff;
+
+  color: var(--ink-deep) !important;
+}
+
+.btn-primary:hover {
+  background: var(--slate-2);
+
+  color: #fff !important;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,.28);
+
+  color: #fff !important;
+}
+
+.btn-ghost:hover {
+  border-color: #fff;
+
+  background: rgba(255,255,255,.06);
+}
+
+.btn-dark {
+  background: var(--slate);
+
+  color: #fff !important;
+}
+
+.btn-dark:hover {
+  background: #a8503f;
+}
+
+
+.section {
+  max-width: var(--max);
+
+  margin: 0 auto;
+
+  padding: 92px 36px;
+}
+
+.section.bordered {
+  border-bottom: 1px solid var(--rule);
+}
+
+.kicker {
+  font-family: var(--mono);
+
+  font-size: .62rem;
+
+  letter-spacing: .2em;
+
+  color: var(--slate);
+
+  text-transform: uppercase;
+
+  margin-bottom: 20px;
+}
+
+.lead-head {
+  font-family: var(--sans);
+
+  font-size: clamp(1.8rem, 3.6vw, 2.65rem);
+
+  font-weight: 700;
+
+  color: var(--ink);
+
+  letter-spacing: -.025em;
+
+  line-height: 1.12;
+
+  max-width: 25ch;
+}
+
+.lead-body {
+  font-family: var(--sans);
+
+  font-size: 1.08rem;
+
+  color: var(--ink-2);
+
+  line-height: 1.75;
+
+  max-width: 60ch;
+
+  margin-top: 22px;
+}
+
+.point-of-view {
+  display: grid;
+
+  grid-template-columns: .85fr 1.15fr;
+
+  gap: 72px;
+
+  align-items: start;
+}
+
+.point-statement {
+  font-family: var(--sans);
+
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+
+  font-weight: 600;
+
+  color: var(--ink);
+
+  line-height: 1.18;
+
+  letter-spacing: -.02em;
+
+  max-width: 17ch;
+}
+
+.point-statement em {
+  font-family: var(--serif);
+
+  font-style: italic;
+
+  font-weight: 400;
+
+  color: var(--slate);
+}
+
+.point-detail p {
+  font-size: 1.05rem;
+
+  color: var(--ink-2);
+
+  line-height: 1.8;
+
+  max-width: 58ch;
+
+  margin-bottom: 18px;
+}
+
+.point-detail p:last-child {
+  margin-bottom: 0;
+}
+
+
+.section.dark {
+  max-width: none;
+
+  background: var(--ink-deep);
+
+  color: #fff;
+}
+
+.section.dark .section-bound {
+  max-width: var(--max);
+
+  margin: 0 auto;
+}
+
+.section.dark .kicker {
+  color: var(--slate-2);
+}
+
+.section.dark .lead-head {
+  color: #fff;
+}
+
+.caps {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+
+  margin-top: 50px;
+}
+
+.cap {
+  border: 1px solid rgba(255,255,255,.12);
+
+  border-radius: var(--radius-lg);
+
+  padding: 34px 30px;
+
+  background: var(--ink-deep-2);
+
+  transition: all var(--trans);
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.cap:hover {
+  border-color: rgba(255,255,255,.28);
+
+  transform: translateY(-3px);
+}
+
+.cap-ico {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 10px;
+
+  background: rgba(90,120,145,.18);
+
+  border: 1px solid var(--slate-2);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--slate-2);
+
+  font-size: 21px;
+
+  margin-bottom: 22px;
+}
+
+.cap-tag {
+  font-family: var(--mono);
+
+  font-size: .56rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+
+  margin-bottom: 10px;
+}
+
+.cap h3 {
+  font-family: var(--sans);
+
+  font-size: 1.3rem;
+
+  font-weight: 600;
+
+  color: #fff;
+
+  margin-bottom: 12px;
+}
+
+.cap p {
+  font-size: .93rem;
+
+  color: #aeb3ba;
+
+  line-height: 1.7;
+
+  margin-bottom: 22px;
+
+  flex-grow: 1;
+}
+
+.cap-link {
+  font-family: var(--mono);
+
+  font-size: .62rem;
+
+  letter-spacing: .06em;
+
+  text-transform: uppercase;
+
+  color: var(--slate-2) !important;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.cap-link:hover {
+  color: #fff !important;
+}
+
+
+.why-grid {
+  display: grid;
+
+  grid-template-columns: .85fr 1.15fr;
+
+  gap: 72px;
+
+  align-items: start;
+}
+
+.why-note {
+  font-family: var(--mono);
+
+  font-size: .62rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+
+  line-height: 1.7;
+
+  padding-top: 7px;
+}
+
+.why-detail {
+  max-width: 58ch;
+}
+
+.why-detail p {
+  font-size: 1.05rem;
+
+  color: var(--ink-2);
+
+  line-height: 1.8;
+
+  margin-bottom: 18px;
+}
+
+.why-detail p:last-child {
+  margin-bottom: 0;
+}
+
+.why-detail strong {
+  color: var(--ink);
+
+  font-weight: 600;
+}
+
+.definition {
+  display: grid;
+
+  grid-template-columns: .85fr 1.15fr;
+
+  column-gap: 72px;
+
+  row-gap: 42px;
+}
+
+.definition-term h2 {
+  font-family: var(--serif);
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  line-height: 1.05;
+
+  letter-spacing: -.025em;
+
+  color: var(--ink);
+
+  max-width: 15ch;
+}
+
+.definition-meta {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-top: 18px;
+
+  font-family: var(--mono);
+
+  font-size: .58rem;
+
+  line-height: 1.6;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+}
+
+.definition-body {
+  display: grid;
+
+  grid-template-columns: 34px 1fr;
+
+  column-gap: 18px;
+
+  row-gap: 26px;
+
+  align-items: start;
+}
+
+.definition-number {
+  font-family: var(--mono);
+
+  font-size: .58rem;
+
+  color: var(--slate);
+
+  letter-spacing: .08em;
+
+  padding-top: 5px;
+}
+
+.definition-body p {
+  font-size: 1.05rem;
+
+  color: var(--ink-2);
+
+  line-height: 1.8;
+
+  max-width: 58ch;
+}
+
+.definition-conclusion {
+  grid-column: 2;
+
+  max-width: 58ch;
+
+  padding-top: 30px;
+
+  border-top: 1px solid var(--rule);
+
+  font-family: var(--serif);
+
+  font-size: 1.25rem;
+
+  font-style: italic;
+
+  color: var(--ink);
+
+  line-height: 1.55;
+}
+
+
 @media (max-width: 900px) {
-  .about-grid { grid-template-columns: 1fr; gap: 32px; }
-  .paths { grid-template-columns: 1fr; }
-  .gaps { grid-template-columns: 1fr; }
-  .caps { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-}
-@media (max-width: 560px) {
-  .hero-inner { padding: 84px 22px 76px; }
-  .section { padding: 64px 22px; }
-  .cta-inner, .affil { padding-left: 22px; padding-right: 22px; }
-  .nav-inner { padding: 0 22px; }
-  .contact-address { font-size: .88rem; }
-  .contact-guide { padding: 22px 22px; }
-  .affil-card { flex-direction: column; gap: 14px; padding: 26px 24px; }
-  .footer-top { grid-template-columns: 1fr; }
-  .nav-cta { display: none; }
-}
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
 
-/* ─── BACK TO TOP ─── */
-.to-top { position: fixed; bottom: 28px; right: 28px; z-index: 700; width: 44px; height: 44px; border-radius: 50%; background: var(--slate); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 19px; box-shadow: 0 8px 24px rgba(20,24,29,.28); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity var(--trans), transform var(--trans), background var(--trans), visibility var(--trans); }
-.to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-.to-top:hover { background: var(--clay); }
-@media (max-width: 560px) { .to-top { bottom: 20px; right: 16px; width: 40px; height: 40px; font-size: 17px; } }
+  .definition {
+    grid-template-columns: 1fr;
+
+    gap: 34px;
+  }
+
+  .definition-term h2 {
+    max-width: 20ch;
+  }
+
+  .definition-conclusion {
+    grid-column: 1;
+  }
+
+}
+
+
+@media (max-width: 560px) {
+
+  .definition {
+    gap: 28px;
+  }
+
+  .definition-body {
+    grid-template-columns: 28px 1fr;
+
+    column-gap: 12px;
+  }
+
+  .definition-body p {
+    font-size: .98rem;
+  }
+
+  .definition-conclusion {
+    font-size: 1.12rem;
+  }
+
+}
+
+
+.cta-band {
+  background: var(--paper-2);
+
+  border-top: 1px solid var(--rule);
+
+  border-bottom: 1px solid var(--rule);
+}
+
+.cta-inner {
+  max-width: var(--max);
+
+  margin: 0 auto;
+
+  padding: 80px 36px;
+
+  text-align: center;
+}
+
+.cta-inner h2 {
+  font-family: var(--sans);
+
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+
+  font-weight: 700;
+
+  color: var(--ink);
+
+  letter-spacing: -.025em;
+
+  line-height: 1.1;
+
+  max-width: 19ch;
+
+  margin: 0 auto 18px;
+}
+
+.cta-inner > p {
+  font-size: 1.08rem;
+
+  color: var(--ink-2);
+
+  max-width: 56ch;
+
+  margin: 0 auto 34px;
+
+  line-height: 1.7;
+}
+
+.contact-block {
+  max-width: 620px;
+
+  margin: 0 auto;
+}
+
+.contact-address {
+  font-family: var(--mono);
+
+  font-size: 1.02rem;
+
+  letter-spacing: .01em;
+
+  color: var(--ink);
+
+  word-break: break-word;
+}
+
+.contact-address a {
+  color: var(--ink) !important;
+
+  border-bottom: 1px solid rgba(63,93,119,.26);
+
+  padding-bottom: 2px;
+}
+
+.contact-address a:hover {
+  color: var(--slate) !important;
+
+  border-color: var(--slate);
+}
+
+.contact-actions {
+  display: flex;
+
+  gap: 12px;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  margin: 26px 0 34px;
+}
+
+.copy-btn {
+  background: transparent;
+
+  color: var(--ink) !important;
+
+  border: 1px solid var(--rule-2);
+
+  cursor: pointer;
+}
+
+.copy-status {
+  font-family: var(--mono);
+
+  font-size: .6rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: var(--slate);
+
+  min-height: 1.2em;
+
+  display: block;
+
+  margin-top: -20px;
+
+  margin-bottom: 26px;
+}
+
+.contact-guide {
+  border: 1px solid var(--rule-2);
+
+  border-radius: var(--radius-lg);
+
+  background: var(--card);
+
+  padding: 26px 30px;
+
+  text-align: left;
+}
+
+.contact-guide h3 {
+  font-family: var(--mono);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--slate);
+
+  font-weight: 500;
+
+  margin-bottom: 14px;
+}
+
+.contact-guide ul {
+  list-style: none;
+}
+
+.contact-guide li {
+  font-size: .93rem;
+
+  color: var(--ink-3);
+
+  line-height: 1.7;
+
+  padding-left: 18px;
+
+  position: relative;
+
+  margin-bottom: 9px;
+}
+
+.contact-guide li:last-child {
+  margin-bottom: 0;
+}
+
+.contact-guide li::before {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  top: .68em;
+
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: rgba(63,93,119,.26);
+}
+
+.contact-guide .note {
+  margin-top: 16px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid var(--rule);
+
+  font-size: .87rem;
+
+  color: var(--ink-3);
+
+  line-height: 1.7;
+}
+
+.referral-note {
+  font-family: var(--mono);
+
+  font-size: .62rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+
+  margin-top: 24px;
+
+  line-height: 1.7;
+}
+
+
+footer {
+  background: var(--ink-deep);
+
+  color: #fff;
+
+  padding: 60px 36px 34px;
+}
+
+.footer-inner {
+  max-width: var(--max);
+
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr 1fr;
+
+  gap: 40px;
+
+  padding-bottom: 40px;
+
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.footer-brand {
+  font-family: var(--mono);
+
+  font-size: .72rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: #fff;
+
+  margin-bottom: 16px;
+}
+
+.footer-mission {
+  font-size: .92rem;
+
+  color: #9aa0a8;
+
+  line-height: 1.7;
+
+  max-width: 40ch;
+}
+
+.footer-tag {
+  margin-top: 18px;
+
+  font-family: var(--mono);
+
+  font-size: .62rem;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+
+  color: var(--slate-2);
+}
+
+.footer-col h4 {
+  font-family: var(--mono);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+
+  margin-bottom: 16px;
+}
+
+.footer-col a {
+  display: block;
+
+  font-size: .9rem;
+
+  color: #c9cdd3 !important;
+
+  margin-bottom: 10px;
+}
+
+.footer-col a:hover {
+  color: #fff !important;
+}
+
+.footer-bottom {
+  padding-top: 26px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  font-family: var(--mono);
+
+  font-size: .6rem;
+
+  letter-spacing: .06em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+}
+
+
+.to-top {
+  position: fixed;
+
+  bottom: 28px;
+  right: 28px;
+
+  z-index: 700;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+
+  background: var(--slate);
+
+  color: #fff;
+
+  border: none;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 19px;
+
+  box-shadow: 0 8px 24px rgba(20,24,29,.28);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateY(10px);
+
+  transition:
+    opacity var(--trans),
+    transform var(--trans),
+    background var(--trans),
+    visibility var(--trans);
+}
+
+.to-top.visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0);
+}
+
+.to-top:hover {
+  background: #a8503f;
+}
+
+
+@media (max-width: 900px) {
+
+  .point-of-view,
+  .why-grid {
+    grid-template-columns: 1fr;
+
+    gap: 32px;
+  }
+
+  .caps {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+}
+
+@media (max-width: 560px) {
+
+  .hero-inner {
+    padding: 84px 22px 76px;
+  }
+
+  .section {
+    padding: 64px 22px;
+  }
+
+  .cta-inner {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .nav-inner {
+    padding: 0 22px;
+  }
+
+  .contact-address {
+    font-size: .88rem;
+  }
+
+  .contact-guide {
+    padding: 22px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .to-top {
+    bottom: 20px;
+    right: 16px;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 17px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+}
+
 </style>
 </head>
 
-<body>
-<a href="#main" class="skip-link">Skip to main content</a>
 
-<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
-  <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
-  <symbol id="i-school" viewBox="0 0 24 24"><path d="M22 9 12 5 2 9l10 4 10-4Z"/><path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/></symbol>
-  <symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
-  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4"/><path d="M16.5 5.2a3.2 3.2 0 0 1 0 5.9M18 14.9c2.4.6 3.9 2.4 3.9 5.1"/></symbol>
-  <symbol id="i-certificate" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.2"/><path d="M8.4 13.2 7 22l5-2.6L17 22l-1.4-8.8"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></symbol>
-  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></symbol>
+<body>
+
+<a href="#main" class="skip-link">
+  Skip to main content
+</a>
+
+<svg
+  class="sprite"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+
+  <symbol id="i-menu" viewBox="0 0 24 24">
+    <path d="M4 8h16M4 16h16"/>
+  </symbol>
+
+  <symbol id="i-close" viewBox="0 0 24 24">
+    <path d="M18 6 6 18M6 6l12 12"/>
+  </symbol>
+
+  <symbol id="i-arrow-right" viewBox="0 0 24 24">
+    <path d="M5 12h14M13 6l6 6-6 6"/>
+  </symbol>
+
+  <symbol id="i-arrow-up" viewBox="0 0 24 24">
+    <path d="M12 19V5M6 11l6-6 6 6"/>
+  </symbol>
+
+  <symbol id="i-school" viewBox="0 0 24 24">
+    <path d="M22 9 12 5 2 9l10 4 10-4Z"/>
+    <path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/>
+  </symbol>
+
+  <symbol id="i-crosshair" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8"/>
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+  </symbol>
+
+  <symbol id="i-users" viewBox="0 0 24 24">
+    <circle cx="9" cy="8" r="3.2"/>
+    <path d="M3 20c0-3.3 2.7-5.4 6-5.4s6 2.1 6 5.4"/>
+    <path d="M16.5 5.2a3.2 3.2 0 0 1 0 5.9M18 14.9c2.4.6 3.9 2.4 3.9 5.1"/>
+  </symbol>
+
+  <symbol id="i-mail" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2"/>
+    <path d="m3.5 6.5 8.5 6 8.5-6"/>
+  </symbol>
+
+  <symbol id="i-copy" viewBox="0 0 24 24">
+    <rect x="9" y="9" width="12" height="12" rx="2"/>
+    <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+  </symbol>
+
 </svg>
 
 <nav aria-label="Primary navigation">
+
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Signature Management <b>Unit</b></a>
+
+    <a href="#" class="nav-logo">
+      Signature Management <b>Unit</b>
+    </a>
+
     <ul class="nav-links" role="list">
-      <li><a href="#about">About</a></li>
-      <li><a href="#capabilities">Capabilities</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#engage" class="nav-cta">Request a Briefing</a></li>
+
+      <li>
+        <a href="#about">About</a>
+      </li>
+
+      <li>
+        <a href="#capabilities">Capabilities</a>
+      </li>
+
+      <li>
+        <a href="#why">Why SMU</a>
+      </li>
+
+      <li>
+        <a href="#engage" class="nav-cta">
+          Start a Conversation
+        </a>
+      </li>
+
     </ul>
-    <button class="nav-hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
-      <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+
+    <button
+      class="nav-hamburger"
+      id="navToggle"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobileNav"
+    >
+
+      <svg class="icon" aria-hidden="true">
+        <use href="#i-menu"/>
+      </svg>
+
     </button>
+
   </div>
+
 </nav>
 
-<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu">
-  <button class="mobile-nav-close" id="navClose" aria-label="Close menu">
-    <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+<div
+  class="mobile-nav"
+  id="mobileNav"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+>
+
+  <button
+    class="mobile-nav-close"
+    id="navClose"
+    aria-label="Close menu"
+  >
+
+    <svg class="icon" aria-hidden="true">
+      <use href="#i-close"/>
+    </svg>
+
   </button>
+
   <ul role="list">
-    <li><a href="#about">About</a></li>
-    <li><a href="#capabilities">Capabilities</a></li>
-    <li><a href="#approach">Approach</a></li>
-    <li><a href="#engage">Request a Briefing</a></li>
+
+    <li>
+      <a href="#about">About</a>
+    </li>
+
+    <li>
+      <a href="#capabilities">Capabilities</a>
+    </li>
+
+    <li>
+      <a href="#why">Why SMU</a>
+    </li>
+
+    <li>
+      <a href="#engage">Start a Conversation</a>
+    </li>
+
   </ul>
+
 </div>
 
 <header class="hero">
+
   <div class="hero-topo" aria-hidden="true">
-    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Topographic field">
+
+    <svg
+      viewBox="0 0 1200 600"
+      preserveAspectRatio="xMidYMid slice"
+      role="img"
+      aria-label="Topographic field"
+    >
+
       <g stroke="#3a4654" stroke-width="1" opacity=".5">
-        <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/><line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/><line x1="0" y1="500" x2="1200" y2="500"/>
-        <line x1="150" y1="0" x2="150" y2="600"/><line x1="300" y1="0" x2="300" y2="600"/><line x1="450" y1="0" x2="450" y2="600"/><line x1="600" y1="0" x2="600" y2="600"/><line x1="750" y1="0" x2="750" y2="600"/><line x1="900" y1="0" x2="900" y2="600"/><line x1="1050" y1="0" x2="1050" y2="600"/>
+
+        <line x1="0" y1="100" x2="1200" y2="100"/>
+        <line x1="0" y1="200" x2="1200" y2="200"/>
+        <line x1="0" y1="300" x2="1200" y2="300"/>
+        <line x1="0" y1="400" x2="1200" y2="400"/>
+        <line x1="0" y1="500" x2="1200" y2="500"/>
+
+        <line x1="150" y1="0" x2="150" y2="600"/>
+        <line x1="300" y1="0" x2="300" y2="600"/>
+        <line x1="450" y1="0" x2="450" y2="600"/>
+        <line x1="600" y1="0" x2="600" y2="600"/>
+        <line x1="750" y1="0" x2="750" y2="600"/>
+        <line x1="900" y1="0" x2="900" y2="600"/>
+        <line x1="1050" y1="0" x2="1050" y2="600"/>
+
       </g>
-      <g fill="none" stroke="#5a7891" stroke-width="1.4" opacity=".8">
-        <path d="M760 60 C900 20 1080 50 1130 160 C1170 250 1110 340 990 330 C880 322 840 250 832 180 C826 120 660 100 760 60 Z"/>
-        <path d="M800 100 C920 70 1050 96 1092 180 C1124 244 1080 300 980 296 C898 292 868 236 860 178 C854 134 720 130 800 100 Z"/>
-        <path d="M848 142 C942 122 1024 142 1056 200 C1082 248 1046 270 972 270 C912 270 884 230 878 188 C874 156 800 172 848 142 Z"/>
-        <path d="M896 184 C962 172 1010 188 1030 224 C1046 254 1016 254 970 254 C928 254 906 226 902 196 C900 178 856 204 896 184 Z" stroke-width="2"/>
+
+
+      <g
+        fill="none"
+        stroke="#5a7891"
+        stroke-width="1.4"
+        opacity=".8"
+      >
+
+        <path d="
+          M760 60
+          C900 20 1080 50 1130 160
+          C1170 250 1110 340 990 330
+          C880 322 840 250 832 180
+          C826 120 660 100 760 60 Z
+        "/>
+
+        <path d="
+          M800 100
+          C920 70 1050 96 1092 180
+          C1124 244 1080 300 980 296
+          C898 292 868 236 860 178
+          C854 134 720 130 800 100 Z
+        "/>
+
+        <path d="
+          M848 142
+          C942 122 1024 142 1056 200
+          C1082 248 1046 270 972 270
+          C912 270 884 230 878 188
+          C874 156 800 172 848 142 Z
+        "/>
+
+        <path
+          d="
+            M896 184
+            C962 172 1010 188 1030 224
+            C1046 254 1016 254 970 254
+            C928 254 906 226 902 196
+            C900 178 856 204 896 184 Z
+          "
+          stroke-width="2"
+        />
+
       </g>
-      <g fill="none" stroke="#5a7891" stroke-width="1.4" opacity=".7">
-        <path d="M80 540 C40 450 90 360 200 350 C290 342 300 420 290 470 C282 512 200 560 140 575 C100 585 96 575 80 540 Z"/>
-        <path d="M120 520 C92 452 128 396 210 388 C272 382 270 440 262 480 C256 514 200 528 156 540 C128 548 124 540 120 520 Z" stroke-width="2"/>
-        <path d="M160 500 C142 456 168 420 212 416 C252 412 250 448 244 478 C240 500 210 504 188 510 C170 514 166 510 160 500 Z"/>
+
+
+      <g
+        fill="none"
+        stroke="#5a7891"
+        stroke-width="1.4"
+        opacity=".7"
+      >
+
+        <path d="
+          M80 540
+          C40 450 90 360 200 350
+          C290 342 300 420 290 470
+          C282 512 200 560 140 575
+          C100 585 96 575 80 540 Z
+        "/>
+
+        <path d="
+          M120 520
+          C92 452 128 396 210 388
+          C272 382 270 440 262 480
+          C256 514 200 528 156 540
+          C128 548 124 540 120 520 Z
+        "
+        stroke-width="2"/>
+
+        <path d="
+          M160 500
+          C142 456 168 420 212 416
+          C252 412 250 448 244 478
+          C240 500 210 504 188 510
+          C170 514 166 510 160 500 Z
+        "/>
+
       </g>
-      <g fill="none" stroke="#5a7891" stroke-width="1.4" opacity=".55">
-        <path d="M380 250 C480 220 560 250 580 320 C598 384 540 410 460 405 C400 401 360 360 358 300 C356 270 320 268 380 250 Z"/>
-        <path d="M430 290 C500 270 548 300 560 340 C570 372 536 380 480 376 C436 372 414 350 410 320 C408 302 390 304 430 290 Z"/>
+
+
+      <g
+        fill="none"
+        stroke="#5a7891"
+        stroke-width="1.4"
+        opacity=".55"
+      >
+
+        <path d="
+          M380 250
+          C480 220 560 250 580 320
+          C598 384 540 410 460 405
+          C400 401 360 360 358 300
+          C356 270 320 268 380 250 Z
+        "/>
+
+        <path d="
+          M430 290
+          C500 270 548 300 560 340
+          C570 372 536 380 480 376
+          C436 372 414 350 410 320
+          C408 302 390 304 430 290 Z
+        "/>
+
       </g>
-      <g fill="none" stroke="#5a7891" stroke-width="1" opacity=".3" stroke-dasharray="3 6">
-        <path d="M940 250 C760 330 620 330 480 430"/>
+
+
+      <g
+        fill="none"
+        stroke="#5a7891"
+        stroke-width="1"
+        opacity=".3"
+        stroke-dasharray="3 6"
+      >
+
+        <path d="
+          M940 250
+          C760 330 620 330 480 430
+        "/>
+
       </g>
+
+
       <g fill="#7a93a8" opacity=".7">
-        <circle cx="966" cy="218" r="2.6"/><circle cx="200" cy="470" r="2.2"/><circle cx="480" cy="345" r="2"/>
+
+        <circle cx="966" cy="218" r="2.6"/>
+        <circle cx="200" cy="470" r="2.2"/>
+        <circle cx="480" cy="345" r="2"/>
+
       </g>
+
     </svg>
+
   </div>
+
+
   <div class="hero-grad" aria-hidden="true"></div>
+
+
   <div class="hero-inner">
-    <h1>We teach operators to read the <em>surveillance terrain.</em></h1>
-    <p class="hero-sub">SMU delivers applied instruction in signature reduction and digital force protection — turning doctrine into trained, repeatable practice for the operators who carry the mission.</p>
+
+    <h1>
+      Learn to read the
+      <em>surveillance terrain.</em>
+    </h1>
+
+    <p class="hero-sub">
+      SMU delivers applied instruction in signature reduction and digital force protection to military and government operators.
+    </p>
+
     <div class="hero-actions">
-      <a href="#engage" class="btn btn-primary">Request a Briefing <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      <a href="#capabilities" class="btn btn-ghost">See What We Train</a>
+
+      <a href="#engage" class="btn btn-primary">
+
+        Start a Conversation
+
+        <svg class="icon" aria-hidden="true">
+          <use href="#i-arrow-right"/>
+        </svg>
+
+      </a>
+
+
+      <a href="#capabilities" class="btn btn-ghost">
+        What We Do
+      </a>
+
     </div>
+
   </div>
+
 </header>
 
 <main id="main">
+  
+  <section class="section bordered" id="about">
 
-<section class="section bordered" id="about">
-  <div class="kicker">About SMU</div>
-  <div class="about-grid">
-    <div class="about-statement">Doctrine is only as good as the operators trained to live it under pressure.</div>
-    <div class="about-detail">
-      <p>The Signature Management Unit is a practitioner-led training organization. We prepare military and government operators to manage their signatures under ubiquitous technical surveillance through facilitated instruction, specialty equipment, and embedded advisory built for the realities of the field.</p>
-      <p>Our curriculum is grounded in doctrine we license from the Institute for Signature Reduction, and what we learn training real operators feeds back into how that doctrine develops. SMU exists to make moving through the surveillance environment a trained competency rather than a hope. The operator, not the system, stays at the center of the decision.</p>
-    </div>
+  <div class="kicker">
+    The operating environment
   </div>
+
+  <div class="definition">
+
+    <div class="definition-term">
+      <h2>
+        Ubiquitous Technical Surveillance
+      </h2>
+
+      <div class="definition-meta">
+        <span>noun</span>
+        <span>/ˌyo͞o-bi-kwə-təs ˈtek-ni-kəl sər-ˈvā-ləns/</span>
+      </div>
+    </div>
+
+
+    <div class="definition-body">
+
+      <div class="definition-number">
+        01
+      </div>
+
+      <div>
+        <p>
+          The persistent ability to observe, detect, identify, locate,
+          or infer activity through the increasingly pervasive technical
+          systems surrounding modern operations.
+        </p>
+      </div>
+
+
+      <div class="definition-number">
+        02
+      </div>
+
+      <div>
+        <p>
+          The condition in which seemingly ordinary communications,
+          devices, infrastructure, and digital activity can collectively
+          produce a meaningful picture of people, places, and patterns.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="definition-conclusion">
+      The digital terrain has evolved faster than operator training in how to navigate it.
+    </div>
+
+  </div>
+
 </section>
 
-<section class="section bordered">
-  <div class="kicker">The problem we train against</div>
-  <h2 class="lead-head">The surveillance environment is ubiquitous. The skill to operate within it is not.</h2>
-  <p class="lead-body">The digital terrain has changed faster than operator training has. SMU closes that gap by integrating irregular warfare methods and technology with operator decision-making.</p>
 
-  <div class="paths">
-    <div class="path">
-      <div class="path-tag">The doctrine-to-practice gap</div>
-      <h3>Rigorous doctrine changes nothing until an operator can execute it.</h3>
-      <p>A coherent body of doctrine now exists: UTS, attribution pressure, signature reduction, digital force protection. But doctrine on a page does not change how an operator behaves in the field. SMU is built to close that distance: taught, rehearsed, and absorbed until it holds under pressure.</p>
-    </div>
-    <div class="path">
-      <div class="path-tag">The operator-exposure gap</div>
-      <h3>Capable operators, exposed by an environment they were never trained for.</h3>
-      <p>The people carrying the hardest missions emit signatures across five domains every day, often without a framework for understanding how those signals compound. They need practical, repeatable tradecraft, not abstraction. That is what SMU delivers.</p>
-    </div>
-  </div>
-</section>
+  <section class="section dark" id="capabilities">
 
-<section class="section bordered">
-  <div class="kicker">Why this, why now</div>
-  <h2 class="lead-head">Digital exposure is measurable. So is the cost of leaving it untrained.</h2>
-  <div class="gaps">
-    <div class="gap-card">
-      <div class="gap-tag">The exposure surface</div>
-      <div class="gap-num">5</div>
-      <p>Distinct surveillance domains — online, electronic, financial, travel, and visual-physical — corroborate one another into a single resolved identity. No single domain is the vulnerability; the correlation is.</p>
+    <div class="section-bound">
+
+      <div class="kicker">
+        What we do
+      </div>
+
+      <h2 class="lead-head">
+        Practical signature management for operational teams.
+      </h2>
+
+
+      <div class="caps">
+
+
+        <div class="cap">
+
+          <div class="cap-ico">
+
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-school"/>
+            </svg>
+
+          </div>
+
+
+          <div class="cap-tag">
+            Instruction
+          </div>
+
+
+          <h3>
+            Training
+          </h3>
+
+
+          <p>
+            Facilitated instruction taking operators from the UTS operating picture through practical signature reduction and digital force protection. Classroom grounding paired with applied tradecraft they can carry into the field.
+          </p>
+
+
+          <a href="#engage" class="cap-link">
+
+            Request the syllabus
+
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-arrow-right"/>
+            </svg>
+
+          </a>
+
+        </div>
+
+
+        <div class="cap">
+
+          <div class="cap-ico">
+
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-crosshair"/>
+            </svg>
+
+          </div>
+
+
+          <div class="cap-tag">
+            Hardware &amp; Development
+          </div>
+
+
+          <h3>
+            Technology
+          </h3>
+
+
+          <p>
+            Specialized equipment and technical solutions that support
+            signature reduction and digital force protection, selected
+            around the requirements of the mission.
+          </p>
+
+
+          <a href="#engage" class="cap-link">
+
+            Request a conversation
+
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-arrow-right"/>
+            </svg>
+
+          </a>
+
+        </div>
+
+
+        <div class="cap">
+
+          <div class="cap-ico">
+
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-users"/>
+            </svg>
+
+          </div>
+
+
+          <div class="cap-tag">
+            Advisory
+          </div>
+
+
+          <h3>
+            Embedded Advisory
+          </h3>
+
+
+          <p>
+            Direct support for organizations incorporating signature
+            management into how they operate, translating concepts into
+            practices tailored to the mission.
+          </p>
+
+
+          <a href="#engage" class="cap-link">
+
+            Start a conversation
+
+            <svg class="icon" aria-hidden="true">
+              <use href="#i-arrow-right"/>
+            </svg>
+
+          </a>
+
+        </div>
+
+
+      </div>
+
     </div>
-    <div class="gap-card alert">
-      <div class="gap-tag">The collection posture</div>
-      <div class="gap-num">24/7</div>
-      <p>Collection is continuous and precedes targeting. Data is retained first and attributed later. The operator becomes a profile before becoming a target, and tradecraft that was adequate a decade ago no longer buys the time it once did.</p>
+
+  </section>
+
+
+  <section class="section bordered" id="why">
+
+    <div class="why-grid">
+
+
+      <div>
+
+        <div class="kicker">
+          Why SMU
+        </div>
+
+
+        <h2 class="lead-head">
+          Small, practitioner-led, and deliberate about fit.
+        </h2>
+
+      </div>
+
+
+      <div class="why-detail">
+
+        <p>
+          SMU was founded in 2020 to translate signature reduction concepts developed inside complex operational environments into applied field instruction. </p>
+          <p>The organization is practitioner-led, operationally grounded, and deliberately small. We engage where timing, alignment, and readiness converge, and we scope each engagement to a specific mission profile rather than running a fixed catalogue.
+        </p>
+
+
+        <p>
+          We work directly with the people who will use what we teach,
+          adapting engagements to the mission. 
+        </p>
+
+      </div>
+
     </div>
-    <div class="gap-card">
-      <div class="gap-tag">The point of leverage</div>
-      <div class="gap-num">4</div>
-      <p>The attribution chain has four stages: observation, collection, correlation, attribution. Each is an intervention point. Trained operators disrupt the chain deliberately, at multiple stages, rather than hoping to stay invisible.</p>
-    </div>
-  </div>
-</section>
+
+  </section>
+
 
 </main>
 
-<section class="section dark" id="capabilities">
-  <div class="section-bound">
-    <div class="kicker">What we deliver</div>
-    <h2 class="lead-head">Three lines of effort, one trained operator.</h2>
-    <div class="caps">
-      <div class="cap">
-        <div class="cap-ico"><svg class="icon" aria-hidden="true"><use href="#i-school"/></svg></div>
-        <div class="cap-tag">Instruction</div>
-        <h3>Training</h3>
-        <p>Facilitated instruction taking operators from the UTS operating picture through practical signature reduction and digital force protection. Classroom grounding paired with applied tradecraft they can carry into the field.</p>
-        <a href="#engage" class="cap-link">Request the syllabus <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      </div>
-      <div class="cap">
-        <div class="cap-ico"><svg class="icon" aria-hidden="true"><use href="#i-crosshair"/></svg></div>
-        <div class="cap-tag">Hardware &amp; Development</div>
-        <h3>Technology Equipment</h3>
-        <p>Specialty technology equipment designed to reduce an element's real attributable surface across the five domains, such as hardened personal devices or mesh technology.</p>
-        <a href="#engage" class="cap-link">Request a quote <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      </div>
-      <div class="cap">
-        <div class="cap-ico"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></div>
-        <div class="cap-tag">Advisory</div>
-        <h3>Embedded Advisory</h3>
-        <p>Direct advisory support for units and programs building signature management into how they operate, translating doctrine into standing procedure tailored to a specific mission profile.</p>
-        <a href="#engage" class="cap-link">Start a conversation <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section bordered" id="approach">
-  <div class="kicker">Approach</div>
-  <h2 class="lead-head">Small, practitioner-led, and deliberate about fit.</h2>
-  <p class="lead-body">SMU was founded in 2020 to translate signature reduction concepts developed inside complex operational environments into applied field instruction. The organization is practitioner-led, operationally grounded, and deliberately small. We engage where timing, alignment, and readiness converge, and we scope each engagement to a specific mission profile rather than running a fixed catalogue.</p>
-</section>
 
 <section class="cta-band" id="engage">
+
   <div class="cta-inner">
-    <h2>Reclaim your freedom for action.</h2>
-    <p>SMU works with military and government organizations to build signature reduction into trained practice. Engagements begin with a conversation.</p>
+
+    <h2>
+      Reclaim your freedom for action.
+    </h2>
+
 
     <div class="contact-block">
-      <p class="contact-address" id="contactAddress">
-        <noscript>contact [at] signaturemanagementunit [dot] com</noscript>
+
+
+      <p
+        class="contact-address"
+        id="contactAddress"
+      >
+
+        <noscript>
+          contact [at] signaturemanagementunit [dot] com
+        </noscript>
+
       </p>
 
+
       <div class="contact-actions">
-        <a class="btn btn-dark" id="mailBtn" href="#">
-          Open in Mail <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+
+
+        <a
+          class="btn btn-dark"
+          id="mailBtn"
+          href="#"
+        >
+
+          Open in Mail
+
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-mail"/>
+          </svg>
+
         </a>
-        <button class="btn btn-dark" id="copyBtn" type="button" style="background:transparent;color:var(--ink)!important;border:1px solid var(--rule-2)">
-          Copy Address <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+
+
+        <button
+          class="btn copy-btn"
+          id="copyBtn"
+          type="button"
+        >
+
+          Copy Address
+
+          <svg class="icon" aria-hidden="true">
+            <use href="#i-copy"/>
+          </svg>
+
         </button>
+
+
       </div>
-      <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+
+
+      <span
+        class="copy-status"
+        id="copyStatus"
+        role="status"
+        aria-live="polite"
+      ></span>
+
 
       <div class="contact-guide">
-        <h3>What to include</h3>
+
+        <h3>
+          What to include
+        </h3>
+
+
         <ul>
-          <li>Your organization and role, at whatever level of detail you're comfortable with.</li>
-          <li>Which line of effort you're interested in — training, equipment, or advisory.</li>
-          <li>Rough timeline and audience size.</li>
+
+          <li>
+            Your organization and role, at whatever level of detail
+            you're comfortable with.
+          </li>
+
+          <li>
+            Which line of effort you're interested in — training,
+            technology, or advisory.
+          </li>
+
+          <li>
+            Rough timeline and group size.
+          </li>
+
         </ul>
-        <p class="note">Email is not a secure channel. Do not share any classified or sensitive information.</p>
+
+
+        <p class="note">
+          Email is not a secure channel. Do not share any classified
+          or sensitive information.
+        </p>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<section class="affil">
-  <div class="affil-card">
-    <svg class="icon" aria-hidden="true"><use href="#i-certificate"/></svg>
-    <p>SMU's instruction is grounded in doctrine licensed from the <a href="https://www.isrprivacymatters.org" target="_blank" rel="noopener noreferrer">Institute for Signature Reduction (ISR)</a>, a nonprofit research institute.</p>
-  </div>
-</section>
-
-<!-- ─── FOOTER ─── -->
 <footer>
+
   <div class="footer-inner">
+
+
     <div class="footer-top">
+
+
       <div>
-        <div class="footer-brand">Signature Management Unit</div>
-        <p class="footer-mission">Applied instruction in signature reduction and digital force protection for military and government operators.</p>
-        <p class="footer-tag">Precise. Rapid. Discreet.</p>
+
+        <div class="footer-brand">
+          Signature Management Unit
+        </div>
+
+
+        <p class="footer-mission">
+          Applied training, specialized technology, and advisory support
+          for military and government operators.
+        </p>
+
+
+        <p class="footer-tag">
+          Precise. Rapid. Discreet.
+        </p>
+
       </div>
+
+
       <div class="footer-col">
-        <h4>Navigate</h4>
-        <a href="#about">About</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#approach">Approach</a>
-        <a href="#engage">Request a Briefing</a>
+
+        <h4>
+          Navigate
+        </h4>
+
+
+        <a href="#about">
+          About
+        </a>
+
+        <a href="#capabilities">
+          Capabilities
+        </a>
+
+        <a href="#why">
+          Why SMU
+        </a>
+
+        <a href="#engage">
+          Contact
+        </a>
+
       </div>
+
+
       <div class="footer-col">
-        <h4>Affiliation</h4>
-        <a href="https://www.isrprivacymatters.org" target="_blank" rel="noopener noreferrer">Institute for Signature Reduction</a>
-        <a href="#engage">Contact</a>
+
+        <h4>
+          Engage
+        </h4>
+
+
+        <a href="#engage">
+          Start a Conversation
+        </a>
+
+        <a href="#capabilities">
+          Training
+        </a>
+
+        <a href="#capabilities">
+          Technology
+        </a>
+
+        <a href="#capabilities">
+          Embedded Advisory
+        </a>
+
       </div>
+
+
     </div>
+
+
     <div class="footer-bottom">
-      <span>© Signature Management Unit</span>
-      <span>signaturemanagementunit.com</span>
+
+      <span>
+        © Signature Management Unit
+      </span>
+
+
+      <span>
+        signaturemanagementunit.com
+      </span>
+
     </div>
+
+
   </div>
+
 </footer>
 
-<button class="to-top" id="toTop" aria-label="Back to top">
-  <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg>
+<button
+  class="to-top"
+  id="toTop"
+  aria-label="Back to top"
+>
+
+  <svg class="icon" aria-hidden="true">
+    <use href="#i-arrow-up"/>
+  </svg>
+
 </button>
 
 <script>
-/* back to top */
-(function(){
+
+(function() {
+
   var btn = document.getElementById('toTop');
-  function onScroll(){
-    var y = window.scrollY || window.pageYOffset || 0;
-    btn.classList.toggle('visible', y > 500);
+
+
+  function onScroll() {
+
+    var y =
+      window.scrollY ||
+      window.pageYOffset ||
+      0;
+
+    btn.classList.toggle(
+      'visible',
+      y > 500
+    );
+
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+
+  window.addEventListener(
+    'scroll',
+    onScroll,
+    { passive: true }
+  );
+
+
+  btn.addEventListener(
+    'click',
+    function() {
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+
+    }
+  );
+
+
   onScroll();
+
 })();
 
-/* mobile nav */
-(function(){
-  var toggle = document.getElementById('navToggle');
-  var close = document.getElementById('navClose');
-  var panel = document.getElementById('mobileNav');
-  if (!toggle || !panel) return;
 
-  function open(){
+(function() {
+
+  var toggle =
+    document.getElementById('navToggle');
+
+  var close =
+    document.getElementById('navClose');
+
+  var panel =
+    document.getElementById('mobileNav');
+
+
+  if (!toggle || !panel) {
+    return;
+  }
+
+
+  function open() {
+
     panel.classList.add('open');
-    toggle.setAttribute('aria-expanded', 'true');
+
+    toggle.setAttribute(
+      'aria-expanded',
+      'true'
+    );
+
     document.body.style.overflow = 'hidden';
-    var first = panel.querySelector('a');
-    if (first) first.focus();
-  }
-  function shut(){
-    panel.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    toggle.focus();
+
+
+    var first =
+      panel.querySelector('a');
+
+    if (first) {
+      first.focus();
+    }
+
   }
 
-  toggle.addEventListener('click', open);
-  close.addEventListener('click', shut);
-  panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', shut); });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && panel.classList.contains('open')) shut();
-  });
+
+  function shut() {
+
+    panel.classList.remove('open');
+
+    toggle.setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    document.body.style.overflow = '';
+
+    toggle.focus();
+
+  }
+
+
+  toggle.addEventListener(
+    'click',
+    open
+  );
+
+
+  close.addEventListener(
+    'click',
+    shut
+  );
+
+
+  panel
+    .querySelectorAll('a')
+    .forEach(function(a) {
+
+      a.addEventListener(
+        'click',
+        shut
+      );
+
+    });
+
+
+  document.addEventListener(
+    'keydown',
+    function(e) {
+
+      if (
+        e.key === 'Escape' &&
+        panel.classList.contains('open')
+      ) {
+        shut();
+      }
+
+    }
+  );
+
 })();
 
-(function(){
-  var user   = 'contact';
-  var host   = 'signaturemanagementunit';
-  var tld    = 'com';
-  var addr   = user + String.fromCharCode(64) + host + '.' + tld;
 
-  var out    = document.getElementById('contactAddress');
-  var mail   = document.getElementById('mailBtn');
-  var copy   = document.getElementById('copyBtn');
-  var status = document.getElementById('copyStatus');
+(function() {
+
+  var user =
+    'contact';
+
+  var host =
+    'signaturemanagementunit';
+
+  var tld =
+    'com';
+
+
+  var addr =
+    user +
+    String.fromCharCode(64) +
+    host +
+    '.' +
+    tld;
+
+
+  var out =
+    document.getElementById(
+      'contactAddress'
+    );
+
+  var mail =
+    document.getElementById(
+      'mailBtn'
+    );
+
+  var copy =
+    document.getElementById(
+      'copyBtn'
+    );
+
+  var status =
+    document.getElementById(
+      'copyStatus'
+    );
+
 
   if (out) {
-    var link = document.createElement('a');
-    link.href = 'mailto:' + addr + '?subject=' + encodeURIComponent('SMU inquiry');
-    link.textContent = addr;
+
+    var link =
+      document.createElement('a');
+
+    link.href =
+      'mailto:' +
+      addr +
+      '?subject=' +
+      encodeURIComponent(
+        'SMU inquiry'
+      );
+
+    link.textContent =
+      addr;
+
     out.textContent = '';
+
     out.appendChild(link);
+
   }
+
 
   if (mail) {
-    mail.href = 'mailto:' + addr + '?subject=' + encodeURIComponent('SMU inquiry');
+
+    mail.href =
+      'mailto:' +
+      addr +
+      '?subject=' +
+      encodeURIComponent(
+        'SMU inquiry'
+      );
+
   }
 
+
+
   if (copy && status) {
-    copy.addEventListener('click', function(){
-      function done(){
-        status.textContent = 'Address copied';
-        setTimeout(function(){ status.textContent = ''; }, 2600);
+
+    copy.addEventListener(
+      'click',
+      function() {
+
+
+        function done() {
+
+          status.textContent =
+            'Address copied';
+
+
+          setTimeout(
+            function() {
+
+              status.textContent =
+                '';
+
+            },
+            2600
+          );
+
+        }
+
+
+        if (
+          navigator.clipboard &&
+          navigator.clipboard.writeText
+        ) {
+
+          navigator.clipboard
+            .writeText(addr)
+            .then(done)
+            .catch(function() {
+
+              status.textContent =
+                addr;
+
+            });
+
+        } else {
+
+          status.textContent =
+            addr;
+
+        }
+
       }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(addr).then(done).catch(function(){
-          status.textContent = addr;
-        });
-      } else {
-        status.textContent = addr;
-      }
-    });
+    );
+
   }
+
 })();
+
 </script>
 
 </body>
