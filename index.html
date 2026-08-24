@@ -11,17 +11,34 @@
   content="Signature Management Unit delivers applied instruction in signature reduction and digital force protection to military and government operators."
 >
 
+<!-- Indexed so units can find us; noarchive prevents cached copies persisting -->
+<meta name="robots" content="index, follow, noarchive">
+
 <meta property="og:title" content="Signature Management Unit">
 <meta
   property="og:description"
   content="Applied training, specialized technology, and advisory support for military and government operators."
 >
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://signaturemanagementunit.com/">
 
 <meta name="theme-color" content="#14181d">
 
 <!-- Privacy / security-oriented browser policies -->
 <meta name="referrer" content="no-referrer">
+
+<!--
+  NOTE: This meta CSP is a FALLBACK ONLY. The authoritative policy must be
+  served as an HTTP response header.
+
+  Directives that DO NOT work in meta and are therefore absent here:
+    frame-ancestors, report-uri, sandbox
+
+  'unsafe-inline' on script-src should be replaced with a hash once the
+  markup is final. Generate it with:
+    openssl dgst -sha256 -binary script.js | openssl base64
+  then use: script-src 'self' 'sha256-<output>';
+-->
 <meta
   http-equiv="Content-Security-Policy"
   content="
@@ -29,7 +46,6 @@
     base-uri 'self';
     form-action 'self';
     object-src 'none';
-    frame-ancestors 'none';
     img-src 'self' data:;
     font-src 'self';
     style-src 'self' 'unsafe-inline';
@@ -42,7 +58,7 @@
 
 <link
   rel="canonical"
-  href="https://www.signaturemanagementunit.com/"
+  href="https://signaturemanagementunit.com/"
 >
 
 <style>
@@ -245,7 +261,7 @@ nav {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 26px;
 
   list-style: none;
 }
@@ -365,11 +381,11 @@ nav {
 .mobile-nav a {
   display: block;
 
-  padding: 15px 40px;
+  padding: 13px 40px;
 
   font-family: var(--sans);
 
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
 
   color: var(--ink);
@@ -789,6 +805,11 @@ nav {
   align-items: center;
 
   gap: 7px;
+
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .cap-link:hover {
@@ -834,10 +855,23 @@ nav {
   font-weight: 600;
 }
 
+.attribution-note {
+  margin-top: 26px;
+
+  padding-top: 22px;
+
+  border-top: 1px solid var(--rule);
+
+  font-size: .95rem;
+
+  color: var(--ink-3);
+
+  line-height: 1.75;
+}
+
 
 /* =========================================================
    UBIQUITOUS TECHNICAL SURVEILLANCE
-   Styled to mirror the site's editorial sections
    ========================================================= */
 
 .uts-grid {
@@ -960,6 +994,91 @@ nav {
 
 
 /* =========================================================
+   CONTRACTING / REGISTRATION
+   ========================================================= */
+
+.reg-list {
+  border-top: 1px solid var(--rule);
+}
+
+.reg-row {
+  display: grid;
+
+  grid-template-columns: 200px 1fr;
+
+  column-gap: 20px;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid var(--rule);
+
+  align-items: baseline;
+}
+
+.reg-row dt {
+  font-family: var(--mono);
+
+  font-size: .58rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-3);
+}
+
+.reg-row dd {
+  font-size: 1rem;
+
+  color: var(--ink-2);
+
+  line-height: 1.6;
+}
+
+.reg-group-head {
+  font-family: var(--mono);
+
+  font-size: .6rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--slate);
+
+  margin: 38px 0 4px;
+}
+
+.reg-group-head:first-of-type {
+  margin-top: 0;
+}
+
+.reg-note {
+  margin-top: 30px;
+
+  font-size: .95rem;
+
+  color: var(--ink-3);
+
+  line-height: 1.75;
+}
+
+.reg-note strong {
+  color: var(--ink-2);
+}
+
+.reg-note ul {
+  margin: 12px 0 0 18px;
+}
+
+.reg-note li {
+  margin-bottom: 9px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
    CTA
    ========================================================= */
 
@@ -1031,6 +1150,24 @@ nav {
   border-color: var(--slate);
 }
 
+.contact-subject {
+  font-family: var(--mono);
+
+  font-size: .6rem;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+
+  color: var(--slate);
+
+  min-height: 1.2em;
+
+  display: block;
+
+  margin-top: 14px;
+}
+
 .contact-actions {
   display: flex;
 
@@ -1040,7 +1177,7 @@ nav {
 
   flex-wrap: wrap;
 
-  margin: 26px 0 34px;
+  margin: 22px 0 34px;
 }
 
 .copy-btn {
@@ -1068,9 +1205,81 @@ nav {
 
   display: block;
 
-  margin-top: -20px;
+  margin-top: -22px;
 
   margin-bottom: 26px;
+}
+
+.secure-block {
+  margin-top: 12px;
+
+  padding-top: 28px;
+
+  border-top: 1px solid var(--rule-2);
+
+  text-align: left;
+}
+
+.secure-block h3 {
+  font-family: var(--mono);
+
+  font-size: .58rem;
+
+  letter-spacing: .16em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-3);
+
+  font-weight: 400;
+
+  margin-bottom: 16px;
+}
+
+.secure-row {
+  margin-bottom: 16px;
+}
+
+.secure-label {
+  font-family: var(--mono);
+
+  font-size: .56rem;
+
+  letter-spacing: .12em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-4);
+
+  display: block;
+
+  margin-bottom: 4px;
+}
+
+.secure-value {
+  font-family: var(--mono);
+
+  font-size: .82rem;
+
+  color: var(--ink-2);
+
+  word-break: break-all;
+
+  line-height: 1.6;
+}
+
+.secure-note {
+  margin-top: 18px;
+
+  font-size: .88rem;
+
+  color: var(--ink-3);
+
+  line-height: 1.7;
+}
+
+.secure-note + .secure-note {
+  margin-top: 12px;
 }
 
 
@@ -1287,6 +1496,10 @@ footer {
     max-width: 20ch;
   }
 
+  .reg-row {
+    grid-template-columns: 170px 1fr;
+  }
+
 }
 
 @media (max-width: 560px) {
@@ -1344,6 +1557,12 @@ footer {
     font-size: 1.12rem;
   }
 
+  .reg-row {
+    grid-template-columns: 1fr;
+
+    row-gap: 3px;
+  }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1374,7 +1593,6 @@ footer {
 
 <!-- =======================================================
      INLINE SVG ICON SPRITE
-     No external icon library required.
      ======================================================= -->
 
 <svg
@@ -1452,6 +1670,10 @@ footer {
       </li>
 
       <li>
+        <a href="#contracting">Contracting</a>
+      </li>
+
+      <li>
         <a href="#engage" class="nav-cta">
           Start a Conversation
         </a>
@@ -1510,6 +1732,10 @@ footer {
 
     <li>
       <a href="#why">Why SMU</a>
+    </li>
+
+    <li>
+      <a href="#contracting">Contracting</a>
     </li>
 
     <li>
@@ -1685,12 +1911,13 @@ footer {
   <div class="hero-inner">
 
     <h1>
-      Learn to read the
+      We teach operators to read the
       <em>surveillance terrain.</em>
     </h1>
 
     <p class="hero-sub">
-      SMU delivers applied instruction in signature reduction and digital force protection to military and government operators.
+      SMU delivers applied instruction in signature reduction and digital
+      force protection to military and government operators.
     </p>
 
     <div class="hero-actions">
@@ -1730,7 +1957,7 @@ footer {
       <div>
 
         <div class="kicker">
-          The operating environment
+          The operating environment we train against
         </div>
 
         <h2 class="uts-statement">
@@ -1778,8 +2005,8 @@ footer {
 
 
         <div class="uts-conclusion">
-          In the age of UTS, operators must learn to navigate digital terrain effectively. That's why they keep coming back to us. 
-          
+          Digital terrain is not optional. Reading it is a skill, and skills
+          are taught.
         </div>
 
       </div>
@@ -1833,7 +2060,11 @@ footer {
             they can carry into the field.
           </p>
 
-          <a href="#engage" class="cap-link">
+          <a
+            href="#engage"
+            class="cap-link"
+            data-subject="SMU &mdash; Syllabus request"
+          >
 
             Request the syllabus
 
@@ -1870,7 +2101,11 @@ footer {
             around the requirements of the mission.
           </p>
 
-          <a href="#engage" class="cap-link">
+          <a
+            href="#engage"
+            class="cap-link"
+            data-subject="SMU &mdash; Equipment quote"
+          >
 
             Request a quote
 
@@ -1907,7 +2142,11 @@ footer {
             practices tailored to the mission.
           </p>
 
-          <a href="#engage" class="cap-link">
+          <a
+            href="#engage"
+            class="cap-link"
+            data-subject="SMU &mdash; Advisory inquiry"
+          >
 
             Start a conversation
 
@@ -1958,7 +2197,7 @@ footer {
         <p>
           The organization is practitioner-led, operationally grounded,
           and deliberately small. We engage where timing, alignment, and
-          readiness converge, and we scope each engagement to a specific
+          readiness converge, and we tailor each engagement to a specific
           mission profile rather than running a fixed catalogue.
         </p>
 
@@ -1966,6 +2205,59 @@ footer {
           We work directly with the people who will use what we teach,
           adapting engagements to the mission.
         </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CONTRACTING
+       ===================================================== -->
+
+  <section class="section bordered" id="contracting">
+
+    <div class="why-grid">
+
+      <div>
+
+        <div class="kicker">
+          Contracting
+        </div>
+
+        <h2 class="lead-head">
+          Work with us.
+        </h2>
+
+      </div>
+
+
+      <div class="why-detail">
+
+        <div class="reg-group-head">
+          Registration
+        </div>
+
+        <dl class="reg-list">
+
+          <div class="reg-row">
+            <dt>UEI</dt>
+            <dd>K449DQLHNAT1</dd>
+          </div>
+
+          <div class="reg-row">
+            <dt>CAGE Code</dt>
+            <dd>9UYH1</dd>
+          </div>
+
+          <div class="reg-row">
+            <dt>Purchase Mechanisms</dt>
+            <dd>GPC accepted for engagements under the micro-purchase threshold; larger actions by SAP or negotiated contract</dd>
+          </div>
+
+        </dl>
 
       </div>
 
@@ -1986,7 +2278,7 @@ footer {
   <div class="cta-inner">
 
     <h2>
-      Reclaim your freedom for action.
+      Reclaim your freedom of action.
     </h2>
 
     <div class="contact-block">
@@ -2001,6 +2293,13 @@ footer {
         </noscript>
 
       </p>
+
+      <span
+        class="contact-subject"
+        id="subjectHint"
+        role="status"
+        aria-live="polite"
+      ></span>
 
 
       <div class="contact-actions">
@@ -2043,6 +2342,19 @@ footer {
         role="status"
         aria-live="polite"
       ></span>
+
+      <div class="secure-block">
+
+        <h3>
+          Treat email to this address as UNCLASSIFIED. Our mail does not support DoD PKI encryption.
+        </h3>
+
+        <div class="secure-row">
+          <span class="secure-label">Signal</span>
+          <span class="secure-value">SMU.14</span>
+        </div>
+
+      </div>
 
     </div>
 
@@ -2097,6 +2409,10 @@ footer {
           Why SMU
         </a>
 
+        <a href="#contracting">
+          Contracting
+        </a>
+
         <a href="#engage">
           Contact
         </a>
@@ -2126,6 +2442,10 @@ footer {
           Embedded Advisory
         </a>
 
+        <a href="/.well-known/security.txt">
+          Contact
+        </a>
+
       </div>
 
     </div>
@@ -2134,7 +2454,7 @@ footer {
     <div class="footer-bottom">
 
       <span>
-        © Signature Management Unit
+        &copy; Signature Management Unit
       </span>
 
       <span>
@@ -2175,7 +2495,7 @@ footer {
 
   if (btn) {
 
-    function onScroll() {
+    var onScroll = function() {
 
       var y =
         window.scrollY ||
@@ -2187,7 +2507,7 @@ footer {
         y > 500
       );
 
-    }
+    };
 
     window.addEventListener(
       'scroll',
@@ -2219,7 +2539,7 @@ footer {
   var toggle =
     document.getElementById('navToggle');
 
-  var close =
+  var closeBtn =
     document.getElementById('navClose');
 
   var panel =
@@ -2228,7 +2548,7 @@ footer {
 
   if (toggle && panel) {
 
-    function open() {
+    var openNav = function() {
 
       panel.classList.add('open');
 
@@ -2246,10 +2566,10 @@ footer {
         first.focus();
       }
 
-    }
+    };
 
 
-    function shut() {
+    var shutNav = function() {
 
       panel.classList.remove('open');
 
@@ -2262,20 +2582,20 @@ footer {
 
       toggle.focus();
 
-    }
+    };
 
 
     toggle.addEventListener(
       'click',
-      open
+      openNav
     );
 
 
-    if (close) {
+    if (closeBtn) {
 
-      close.addEventListener(
+      closeBtn.addEventListener(
         'click',
-        shut
+        shutNav
       );
 
     }
@@ -2287,7 +2607,7 @@ footer {
 
         a.addEventListener(
           'click',
-          shut
+          shutNav
         );
 
       });
@@ -2301,7 +2621,7 @@ footer {
           e.key === 'Escape' &&
           panel.classList.contains('open')
         ) {
-          shut();
+          shutNav();
         }
 
       }
@@ -2346,44 +2666,95 @@ footer {
       'copyStatus'
     );
 
-
-  var subject =
-    encodeURIComponent(
-      'SMU inquiry'
+  var hint =
+    document.getElementById(
+      'subjectHint'
     );
+
+
+  var defaultSubject =
+    'SMU \u2014 General inquiry';
+
+  var currentSubject =
+    defaultSubject;
+
+
+  var addressLink = null;
+
+
+  var mailtoFor = function(subject) {
+
+    return (
+      'mailto:' +
+      addr +
+      '?subject=' +
+      encodeURIComponent(subject)
+    );
+
+  };
+
+
+  var applySubject = function(subject) {
+
+    currentSubject = subject;
+
+    if (mail) {
+      mail.href = mailtoFor(subject);
+    }
+
+    if (addressLink) {
+      addressLink.href = mailtoFor(subject);
+    }
+
+    if (hint) {
+      hint.textContent = subject;
+    }
+
+  };
 
 
   if (out) {
 
-    var link =
+    addressLink =
       document.createElement('a');
 
-    link.href =
-      'mailto:' +
-      addr +
-      '?subject=' +
-      subject;
-
-    link.textContent =
-      addr;
+    addressLink.textContent = addr;
 
     out.textContent = '';
 
-    out.appendChild(link);
+    out.appendChild(addressLink);
 
   }
 
 
-  if (mail) {
+  applySubject(defaultSubject);
 
-    mail.href =
-      'mailto:' +
-      addr +
-      '?subject=' +
-      subject;
 
-  }
+  /* -------------------------------------------------------
+     Per-CTA subject lines so inquiries self-triage
+     ------------------------------------------------------- */
 
+  document
+    .querySelectorAll('[data-subject]')
+    .forEach(function(el) {
+
+      el.addEventListener(
+        'click',
+        function() {
+
+          applySubject(
+            el.getAttribute('data-subject')
+          );
+
+        }
+      );
+
+    });
+
+
+  /* -------------------------------------------------------
+     Copy to clipboard
+     ------------------------------------------------------- */
 
   if (copy && status) {
 
@@ -2391,7 +2762,7 @@ footer {
       'click',
       function() {
 
-        function done() {
+        var done = function() {
 
           status.textContent =
             'Address copied';
@@ -2399,14 +2770,13 @@ footer {
           setTimeout(
             function() {
 
-              status.textContent =
-                '';
+              status.textContent = '';
 
             },
             2600
           );
 
-        }
+        };
 
 
         if (
@@ -2419,15 +2789,13 @@ footer {
             .then(done)
             .catch(function() {
 
-              status.textContent =
-                addr;
+              status.textContent = addr;
 
             });
 
         } else {
 
-          status.textContent =
-            addr;
+          status.textContent = addr;
 
         }
 
